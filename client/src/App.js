@@ -3,14 +3,17 @@ import { Routes, Route } from 'react-router-dom';
 
 import './StyleSheets/App.css';
 
-import Landing from './Components/Landing'
+import Landing from './Components/Landing';
+import Login from './Components/Login';
 
 export default function App() {
+  const [user, setUser] = useState(null);
 
   return (
     <>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login setUser={setUser} />} />
       </Routes>
     </>
   );
