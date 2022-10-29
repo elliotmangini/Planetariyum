@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Error from './Error'
+import { Navigate } from 'react-router-dom';
 
 
 
-export default function Login ({ setUser }) {
+
+export default function Login ({ user, setUser }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
@@ -29,27 +31,32 @@ export default function Login ({ setUser }) {
       }
 
       return (
-        <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              id="username"
-              autoComplete="off"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button variant="fill" color="primary" type="submit">
-              {isLoading ? "Loading..." : "Login"}
-            </button>
-            {errors.map((err) => (
-              <Error key={err}>{err}</Error>
-            ))}
-        </form>
+        <>
+          {/* FORWARD PATH */}
+          { user ? <Navigate to="/" /> : null}
+          
+          <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                id="username"
+                autoComplete="off"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <input
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button variant="fill" color="primary" type="submit">
+                {isLoading ? "Loading..." : "Login"}
+              </button>
+              {errors.map((err) => (
+                <Error key={err}>{err}</Error>
+              ))}
+          </form>
+        </>
       );
 }

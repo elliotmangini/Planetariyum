@@ -5,6 +5,7 @@ import './StyleSheets/App.css';
 
 import Landing from './Components/Landing';
 import Login from './Components/Login';
+import SignUp from './Components/SignUp';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -22,7 +23,8 @@ export default function App() {
     <>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route path="/login" element={<Login user={user} setUser={setUser} />} />
+        <Route path="/signup" element={<SignUp user={user} setUser={setUser} />} />
       </Routes>
     </>
   );
