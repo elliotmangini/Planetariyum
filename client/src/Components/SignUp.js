@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navigate } from 'react-router-dom';
 
-function SignUpForm({ user, setUser }) {
+export default function SignUp ({ user, setUser }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -73,11 +73,9 @@ function SignUpForm({ user, setUser }) {
             />
             <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
             {errors.map((err) => (
-            <h1 key={err}>{err}</h1>
+            <p key={err}>{err}</p>
             ))}
         </form>
     </>
   );
 }
-
-export default SignUpForm;

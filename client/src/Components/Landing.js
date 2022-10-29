@@ -2,7 +2,7 @@
 
 
 
-export default function X () {
+export default function Landing () {
 
     return (
         <>
