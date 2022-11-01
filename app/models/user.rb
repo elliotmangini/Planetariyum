@@ -4,4 +4,6 @@ class User < ApplicationRecord
     validates_uniqueness_of :username, :case_sensitive => false
     validates :username, :length => { :in => 3..26}
     validates_uniqueness_of :email, :case_sensitive => false
+
+    has_one_attached :avatar
 end

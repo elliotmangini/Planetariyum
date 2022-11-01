@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Navigate } from 'react-router-dom';
+import AvatarUpload from './AvatarUpload';
 
 export default function SignUp ({ user, setUser }) {
   const [username, setUsername] = useState("");
@@ -71,11 +72,13 @@ export default function SignUp ({ user, setUser }) {
             onChange={(e) => setPasswordConfirmation(e.target.value)}
             autoComplete="current-password"
             />
+
             <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
             {errors.map((err) => (
             <p key={err}>{err}</p>
             ))}
         </form>
+        <AvatarUpload />
     </>
   );
 }
