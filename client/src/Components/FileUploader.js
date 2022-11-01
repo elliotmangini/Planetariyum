@@ -13,7 +13,7 @@ export default function FileUploader ({onFileSelectError, onFileSelectSuccess })
 
     return (
         <div className="file-uploader">
-            <input type="file" onChange={(e) => handleFileInput(e)}/>
+            <input type="file" accept="image/*" onChange={(e) => handleFileInput(e)}/>
         </div>
     )
 }

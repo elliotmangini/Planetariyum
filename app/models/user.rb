@@ -6,4 +6,7 @@ class User < ApplicationRecord
     validates_uniqueness_of :email, :case_sensitive => false
 
     has_one_attached :avatar
+    def avatar_url
+        Rails.application.routes.url_helpers.url_for(avatar) if avatar.attached?
+    end
 end

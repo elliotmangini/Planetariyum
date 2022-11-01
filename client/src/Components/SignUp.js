@@ -38,7 +38,7 @@ export default function SignUp ({ user, setUser }) {
   return (
     <>
         {/* FORWARD PATH */}
-        { user ? <Navigate to="/" /> : null}
+        {/* { user ? <Navigate to="/" /> : null} */}
 
         <form onSubmit={handleSubmit}>
             <input
@@ -78,7 +78,8 @@ export default function SignUp ({ user, setUser }) {
             <p key={err}>{err}</p>
             ))}
         </form>
-        <AvatarUpload />
+
+        <AvatarUpload user={user} setUser={setUser}/>
     </>
   );
 }

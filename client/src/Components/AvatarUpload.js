@@ -3,19 +3,29 @@ import FileUploader from './FileUploader';
 
 
 
-export default function AvatarUpload () {
-    const [ selectedFile, setSelectedFile ] = useState("");
-
-
-    // function handleUploadAvatar () {
-    //     fetch('http://localhost:3000/events', {
-    //         method: 'post',
-    //         body: formData,
-    //     })
-    // }
+export default function AvatarUpload ({ user, setUser }) {
+    const [ selectedFile, setSelectedFile ] = useState(null);
+    const [ errors, setErrors ] = useState([]);
 
     function submitForm (e) {
         e.preventDefault();
+
+        console.log(selectedFile);
+
+        const avatar = new FormData()
+
+        avatar.append("avatar", selectedFile)
+
+        fetch(`/avatar`, {
+            method: 'PATCH',
+            body: avatar,
+        }).then((r) => {
+            if (r.ok) {
+                r.json().then((user) => setUser(user));
+            } else {
+                r.json().then((err) => setErrors(err.errors));
+            }
+        });
     }
 
 
