@@ -42,6 +42,7 @@ export default function AvatarUpload ({ user, setUser }) {
             /> */}
 
             <FileUploader
+            maxSize={6291456}
             onFileSelectSuccess={setSelectedFile}
             onFileSelectError={({ error }) => alert(error)}
             />
