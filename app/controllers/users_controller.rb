@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :authorize, only: [:create, :index]
+    skip_before_action :authorize, only: [:create]
 
     def create
         user = User.create!(user_params)
@@ -8,7 +8,8 @@ class UsersController < ApplicationController
     end
 
     def set_avatar
-        @current_user.update(avatar: params[:avatar]);
+        # byebug
+        @current_user.update_attribute(:avatar, params[:avatar])
         render json: @current_user, status: :accepted
     end
 
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.permit(:username, :bio, :email, :default_timezone, :twitch_username, :password, :password_confirmation)
+        params.permit(:username, :avatar, :bio, :email, :default_timezone, :twitch_username, :password, :password_confirmation)
     end
 
 end

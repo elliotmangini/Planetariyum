@@ -1,19 +1,17 @@
-import React, {useRef} from 'react'
 
 export default function FileUploader ({onFileSelectError, onFileSelectSuccess }) {
-    const fileInput = useRef(null)
 
     const handleFileInput = (e) => {
         // handle validations
         const file = e.target.files[0];
-        if (file.size > 1048576)
-          onFileSelectError({ error: "File size cannot exceed more than 1MB" });
+        if (file.size > 6291456)
+          onFileSelectError({ error: "Avatar size must be 6MB or less." });
         else onFileSelectSuccess(file);
     };
 
     return (
         <div className="file-uploader">
-            <input type="file" accept="image/*" onChange={(e) => handleFileInput(e)}/>
+            <input type="file" onChange={(e) => handleFileInput(e)}/>
         </div>
     )
 }

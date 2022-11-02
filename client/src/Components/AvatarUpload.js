@@ -10,14 +10,13 @@ export default function AvatarUpload ({ user, setUser }) {
     function submitForm (e) {
         e.preventDefault();
 
-        console.log(selectedFile);
+        // console.log(selectedFile);
 
         const avatar = new FormData()
+        avatar.append('avatar', selectedFile)
 
-        avatar.append("avatar", selectedFile)
-
-        fetch(`/avatar`, {
-            method: 'PATCH',
+        fetch("/avatar", {
+            method: 'post',
             body: avatar,
         }).then((r) => {
             if (r.ok) {

@@ -20,9 +20,9 @@ export default function SignUp ({ user, setUser }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username,
-        email,
-        password,
+        username: username,
+        email: email,
+        password: password,
         password_confirmation: passwordConfirmation,
       }),
     }).then((r) => {
