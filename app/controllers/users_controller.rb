@@ -8,7 +8,6 @@ class UsersController < ApplicationController
     end
 
     def set_avatar
-        # byebug
         @current_user.update_attribute(:avatar, params[:avatar])
         render json: @current_user, status: :accepted
     end

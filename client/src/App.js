@@ -28,6 +28,13 @@ export default function App() {
         <Route path="/login" element={<Login user={user} setUser={setUser} />} />
         <Route path="/logout" element={<Logout user={user} setUser={setUser} />} />
       </Routes>
+      { user ? 
+      <>
+      <h1>State Shit</h1>
+      <p>avatar</p>
+      <img src={user.avatar_url}></img>
+      </>
+      : null }
     </>
   );
 }
