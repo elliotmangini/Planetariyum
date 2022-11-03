@@ -11,10 +11,10 @@ export default function NavBar ({ user }) {
     return (
         <>
             <div id={style.sidebar_container}>
-                <Link to="/" className={style.nav_items}>Planetariyum</Link>
-                <Link to="/explore" className={style.nav_items}>Explore</Link>
+                <Link to="/" className={style.nav_items}>Sphere</Link>
                 <Link to="/arena" className={style.nav_items}>Arena</Link>
                 <Link to="/mint" className={style.nav_items}>Mint</Link>
+                <Link to="/explore" className={style.nav_items}>Explore</Link>
                 <Link to={ user ? "/dashboard" : "/login"} className={style.nav_items}>{ user ? null : "Login/SignUp" }</Link>
             </div>
         </>
