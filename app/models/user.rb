@@ -6,6 +6,12 @@ class User < ApplicationRecord
     validates_uniqueness_of :email, :case_sensitive => false
 
     has_one_attached :avatar
+    has_many :cards, foreign_key: 'author_id'
+    has_many :collections, foreign_key: 'creator_id'
+
+
+
+
     def avatar_url
         Rails.application.routes.url_helpers.url_for(avatar) if avatar.attached?
     end
