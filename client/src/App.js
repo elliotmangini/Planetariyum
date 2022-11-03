@@ -27,29 +27,20 @@ export default function App() {
 
   return (
     <>
-      { user ?
+      
       <NavBar user={user} />
-      : null}
         <Routes>
           <Route path="/Explore" element={<Explore />} />
           <Route path="/" element={<Planetariyum />} />
           <Route path="/Arena" element={<Arena />} />
           <Route path="/Mint" element={<Mint />} />
-          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/Dashboard" element={<Dashboard user={user} />} />
 
 
           <Route path="/signup" element={<SignUp user={user} setUser={setUser} />} />
           <Route path="/login" element={<Login user={user} setUser={setUser} />} />
           <Route path="/logout" element={<Logout user={user} setUser={setUser} />} />
         </Routes>
-
-      {/* { user ? 
-      <>
-      <h1>State Shit</h1>
-      <p>avatar</p>
-      <img src={user.avatar_url}></img>
-      </>
-      : null } */}
     </>
   );
 }
