@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.permit(:username, :avatar, :bio, :email, :default_timezone, :twitch_username, :password, :password_confirmation)
+        params.permit(:username, :avatar, :bio, :email, :site_theme, :custom_theme, :default_timezone, :twitch_username, :password, :password_confirmation)
     end
 
 end

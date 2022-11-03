@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Navigate } from 'react-router-dom';
 import AvatarUpload from './AvatarUpload';
 
+
 export default function SignUp ({ user, setUser }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -23,6 +24,7 @@ export default function SignUp ({ user, setUser }) {
         username: username,
         email: email,
         password: password,
+        // set_theme: theme,
         password_confirmation: passwordConfirmation,
       }),
     }).then((r) => {

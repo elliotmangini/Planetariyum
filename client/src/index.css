@@ -1,13 +1,73 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* HIDE SCROLLBAR */
+::-webkit-scrollbar {
+  display: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* FIX LINKS */
+a, a:visited{
+  color: var(--text-primary);
+  text-decoration: none;
+  cursor: none;
+}
+
+/* SITE THEMES */
+.light {
+  --background: white;
+  --text-primary: rgb(89, 52, 255);
+  --text-secondary: royalblue;
+  --accent: purple;
+}
+
+.dark {
+  --background: rgb(28, 28, 28);
+  --text-primary: rgb(236, 231, 231);
+  --text-secondary: grey;
+  --accent: darkred;
+
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  height:99.3vh;
+  border: 3px solid rgb(255, 0, 238);
+
+  /* TESTING LIGHT AND DARK */
+
+}
+
+#root {
+  height: 99%;
+  width: 100%;
+}
+
+#data_container {
+  height: 100%;
+}
+
+#header_container {
+  height: 10%;
+  width: 99.5%;
+  border: 4px solid rgb(0, 4, 255);
+}
+
+#nav_main_and_dash_container {
+  display: flex;
+  height: 90%;
+  width: 99.5%;
+  border: 5px solid rgb(0, 255, 38);
+}
+
+#nav_and_left_dash_container {
+  width: auto;
+  height: 100%;
+  border: 3px solid rgb(0, 174, 255);
+}
+
+#main_content {
+  height: 99%;
+  width: 99%;
+  border: 5px solid rgb(27, 74, 34);
 }

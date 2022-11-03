@@ -1,0 +1,11 @@
+#left_dash_container {
+    display: flex;
+    height: auto;
+    min-height: 10rem;
+    border: 3px solid red;
+}
+
+#left_dash_contents {
+    flex-grow: 1;
+    width: 0;
+}

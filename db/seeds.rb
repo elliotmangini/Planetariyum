@@ -7,7 +7,14 @@ puts 'Seeding Database 🌱🍃🌱🍃🌱🍃'
 
 puts 'Creating Users 👤'
 # MUST MEET VALIDATIONS!!!
-elliot = User.create(username: 'BigSister', password: '123456', bio: 'Big Sis', email: 'elliot.mangini@gmail.com', twitch_username: 'biigsiister')
+elliot = User.create(
+    username: 'BigSister',
+    display_name: 'Big Sister',
+    password: '123456',
+    bio: 'Big Sis',
+    email: 'elliot.mangini@gmail.com',
+    twitch_username: 'biigsiister',
+    site_theme: 'dark')
 # ACTIVE STORAGE SEEDING EXAMPLE
 elliot_avatar = elliot.avatar.attach(io: File.open(File.join(Rails.root,'/app/assets/avatars/Octopus_God_pfp.png')), filename: 'Octopus_God_pfp.png')
 
@@ -19,13 +26,12 @@ yumBase_art_blob = yumBase.collection_art.attach(io: File.open(File.join(Rails.r
 
 puts 'Creating Cards 🃏🃏🃏🃏🃏'
 yumBase_card1 = elliot.cards.create(
+    # chosen_count: DEFAULTS TO 0
     collection_id: yumBase.id,
     name: 'Geef',
     asset_kind: 'kick',
     file_name: 'Big_Sister_Kick_Geef_01.wav',
-    variant: '1',
-    # chosen_count: DEFAULTS TO 0
-)
+    variant: '1')
 # ACTIVE STORAGE SEED EXAMPLE THREE
 yumBase_card1_asset_blob = yumBase_card1.card_asset.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_assets/Big_Sister_Kick_Geef_01.wav')), filename: 'Big_Sister_Kick_Geef_01.wav')
 yumBase_card1_art_blob = yumBase_card1.card_art.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_arts/Big_Sister_Kick_Geef_01_art.png')), filename: 'Big_Sister_Kick_Geef_01_art.png')

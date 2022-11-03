@@ -1,6 +1,6 @@
 class Card < ApplicationRecord
   belongs_to :user, foreign_key: 'author_id'
-  belongs_to :collection
+  # belongs_to :collection
 
   has_one_attached :card_asset
   has_one_attached :card_art
