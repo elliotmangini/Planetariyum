@@ -28,7 +28,7 @@ a, a:visited {
     color: var(--text-primary);
     font-size: 1.4vw;
     background-color: var(--button-background);
-    height: fit-content;
+    /* height: fit-content; */
     padding: .2rem;
     border-radius: .8vw;
     margin-right: .3rem;

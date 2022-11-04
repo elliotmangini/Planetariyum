@@ -6,7 +6,7 @@ export default function Planetariyum () {
 
     return (
         <>
-            <>Planetariyum goes here!</>
+            <>Sphere: Social Network Goes Here</>
         </>
     )
 }

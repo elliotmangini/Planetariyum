@@ -5,8 +5,17 @@ import NavBar from './Components/NavBar';
 import './StyleSheets/App.css';
 
 import Header from './Components/Header';
+
 import Planetariyum from './Components/Planetariyum';
-import Explore from './Components/Explore';
+import SocialFeed from './Components/SocialFeed';
+
+import Home from './Components/Home';
+import Browse from './Components/Browse';
+import Themes from './Components/Themes';
+import Resources from './Components/Resources';
+import Forums from './Components/Forums';
+
+
 import Arena from './Components/Arena';
 import Mint from './Components/Mint';
 import Dashboard from './Components/Dashboard';
@@ -20,6 +29,7 @@ import DashLeftUserless from './Components/DashLeftUserless';
 
 export default function App() {
   const [user, setUser] = useState(null);
+  const [ path , setPath ] = useState("")
 
     // // grab default theme from user's browser settings
     // const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -41,7 +51,8 @@ export default function App() {
       </div>
       <div id="nav_main_and_dash_container">
       <div id="nav_and_left_dash_container">
-        <NavBar user={user} />
+        <NavBar path={path} setPath={setPath} user={user} />
+
         { user ?
         <DashLeft user={user} />
         :
@@ -49,8 +60,20 @@ export default function App() {
       </div>
         <div id="main_content">
           <Routes>
-            <Route path="/Explore" element={<Explore />} />
-            <Route path="/" element={<Planetariyum />} />
+            <Route path="/" element={<Home />} />
+              <Route path="/Browse" element={<Browse />} />
+              <Route path="/Themes" element={<Themes />} />
+              <Route path="/Resources" element={<Resources />} />
+              <Route path="/Forums" element={<Forums />} />
+
+
+
+
+
+            <Route path="/Sphere" element={<Planetariyum />} />
+              <Route path="/Feed" element={<SocialFeed />} />
+
+
             <Route path="/Arena" element={<Arena />} />
             <Route path="/Mint" element={<Mint />} />
             <Route path="/Dashboard" element={<Dashboard user={user} />} />
@@ -62,7 +85,7 @@ export default function App() {
           </Routes>
         </div>
         { user ?
-        <DashRight setUser={setUser} user={user} />
+        <DashRight setUser={setUser} user={user} setPath={setPath} />
         :
         <DashRightUserless /> }
       </div>

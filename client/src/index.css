@@ -55,6 +55,7 @@ body {
   --popup-background: rgb(58, 58, 58);
   --button-background: rgb(103, 103, 103);
   --button-selected: rgb(82, 82, 82);
+  --selected-subheading: rgb(69, 69, 69);
   --text-primary: rgb(236, 231, 231);
   --text-secondary: grey;
   --accent: darkred;
