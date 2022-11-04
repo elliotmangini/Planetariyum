@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Error from './Error'
 import { Navigate } from 'react-router-dom';
 import style from '../StyleSheets/Login.module.css';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -63,12 +65,19 @@ export default function Login ({ user, setUser }) {
                       {isLoading ? "Loading..." : "Login"}
                     </button>
                   </div>
-                  {errors.map((err) => (
-                    <Error key={err}>{err}</Error>
-                  ))}
+                  <div className="form-item-div">
+                    {errors.map((err) => (
+                      <Error key={err}>{err}</Error>
+                    ))}
+                  </div>
               </form>
-              </div>
-            <div className="pop-up-text">Need to make an account? </div>
+            </div>
+            <div className="pop-up-text">
+              Need to make an account?
+              <br />
+              <Link to="/signup" id={style.signup}> Sign Up</Link>
+              . 💫
+            </div>
           </div>
           
         </>

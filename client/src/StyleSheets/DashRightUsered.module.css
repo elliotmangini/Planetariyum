@@ -1,40 +1,6 @@
-#user_header {
-    margin: 0;
-    align-items: center;
-    display: inline-flex;
-    white-space: nowrap;
-    background: var(--element-background);
-    border-radius: .7vw;
-    width: 100%;
-}
-
-#spacer {
-    width: 100%;
-}
-
-#username {
-    font-size: 1.5vw;
-    background-color: var(--button-background);
-    height: fit-content;
-    padding: .2rem;
-    border-radius: 1vw;
-    margin-left: 1rem;
-}
-
-#username:hover {
-    background-color: var(--button-selected);
-}
-
-#dash_avatar {
-    height: 2.5vw;
-    width: 2.5vw;
-    border-radius:50%;
-    margin: .5rem;
-    margin-left: .5rem;
-}
-
 #quick_settings_panel {
     position: absolute;
+    margin-top: .5vw;
     right: 1.2vw;
     background: var(--element-background);
     border-radius: .7vw;

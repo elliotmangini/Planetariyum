@@ -2,6 +2,8 @@ import styleRightGeneric from '../StyleSheets/DashRight.module.css'
 import style from '../StyleSheets/DashRightUsered.module.css'
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import avatarPlaceholder from '../Assets/placeholders/Avatar_Placeholder.png';
+
 
 
 
@@ -20,10 +22,10 @@ export default function DashRight ({ user, setUser }) {
     return (
         <div id={styleRightGeneric.dash_panel_container}>
 
-            <h1 id={style.user_header}>
-                <div id={style.spacer}></div>
-                <Link id={style.username} to={ user ? "/dashboard" : "/login"}>&nbsp;&nbsp;{user.display_name}&nbsp;</Link>
-                <img onClick={() => setIsQuickSettings(!isQuickSettings)} id={style.dash_avatar}  src={user.avatar_url}></img>
+            <h1 id={styleRightGeneric.user_header}>
+                <div id={styleRightGeneric.spacer}></div>
+                <Link id={styleRightGeneric.username} to="/dashboard">&nbsp;&nbsp;{user.display_name}&nbsp;</Link>
+                <img onClick={() => setIsQuickSettings(!isQuickSettings)} id={styleRightGeneric.dash_avatar}  src={user.avatar_url ? user.avatar_url : avatarPlaceholder}></img>
             </h1>
             { isQuickSettings ?
                 <div id={style.quick_settings_panel}>

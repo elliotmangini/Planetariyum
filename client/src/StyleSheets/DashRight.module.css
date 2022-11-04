@@ -1,7 +1,48 @@
+a, a:visited {
+    text-decoration: none;
+    cursor: default;
+}
+
 #dash_panel_container {
     display: inline-block;
     width: auto;
-    min-width: 16%;
+    min-width: 15%;
     border: 3px solid rgb(0, 174, 255);
-    background: var(--background-secondary)
+    background: var(--element-background)
+}
+
+#user_header {
+    margin: 0;
+    align-items: center;
+    display: inline-flex;
+    white-space: nowrap;
+    background: var(--header-background);
+    width: 100%;
+}
+
+#spacer {
+    width: 100%;
+}
+
+#username {
+    color: var(--text-primary);
+    font-size: 1.4vw;
+    background-color: var(--button-background);
+    height: fit-content;
+    padding: .2rem;
+    border-radius: .8vw;
+    margin-right: .3rem;
+}
+
+#username:hover {
+    background-color: var(--button-selected);
+}
+
+#dash_avatar {
+    height: 2.5vw;
+    width: 2.5vw;
+    border-radius:50%;
+    margin: .5rem;
+    margin-left: .5rem;
+    margin-right: 1vw;
 }

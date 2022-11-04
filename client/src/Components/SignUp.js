@@ -40,46 +40,63 @@ export default function SignUp ({ user, setUser }) {
   return (
     <>
         {/* FORWARD PATH */}
-        {/* { user ? <Navigate to="/" /> : null} */}
+        { user ? <Navigate to="/" /> : null}
+        
+        <div className="pop-up-container">
+          <div className="pop-up-title">Create An Account</div>
+          <div className="form-container">
+            <form className="form" onSubmit={handleSubmit}>
+              <div className="form-item-div">
+                <input
+                type="text"
+                id="username"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+              <div className="form-item-div">
+                <input
+                type="text"
+                id="email"
+                placeholder="e-mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="form-item-div">
+                <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+                />
+              </div>
+              
+              <div className="form-item-div">
+                <input
+                type="password"
+                id="password_confirmation"
+                placeholder="Confirm Password"
+                value={passwordConfirmation}
+                onChange={(e) => setPasswordConfirmation(e.target.value)}
+                autoComplete="current-password"
+                />
+              </div>
 
-        <form onSubmit={handleSubmit}>
-            <input
-            type="text"
-            id="username"
-            autoComplete="off"
-            placeholder="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-            type="text"
-            id="email"
-            placeholder="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-            type="password"
-            id="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-            />
-            <input
-            type="password"
-            id="password_confirmation"
-            placeholder="confirm password"
-            value={passwordConfirmation}
-            onChange={(e) => setPasswordConfirmation(e.target.value)}
-            autoComplete="current-password"
-            />
-
-            <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
-            {errors.map((err) => (
-            <p key={err}>{err}</p>
-            ))}
-        </form>
+              <div className="form-item-div">
+                <button className="submit-button" type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
+              </div>
+              <div className="validation-errors">
+                {errors.map((err) => (
+                  <p key={err}>{err}</p>
+                ))}
+              </div>
+            </form>
+          </div>
+        </div>
 
         <AvatarUpload user={user} setUser={setUser}/>
     </>

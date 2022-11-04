@@ -29,17 +29,6 @@ body {
   width: 100%;
 }
 
-/* FIX LINKS */
-a, a:visited{
-  color: var(--text-primary);
-  text-decoration: none;
-  cursor: default;
-}
-
-a:hover {
-  background-color: var(--text-secondary);
-}
-
 /* SITE THEMES */
 #theme_container {
   height: 100%;
@@ -51,6 +40,8 @@ a:hover {
   --background-secondary: rgb(241, 241, 241);
   --element-background: rgb(231, 231, 231);
   --popup-background: rgb(231, 231, 231);
+  --button-background: rgb(205, 205, 205);
+  --button-selected: rgb(82, 82, 82);
   --text-primary: rgb(22, 22, 22);
   --text-secondary: royalblue;
   --accent: purple;
@@ -59,6 +50,7 @@ a:hover {
 .dark {
   --background: rgb(28, 28, 28);
   --background-secondary: rgb(15, 15, 15);
+  --header-background: rgb(49, 49, 49);
   --element-background: rgb(58, 58, 58);
   --popup-background: rgb(58, 58, 58);
   --button-background: rgb(103, 103, 103);
@@ -88,7 +80,7 @@ a:hover {
 
 #nav_and_left_dash_container {
   width: auto;
-  min-width: 16%;
+  min-width: 15%;
   height: 100%;
   border: 3px solid rgb(0, 174, 255);
   background: var(--background-secondary)
