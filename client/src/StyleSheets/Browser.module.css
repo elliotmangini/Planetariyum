@@ -1,0 +1,28 @@
+#collections_container {
+    border: 3px solid rgb(255, 79, 79);
+}
+
+#single_collection_container {
+    border: 3px solid rgb(170, 79, 255);
+    position: relative;
+    animation: fadein 1s;
+    animation-delay: .5s;
+    animation-fill-mode: forwards;
+}
+
+.collection_title {
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+}
+
+.cover_art {
+    position: relative;
+    width: 100%;
+    border-radius: 10em;
+}
+
+@keyframes fadein {
+    0% { opacity: 0% };
+    100% { opacity: 100% };
+}

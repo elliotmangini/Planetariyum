@@ -36,14 +36,14 @@ body {
 
 .light {
   --background: rgb(240, 240, 240);
+  --background-secondary: rgb(230, 230, 230);
   --primary-theme-color: purple;
-  --background-secondary: rgb(241, 241, 241);
   --element-background: rgb(231, 231, 231);
   --popup-background: rgb(231, 231, 231);
   --button-background: rgb(205, 205, 205);
-  --button-selected: rgb(82, 82, 82);
+  --button-selected: rgb(213, 213, 213);
   --text-primary: rgb(22, 22, 22);
-  --text-secondary: royalblue;
+  --text-secondary: rgb(46, 46, 46);
   --accent: purple;
 }
 
@@ -59,7 +59,7 @@ body {
   --text-primary: rgb(236, 231, 231);
   --text-secondary: grey;
   --accent: darkred;
-
+  
   background-color: var(--background);
   color: var(--text-primary);
 }

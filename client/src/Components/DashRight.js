@@ -37,11 +37,13 @@ export default function DashRight ({ user, setUser, setPath }) {
                 </div>
             : null }
 
-            <p>contents</p>
-            <p>contents</p>
-            <p>contents</p>
-            <p>contents</p>
-            <p>contents</p>
+            <div className={styleRightGeneric.dash_contents_container}>
+                <p>contents</p>
+                <p>contents</p>
+                <p>contents</p>
+                <p>contents</p>
+                <p>contents</p>
+            </div>
 
         </div>
     )

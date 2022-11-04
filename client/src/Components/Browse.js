@@ -1,12 +1,16 @@
 
+import style from '../StyleSheets/Browser.module.css';
 
 
 
-export default function X () {
+export default function Browse ({ collectionsToDisplay }) {
+
 
     return (
         <>
-            <div>Browse/MarketPlace Goes Here</div>
+            <div id={style.collections_container}>
+                {collectionsToDisplay}
+            </div>
         </>
     )
 }

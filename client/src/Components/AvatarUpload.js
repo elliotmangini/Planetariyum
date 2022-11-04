@@ -12,8 +12,8 @@ export default function AvatarUpload ({ user, setUser }) {
 
         // console.log(selectedFile);
 
-        const avatar = new FormData()
-        avatar.append('avatar', selectedFile)
+        const avatar = new FormData();
+        avatar.append('avatar', selectedFile);
 
         fetch("/avatar", {
             method: 'post',
