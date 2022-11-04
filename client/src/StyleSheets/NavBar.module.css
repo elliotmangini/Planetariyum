@@ -1,11 +1,11 @@
 #sidebar_container {
     display: inline-block;
-    border: 3px solid red;
+    /* border: 3px solid red; */
     width: 100%;
 }
 
 .main_tab {
-    border: 3px solid rgb(0, 208, 255);
+    /* border: 3px solid rgb(0, 208, 255); */
     background-color: var(--background-secondary);
     display: inline-flex;
     width: 100%;

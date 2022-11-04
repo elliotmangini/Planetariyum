@@ -1,9 +1,9 @@
 #collections_container {
-    border: 3px solid rgb(255, 79, 79);
+    /* border: 3px solid rgb(255, 79, 79); */
 }
 
 #single_collection_container {
-    border: 3px solid rgb(170, 79, 255);
+    /* border: 3px solid rgb(170, 79, 255); */
     position: relative;
     animation: fadein 1s;
     animation-delay: .5s;

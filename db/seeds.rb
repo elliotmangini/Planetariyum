@@ -9,32 +9,33 @@ puts 'Seeding Database 🌱🍃🌱🍃🌱🍃'
 puts 'Creating Publications 🗞🗞🗞🗞🗞'
 story1 = Publication.create(title: "Welcome to Planetariyum",
 body: "",
-kind: "general", route: nil, runtime: 10000)
+kind: "large", route: nil, runtime: 10000)
 story1_cover_blob = story1.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/grid_rectangle_1.png')), filename: 'grid_rectangle_1.png')
 
 story2 = Publication.create(title: "New Release: Planetariyum Base",
 body: "",
-kind: "general", route: nil, runtime: 10000)
+kind: "", route: nil, runtime: 10000)
 story2_cover_blob = story2.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/grid_square_1.png')), filename: 'grid_square_1.png')
 
 story3 = Publication.create(title: "About The Creators",
 body: "",
-kind: "general", route: nil, runtime: 10000)
+kind: "", route: nil, runtime: 10000)
 story3_cover_blob = story3.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/grid_square_2.png')), filename: 'grid_square_2.png')
 
-story4 = Publication.create(title: "Limited Time Invite Offer",
-body: "",
-kind: "general", route: nil, runtime: 10000)
-story4_cover_blob = story4.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/grid_rectangle_2.png')), filename: 'grid_rectangle_2.png')
 
 story5 = Publication.create(title: "Web 3.0 Integration",
 body: "",
-kind: "general", route: nil, runtime: 10000)
+kind: "", route: nil, runtime: 10000)
 story5_cover_blob = story5.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/grid_square_3.png')), filename: 'grid_square_3.png')
+
+story4 = Publication.create(title: "Limited Time Invite Offer",
+body: "",
+kind: "large", route: nil, runtime: 10000)
+story4_cover_blob = story4.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/grid_rectangle_2.png')), filename: 'grid_rectangle_2.png')
 
 story6 = Publication.create(title: "Reach Out (and Hire Me)",
 body: "",
-kind: "general", route: nil, runtime: 10000)
+kind: "", route: nil, runtime: 10000)
 story6_cover_blob = story6.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/grid_square_4.png')), filename: 'grid_square_4.png')
 
 
