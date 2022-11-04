@@ -1,5 +1,8 @@
-import style from '../StyleSheets/DashRight.module.css'
+import styleRightGeneric from '../StyleSheets/DashRight.module.css'
+import style from '../StyleSheets/DashRightUserless.module.css'
 import { Link } from 'react-router-dom';
+
+// import
 
 
 
@@ -7,8 +10,9 @@ import { Link } from 'react-router-dom';
 export default function DashRightUserless () {
 
     return (
-        <div id={style.dash_panel_container}>
-            <h1>logged out dash right</h1>
+        <div id={styleRightGeneric.dash_panel_container}>
+            <Link to="/login" className={style.nav_items}>LogIn/SignUp</Link>
+
 
         </div>
     )

@@ -15,7 +15,6 @@ export default function NavBar ({ user }) {
                 <Link to="/arena" className={style.nav_items}>Arena</Link>
                 <Link to="/mint" className={style.nav_items}>Mint</Link>
                 <Link to="/explore" className={style.nav_items}>Explore</Link>
-                <Link to={ user ? "/dashboard" : "/login"} className={style.nav_items}>{ user ? null : "Login/SignUp" }</Link>
             </div>
         </>
     )

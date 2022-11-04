@@ -35,7 +35,7 @@ export default function App() {
   }, []);
 
   return (
-    <div id="data_container" className={user ? user.site_theme : theme}>
+    <div id="theme_container" className={user ? user.site_theme : theme}>
       <div id="header_container">
         <Header />
       </div>
@@ -62,7 +62,7 @@ export default function App() {
           </Routes>
         </div>
         { user ?
-        <DashRight user={user} />
+        <DashRight setUser={setUser} user={user} />
         :
         <DashRightUserless /> }
       </div>

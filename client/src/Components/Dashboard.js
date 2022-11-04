@@ -7,13 +7,7 @@ export default function Dashboard({ user }) {
     <>
     { !user ? <Navigate to="/" /> :
     <>
-      <>Dashboard goes here!</>
-      
-      
-      <h1>State Shit</h1>
-      <p>avatar</p>
-      <img src={user.avatar_url}></img>
-      
+      <img width="100%" src={user.avatar_url}></img>
     </>
     }
     </>

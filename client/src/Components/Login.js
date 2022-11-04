@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Error from './Error'
 import { Navigate } from 'react-router-dom';
+import style from '../StyleSheets/Login.module.css';
 
 
 
@@ -35,28 +36,41 @@ export default function Login ({ user, setUser }) {
           {/* FORWARD PATH */}
           { user ? <Navigate to="/" /> : null}
           
-          <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                id="username"
-                autoComplete="off"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <input
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <button variant="fill" color="primary" type="submit">
-                {isLoading ? "Loading..." : "Login"}
-              </button>
-              {errors.map((err) => (
-                <Error key={err}>{err}</Error>
-              ))}
-          </form>
+          <div className="pop-up-container">
+            <div className="pop-up-title">Welcome Back</div>
+            <div className="form-container">
+              <form className="form" onSubmit={handleSubmit}>
+                  <div className="form-item-div">
+                    <input
+                      type="text"
+                      id="username"
+                      placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-item-div">
+                  <input
+                    type="password"
+                    id="password"
+                    value={password}
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  </div>
+                  <div className="form-item-div">
+                    <button className="submit-button" type="submit">
+                      {isLoading ? "Loading..." : "Login"}
+                    </button>
+                  </div>
+                  {errors.map((err) => (
+                    <Error key={err}>{err}</Error>
+                  ))}
+              </form>
+              </div>
+            <div className="pop-up-text">Need to make an account? </div>
+          </div>
+          
         </>
       );
 }
