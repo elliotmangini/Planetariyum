@@ -1,5 +1,5 @@
 class Collection < ApplicationRecord
-  belongs_to :user, foreign_key: 'creator_id'
+  belongs_to :creator, foreign_key: 'creator_id', class_name: 'User'
   has_one_attached :collection_art
 
   def cover_url

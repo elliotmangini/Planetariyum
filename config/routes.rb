@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :playings
+  resources :vods
+  resources :games
   resources :follows
   resources :publications
   resources :collections

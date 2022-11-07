@@ -4,6 +4,9 @@ User.destroy_all
 Follow.destroy_all
 Collection.destroy_all
 Card.destroy_all
+Game.destroy_all
+Playing.destroy_all
+Vod.destroy_all
 
 puts 'Seeding Database 🌱🍃🌱🍃🌱🍃'
 
@@ -95,9 +98,20 @@ yumBase_card1 = elliot.cards.create(
     name: 'Geef',
     asset_kind: 'kick',
     file_name: 'Big_Sister_Kick_Geef_01.wav',
-    variant: '1')
+    variant: '1'
+)
+
 # ACTIVE STORAGE SEED EXAMPLE THREE
 yumBase_card1_asset_blob = yumBase_card1.card_asset.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_assets/Big_Sister_Kick_Geef_01.wav')), filename: 'Big_Sister_Kick_Geef_01.wav')
 yumBase_card1_art_blob = yumBase_card1.card_art.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_arts/Big_Sister_Kick_Geef_01_art.png')), filename: 'Big_Sister_Kick_Geef_01_art.png')
+
+
+puts 'Creating Games 🎮🎮🎮'
+game1 = Game.create(deadline: DateTime.new(2001,2,3,4,5,6), collection: yumBase)
+
+puts 'Creating Playings 🚣‍♀️🤺'
+elliot.playings.create(game_id: game1.id)
+gabe.playings.create(game_id: game1.id)
+
 
 puts 'Database Seeded ✅✅✅✅✅✅'

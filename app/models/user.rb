@@ -18,6 +18,14 @@ class User < ApplicationRecord
     has_many :following_relationships, foreign_key: :follower_id, class_name: 'Follow'
     has_many :following, through: :following_relationships, source: :following
 
+    # GAMES AND PLAYINGS
+    has_many :playings, foreign_key: 'player_id'
+    has_many :games, through: :playings
+
+    # UNCERTAIN ABOUT THIS!!!!
+    # has_many :game_relationships, foreign_key: :player_id, class_name: 'Playing'
+    # has_many :opponents, through: :game_relationships, source: :opponent
+
 
 
 

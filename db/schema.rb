@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_07_184026) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_07_185828) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -68,6 +68,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_07_184026) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "games", force: :cascade do |t|
+    t.datetime "deadline"
+    t.integer "collection_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["collection_id"], name: "index_games_on_collection_id"
+  end
+
+  create_table "playings", force: :cascade do |t|
+    t.integer "game_id", null: false
+    t.integer "player_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_playings_on_game_id"
+    t.index ["player_id"], name: "index_playings_on_player_id"
+  end
+
   create_table "publications", force: :cascade do |t|
     t.string "title"
     t.string "body"
@@ -92,9 +109,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_07_184026) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "vods", force: :cascade do |t|
+    t.integer "streamer_id", null: false
+    t.integer "game_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_vods_on_game_id"
+    t.index ["streamer_id"], name: "index_vods_on_streamer_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cards", "collections"
   add_foreign_key "cards", "users", column: "author_id"
   add_foreign_key "collections", "users", column: "creator_id"
+  add_foreign_key "games", "collections"
+  add_foreign_key "playings", "games"
+  add_foreign_key "playings", "users", column: "player_id"
+  add_foreign_key "vods", "games"
+  add_foreign_key "vods", "users", column: "streamer_id"
 end
