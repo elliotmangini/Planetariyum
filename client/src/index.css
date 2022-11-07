@@ -112,6 +112,8 @@ body {
   height: 6%;
   position: relative;
   margin: auto;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .tab-button {
@@ -150,25 +152,50 @@ body {
 .tab-search {
   background-color: darkslategray;
   position: absolute;
+  left: 0%;
   height: 100%;
   width: 20%;
   border-radius: 6rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: get-wide ease-in-out 1s;
+  animation: get-wide ease-in-out .8s;
   animation-fill-mode: forwards;
+}
+
+.tab-cover {
+  background-color: red;
+  position: absolute;
+  right: 0%;
+  height: 100%;
+  width: 20%;
+  border-radius: 6rem;
+  animation: get-wide ease-in-out .8s;
+  animation-fill-mode: forwards;
+  background-color: var(--background-secondary);
 }
 
 @keyframes get-wide {
   0% { 
     width: 20%;
-    opacity: 0%;
+    /* opacity: 0%; */
    }
   100% { 
     width: 100%;
-    opacity: 100%;
+    /* opacity: 100%; */
   }
+}
+
+.back-button {
+  background-color: grey;
+  position: absolute;
+  height: 90%;
+  width: 8%;
+  border-radius: 6rem;
+  right: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 

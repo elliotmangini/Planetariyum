@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './Components/NavBar';
-import { v4 as uuid } from 'uuid';
+
 
 import './StyleSheets/App.css';
 
@@ -12,7 +12,6 @@ import SocialFeed from './Components/SocialFeed';
 
 import Home from './Components/Home';
 import Browse from './Components/Browse';
-import CollectionCard from './Components/CollectionCard';
 import Themes from './Components/Themes';
 import Resources from './Components/Resources';
 import Forums from './Components/Forums';
@@ -46,21 +45,6 @@ export default function App() {
     });
   }, []);
 
-  // GET STUFF FOR BROWSE IN ADVANCE
-  const [ collections , setCollections ] = useState([]);
-
-  useEffect(() => {
-      fetch('/collections')
-      .then(resp => resp.json())
-      .then(data => setCollections(data));
-  },[]);
-
-  const collectionsToDisplay = collections.map((c) => {
-      return (
-          <CollectionCard key={uuid()} collection={c} />
-      )
-  })
-
   // GET STUFF FOR HOME
   const [ publications , setPublications ] = useState([]);
 
@@ -87,7 +71,7 @@ export default function App() {
         <div id="main_content">
           <Routes>
             <Route path="/" element={<Home publications={publications} />} />
-              <Route path="/Browse" element={<Browse collectionsToDisplay={collectionsToDisplay} />} />
+              <Route path="/Browse" element={<Browse />} />
               <Route path="/Themes" element={<Themes />} />
               <Route path="/Resources" element={<Resources />} />
               <Route path="/Forums" element={<Forums />} />
