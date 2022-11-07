@@ -1,19 +1,30 @@
-#collections_container {
-    /* border: 3px solid rgb(255, 79, 79); */
-}
+/* .browser_search_bar {
+    width: 70%;
+    height: 5%;
+    margin: auto;
+    background-color: var(--header-background);
+    display: flex;
+    justify-content: flex-end;
+} */
 
 #single_collection_container {
     /* border: 3px solid rgb(170, 79, 255); */
     position: relative;
-    animation: fadein 1s;
+    /* animation: fadein 1s;
     animation-delay: .5s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: forwards; */
 }
 
 .cover_art {
     position: relative;
     width: 100%;
     border-radius: 10em;
+    transition: filter .5s;
+    filter: blur(3px);
+}
+
+.cover_art:hover {
+    filter: blur(0);
 }
 
 .collection_title {

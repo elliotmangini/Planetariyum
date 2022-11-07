@@ -88,8 +88,8 @@ body {
 }
 
 #main_content {
-  height: 99%;
-  width: 99%;
+  height: 100%;
+  width: 100%;
   overflow: auto;
   /* border: 5px solid rgb(27, 74, 34); */
 }
@@ -105,6 +105,75 @@ body {
   margin-top: 2rem;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.tab-header {
+  width: 90%;
+  height: 6%;
+  position: relative;
+  margin: auto;
+}
+
+.tab-button {
+  position: absolute;
+  height: 100%;
+  width: 20%;
+  background-color: white;
+  border-radius: 6rem;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: left ease-in-out .6s;
+}
+
+.tab-1-of-5 {
+  left: 0%;
+}
+
+.tab-2-of-5 {
+  left: 20%;
+}
+
+.tab-3-of-5 {
+  left: 40%;
+}
+
+.tab-4-of-5 {
+  left: 60%;
+}
+
+.tab-5-of-5 {
+  left: 80%;
+}
+
+.tab-search {
+  background-color: darkslategray;
+  position: absolute;
+  height: 100%;
+  width: 20%;
+  border-radius: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: get-wide ease-in-out 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes get-wide {
+  0% { 
+    width: 20%;
+    opacity: 0%;
+   }
+  100% { 
+    width: 100%;
+    opacity: 100%;
+  }
+}
+
+
+input {
+  width: 12rem;
 }
 
 .pop-up-title {
