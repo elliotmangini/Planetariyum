@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :follows
   resources :publications
   resources :collections
   resources :cards

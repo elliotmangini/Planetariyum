@@ -1,6 +1,7 @@
 puts 'Clearing Database 💀💀💀'
 Publication.destroy_all
 User.destroy_all
+Follow.destroy_all
 Collection.destroy_all
 Card.destroy_all
 
@@ -54,6 +55,9 @@ elliot = User.create(
 elliot_avatar = elliot.avatar.attach(io: File.open(File.join(Rails.root,'/app/assets/avatars/Octopus_God_pfp.png')), filename: 'Octopus_God_pfp.png')
 
 gabe = User.create(username: 'Sine Caster', password: '123456', bio: 'Big Sis', email: 'sinecaster@gmail.com', twitch_username: 'SineCasterMusic')
+
+# FOLLOWINGS
+Follow.create(follower_id: elliot.id, following_id: gabe.id)
 
 puts 'Creating Collections 🗂🗂🗂'
 yumBase = elliot.collections.create(name: 'Planetariyum Base')
