@@ -10,16 +10,16 @@
     animation-fill-mode: forwards;
 }
 
-.collection_title {
-    position: absolute;
-    bottom: 5%;
-    right: 5%;
-}
-
 .cover_art {
     position: relative;
     width: 100%;
     border-radius: 10em;
+}
+
+.collection_title {
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
 }
 
 @keyframes fadein {
