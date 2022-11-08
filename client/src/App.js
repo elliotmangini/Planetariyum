@@ -36,7 +36,7 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [ path , setPath ] = useState("")
   const [theme, setTheme] = useState('dark');
-  const [ currentGame , setCurrentGame ] = useState(true);
+  const [ currentGame , setCurrentGame ] = useState(null);
 
   // auto-login
   useEffect(() => { fetch("/me").then((r) => { if (r.ok) { r.json().then((user) => setUser(user))}})}, []);
@@ -88,7 +88,7 @@ export default function App() {
               <Route path="/Feed" element={<SocialFeed />} />
 
 
-            <Route path="/Arena" element={<Arena />} />
+            <Route path="/Arena" element={<Arena setCurrentGame={setCurrentGame} />} />
             <Route path="/Mint" element={<Mint />} />
 
             {/* USER PROFILES */}
