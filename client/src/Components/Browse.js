@@ -51,7 +51,10 @@ export default function Browse () {
                             onChange={(e) => setQuery(e.target.value)}
                             />
                         </form>
-                        <div onClick={() => setTab(null)} className="back-button">X</div>
+                        <div onClick={() => {
+                            setTab(null);
+                            setQuery("");
+                            }} className="back-button">X</div>
                     </div>
                 </>
                 : null }

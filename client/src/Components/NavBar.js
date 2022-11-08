@@ -26,17 +26,17 @@ export default function NavBar ({ path, setPath }) {
                 {/* { path === "" ? */}
                     <>
                         <Link id={openTab === "Browse" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["", "Browse"])} to="/Browse" className={style.sub_items}>Browse</Link>
-                        <Link id={openTab === "Forums" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["", "Forums"])} to="/Forums" className={style.sub_items}>Forums</Link>
-                        <Link id={openTab === "Themes" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["", "Themes"])} to="/Themes" className={style.sub_items}>Themes</Link>
-                        <Link id={openTab === "Resources" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["", "Resources"])} to="/Resources" className={style.sub_items}>Resources</Link>
+                        <Link id={openTab === "Forums" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["", "Forums"])} to="/Forums" className={style.sub_items}>🔒 Forums</Link>
+                        <Link id={openTab === "Themes" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["", "Themes"])} to="/Themes" className={style.sub_items}>🔒 Themes</Link>
+                        <Link id={openTab === "Resources" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["", "Resources"])} to="/Resources" className={style.sub_items}>🔒 Resources</Link>
                     </>
                 {/* : null } */}
 
-                <Link id={path === "Sphere" ? style.selected_path : null}  onClick={() => clickedMainTab("Sphere")}  to="/Sphere" className={style.nav_items}>Social</Link>
+                <Link id={path === "Sphere" ? style.selected_path : null}  onClick={() => clickedMainTab("Sphere")}  to="/Sphere" className={style.nav_items}>🔒 Social</Link>
                 {/* { path === "Sphere" ? */}
                     <>
-                        <Link id={openTab === "Events" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["Sphere", "Events"])} to="/Events" className={style.sub_items}>Events</Link>
-                        <Link id={openTab === "Polls" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["Sphere", "Polls"])} to="/Polls" className={style.sub_items}>Polls</Link>
+                        <Link id={openTab === "Events" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["Sphere", "Events"])} to="/Events" className={style.sub_items}>🔒 Events</Link>
+                        <Link id={openTab === "Polls" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["Sphere", "Polls"])} to="/Polls" className={style.sub_items}>🔒 Polls</Link>
                     </>
                 {/* : null } */}
 
@@ -49,11 +49,11 @@ export default function NavBar ({ path, setPath }) {
                     </>
                 {/* : null } */}
                 
-                <Link id={path === "Mint" ? style.selected_path : null}  onClick={() => clickedMainTab("Mint")} to="/Mint" className={style.nav_items}>Mint</Link>
+                <Link id={path === "Mint" ? style.selected_path : null}  onClick={() => clickedMainTab("Mint")} to="/Mint" className={style.nav_items}>🔒 Create</Link>
                 {/* { path === "Sphere" ? */}
                     <>
-                        <Link id={openTab === "OffRamp" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["Mint", "OffRamp"])} to="/OffRamp" className={style.sub_items}>Off Ramp</Link>
-                        <Link id={openTab === "Creator Camp" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["Mint", "Creator Camp"])} to="/Creator Camp" className={style.sub_items}>Creator Camp</Link>
+                        <Link id={openTab === "OffRamp" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["Mint", "OffRamp"])} to="/OffRamp" className={style.sub_items}>🔒 Off Ramp</Link>
+                        <Link id={openTab === "Creator Camp" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["Mint", "Creator Camp"])} to="/Creator Camp" className={style.sub_items}>🔒 Creator Camp</Link>
 
 
                     </>
