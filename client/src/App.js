@@ -19,7 +19,7 @@ import Forums from './Components/Forums';
 
 import Arena from './Components/Arena';
 import Mint from './Components/Mint';
-import Dashboard from './Components/Dashboard';
+import Profile from './Components/Profile';
 import SignUp from './Components/SignUp';
 import Login from './Components/Login';
 import Logout from './Components/Logout';
@@ -86,7 +86,9 @@ export default function App() {
 
             <Route path="/Arena" element={<Arena />} />
             <Route path="/Mint" element={<Mint />} />
-            <Route path="/Dashboard" element={<Dashboard user={user} />} />
+            <Route path="u">
+              <Route path=":u" element={<Profile user={user} />} />
+            </Route>
 
 
             <Route path="/signup" element={<SignUp user={user} setUser={setUser} />} />

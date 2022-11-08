@@ -15,7 +15,6 @@ export default function CollectionCard ({ collection }) {
                 <div class_name={style.collection_description}>{collection.description}</div>
                 <div class_name={style.collection_description}>{collection.featured_content}</div>
             </div>
-
         </div>
     )
 }

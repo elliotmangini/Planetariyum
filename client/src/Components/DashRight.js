@@ -24,7 +24,7 @@ export default function DashRight ({ user, setUser, setPath }) {
 
             <h1 id={styleRightGeneric.user_header}>
                 <div id={styleRightGeneric.spacer}></div>
-                <Link onClick={() => setPath("dashboard")} id={styleRightGeneric.username} to="/dashboard">&nbsp;&nbsp;{user.display_name}&nbsp;</Link>
+                <Link onClick={() => setPath("dashboard")} id={styleRightGeneric.username} to={`/u/${user.username}`}>&nbsp;&nbsp;{user.display_name}&nbsp;</Link>
                 <img onClick={() => setIsQuickSettings(!isQuickSettings)} id={styleRightGeneric.dash_avatar}  src={user.avatar_url ? user.avatar_url : avatarPlaceholder}></img>
             </h1>
             { isQuickSettings ?
