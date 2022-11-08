@@ -16,6 +16,7 @@ import Themes from './Components/Themes';
 import Resources from './Components/Resources';
 import Forums from './Components/Forums';
 
+import Game from './Components/Game';
 
 import Arena from './Components/Arena';
 import Mint from './Components/Mint';
@@ -34,19 +35,11 @@ import Collection from './Components/Collection';
 export default function App() {
   const [user, setUser] = useState(null);
   const [ path , setPath ] = useState("")
+  const [theme, setTheme] = useState('dark');
+  const [ currentGame , setCurrentGame ] = useState(true);
 
-  // // grab default theme from user's browser settings
-  // const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const [theme, setTheme] = useState('light');
-
-  useEffect(() => {
-    // auto-login
-    fetch("/me").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      }
-    });
-  }, []);
+  // auto-login
+  useEffect(() => { fetch("/me").then((r) => { if (r.ok) { r.json().then((user) => setUser(user))}})}, []);
 
   // GET STUFF FOR HOME
   const [ publications , setPublications ] = useState([]);
@@ -59,20 +52,32 @@ export default function App() {
 
   return (
     <div id="theme_container" className={user ? user.site_theme : theme}>
-      <div id="header_container">
-        <Header />
-      </div>
-      <div id="nav_main_and_dash_container">
-      <div id="nav_and_left_dash_container">
-        <NavBar path={path} setPath={setPath} user={user} />
 
-        { user ?
-        <DashLeft user={user} />
-        :
-        <DashLeftUserless /> }
-      </div>
+        { !currentGame ?
+        <div id="header_container">
+          <Header />
+        </div>
+        : null }
+
+        <div id="nav_main_and_dash_container">
+          
+          { !currentGame ?
+          <div id="nav_and_left_dash_container">
+            <NavBar path={path} setPath={setPath} user={user} />
+
+            { user ?
+            <DashLeft user={user} />
+            :
+            <DashLeftUserless /> }
+          </div>
+        : null }
+
         <div id="main_content">
           <Routes>
+            <Route path="/play/:gameType/:gameURL" element={
+              <Game />
+            } />
+
             <Route path="/" element={<Home publications={publications} />} />
               <Route path="/Browse" element={<Browse />} />
               <Route path="/Themes" element={<Themes />} />
@@ -98,11 +103,18 @@ export default function App() {
             <Route path="/logout" element={<Logout user={user} setUser={setUser} />} />
           </Routes>
         </div>
-        { user ?
-        <DashRight setUser={setUser} user={user} setPath={setPath} />
-        :
-        <DashRightUserless /> }
+        { !currentGame ?
+        <>
+          { user ?
+          <DashRight setUser={setUser} user={user} setPath={setPath} />
+          :
+          <DashRightUserless />
+          }
+        </>
+        : null }
       </div>
+
+
     </div>
   );
 }

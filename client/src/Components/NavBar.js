@@ -40,12 +40,12 @@ export default function NavBar ({ path, setPath }) {
                     </>
                 {/* : null } */}
 
-                <Link id={path === "Arena" ? style.selected_path : null}  onClick={() => clickedMainTab("Arena")} to="/Arena" className={style.nav_items}>Arena</Link>
+                <Link id={path === "Arena" ? style.selected_path : null}  onClick={() => clickedMainTab("Arena")} to="/Arena" className={style.nav_items}>Play</Link>
                 {/* { path === "Sphere" ? */}
                     <>
                         <Link id={openTab === "Solo" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["Arena", "Solo"])} to="/Solo" className={style.sub_items}>Solo</Link>
-                        <Link id={openTab === "Ranked" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["Arena", "Ranked"])} to="/Ranked" className={style.sub_items}>Ranked</Link>
-                        <Link id={openTab === "Spectate" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["Arena", "Spectate"])} to="/Spectate" className={style.sub_items}>Spectate</Link>
+                        <Link id={openTab === "Ranked" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["Arena", "Ranked"])} to="/Ranked" className={style.sub_items}>🔒 Ranked</Link>
+                        <Link id={openTab === "Spectate" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["Arena", "Spectate"])} to="/Spectate" className={style.sub_items}>🔒 Spectate</Link>
                     </>
                 {/* : null } */}
                 

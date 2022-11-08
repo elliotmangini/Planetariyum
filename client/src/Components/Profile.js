@@ -7,6 +7,8 @@ export default function Profile () {
   const { u } = useParams();
   const [ user , setUser ] = useState(null);
 
+  console.log(u);
+
   useEffect(() => {
     fetch(`/users/${u.toLowerCase()}`)
     .then(resp => resp.json())
