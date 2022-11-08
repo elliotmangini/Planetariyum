@@ -16,6 +16,11 @@ export default function Collection () {
 
   return (
     <>
+      { collection ?
+        <>
+          <img width="100%" height="100%" src={collection.cover_url} />
+        </>
+      : null }
     </>
   );
 }

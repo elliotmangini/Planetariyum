@@ -15,13 +15,11 @@ export default function Profile () {
 
   return (
     <>
-    {/* { !user ? <Navigate to="/" /> : */}
-
-    { user ?
-    <>
-      <img width="100%" src={user.avatar_url}></img>
-    </>
-    : null }
+      { user ?
+        <>
+          <img width="100%" src={user.avatar_url}></img>
+        </>
+      : null }
     </>
   );
 }

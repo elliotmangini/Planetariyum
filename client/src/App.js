@@ -89,7 +89,8 @@ export default function App() {
             {/* USER PROFILES */}
             <Route path="u/:u" element={<Profile user={user} />} />
 
-            <Route path="/c/:c" element={<Collection />} />
+            {/* THINGS THAT GET A WHOLE PAGE */}
+            <Route path="sets/:c" element={<Collection />} />
 
             {/* ACCOUNT CREATION */}
             <Route path="/signup" element={<SignUp user={user} setUser={setUser} />} />

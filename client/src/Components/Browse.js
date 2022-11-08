@@ -46,7 +46,7 @@ export default function Browse () {
                         <form>
                             <input
                             type="text"
-                            placeholder="Search"
+                            placeholder="Search by creator, genre, title, etc."
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
                             />

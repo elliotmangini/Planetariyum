@@ -71,3 +71,16 @@ iframe {
 .hidden {
     visibility: hidden;
 }
+
+.visit_button {
+    background-color: green;
+    position: absolute;
+    left: 5%;
+    bottom: 3%;
+    width: 5rem;
+    height: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
