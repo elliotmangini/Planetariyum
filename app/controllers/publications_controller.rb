@@ -1,5 +1,7 @@
 class PublicationsController < ApplicationController
   before_action :set_publication, only: %i[ show update destroy ]
+  skip_before_action :authorize, only: [:index]
+
 
   # GET /publications
   def index

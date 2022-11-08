@@ -47,23 +47,43 @@ story6_cover_blob = story6.cover_image.attach(io: File.open(File.join(Rails.root
 puts 'Creating Users 👤'
 # MUST MEET VALIDATIONS!!!
 elliot = User.create(
-    username: 'BigSister',
+    username: 'bigsister',
     display_name: 'Big Sister',
     password: '123456',
-    bio: 'Big Sis',
+    bio: 'this is big sisters bio',
     email: 'elliot.mangini@gmail.com',
     twitch_username: 'biigsiister',
-    site_theme: 'dark')
+    site_theme: 'dark'
+)
 # ACTIVE STORAGE SEEDING EXAMPLE
 elliot_avatar = elliot.avatar.attach(io: File.open(File.join(Rails.root,'/app/assets/avatars/Octopus_God_pfp.png')), filename: 'Octopus_God_pfp.png')
 
-gabe = User.create(username: 'Sine Caster', password: '123456', bio: 'Big Sis', email: 'sinecaster@gmail.com', twitch_username: 'SineCasterMusic')
+gabe = User.create(
+    username: 'sinecaster',
+    display_name: 'Sine Caster',
+    password: '123456',
+    bio: 'this is gabes bio',
+    email: 'sinecaster@gmail.com',
+    twitch_username: 'SineCasterMusic'
+)
+gabe_avatar = gabe.avatar.attach(io: File.open(File.join(Rails.root,'/app/assets/avatars/gabepfp.png')), filename: 'gabepfp.png')
 
 # FOLLOWINGS
 Follow.create(follower_id: elliot.id, following_id: gabe.id)
 
 puts 'Creating Collections 🗂🗂🗂'
-yumBase = elliot.collections.create(name: 'Planetariyum Base')
+yumBase = elliot.collections.create(
+    name: 'Planetariyum Base',
+    description: 'First Set on the platform. Over 500 sounds crafted over 5+ years with an emphasis on powerful drums. 
+                Influences at the convergance point of UK sensibilities, tech brilliance, old skool dirt, and sound design experimentation. 
+                Transient-heavy, maximized whatever the tonality, and suitable for any style. 
+                This release is only available on Planetariyum and represents the first series of On-Label Mints. 
+                All artworks were generated with AI and edited/composited by Big Sis. Hope you enjoy!
+                ',
+    embed_url: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1026688306&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true',
+    local_url: 'base',
+    featured_content: 'none at this time'
+)
 yumBase_art_blob = yumBase.collection_art.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/collection_arts/Planetariyum_Base_art.png')), filename: 'Planetariyum_Base_art.png')
 
 coll1 = elliot.collections.create(name: 'Test Collection 1')
@@ -92,18 +112,19 @@ coll8_art_blob = coll8.collection_art.attach(io: File.open(File.join(Rails.root,
 
 
 puts 'Creating Cards 🃏🃏🃏🃏🃏'
-yumBase_card1 = elliot.cards.create(
-    # chosen_count: DEFAULTS TO 0
-    collection_id: yumBase.id,
-    name: 'Geef',
-    asset_kind: 'kick',
-    file_name: 'Big_Sister_Kick_Geef_01.wav',
-    variant: '1'
-)
 
+100.times do |i|
+    yumBase_card = elliot.cards.create(
+        # chosen_count: DEFAULTS TO 0
+        collection_id: yumBase.id,
+        name: "card #{i}",
+        asset_kind: 'kick',
+        file_name: 'Big_Sister_Kick_Geef_01.wav',
+        variant: '1')
+end
 # ACTIVE STORAGE SEED EXAMPLE THREE
-yumBase_card1_asset_blob = yumBase_card1.card_asset.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_assets/Big_Sister_Kick_Geef_01.wav')), filename: 'Big_Sister_Kick_Geef_01.wav')
-yumBase_card1_art_blob = yumBase_card1.card_art.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_arts/Big_Sister_Kick_Geef_01_art.png')), filename: 'Big_Sister_Kick_Geef_01_art.png')
+# yumBase_card1_asset_blob = yumBase_card1.card_asset.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_assets/Big_Sister_Kick_Geef_01.wav')), filename: 'Big_Sister_Kick_Geef_01.wav')
+# yumBase_card1_art_blob = yumBase_card1.card_art.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_arts/Big_Sister_Kick_Geef_01_art.png')), filename: 'Big_Sister_Kick_Geef_01_art.png')
 
 
 puts 'Creating Games 🎮🎮🎮'

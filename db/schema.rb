@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_07_185828) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_08_210325) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -55,6 +55,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_07_185828) do
 
   create_table "collections", force: :cascade do |t|
     t.string "name"
+    t.string "description"
+    t.string "embed_url"
+    t.string "local_url"
+    t.string "featured_content"
     t.integer "creator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -74,6 +78,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_07_185828) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["collection_id"], name: "index_games_on_collection_id"
+  end
+
+  create_table "nfts", force: :cascade do |t|
+    t.string "edition"
+    t.string "scan_digest"
+    t.string "address"
+    t.integer "card_id", null: false
+    t.integer "game_id", null: false
+    t.integer "owner_id", null: false
+    t.integer "holder_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_nfts_on_card_id"
+    t.index ["game_id"], name: "index_nfts_on_game_id"
+    t.index ["holder_id"], name: "index_nfts_on_holder_id"
+    t.index ["owner_id"], name: "index_nfts_on_owner_id"
   end
 
   create_table "playings", force: :cascade do |t|
@@ -124,6 +144,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_07_185828) do
   add_foreign_key "cards", "users", column: "author_id"
   add_foreign_key "collections", "users", column: "creator_id"
   add_foreign_key "games", "collections"
+  add_foreign_key "nfts", "cards"
+  add_foreign_key "nfts", "games"
+  add_foreign_key "nfts", "users", column: "holder_id"
+  add_foreign_key "nfts", "users", column: "owner_id"
   add_foreign_key "playings", "games"
   add_foreign_key "playings", "users", column: "player_id"
   add_foreign_key "vods", "games"

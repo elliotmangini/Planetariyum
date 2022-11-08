@@ -14,7 +14,13 @@ class UsersController < ApplicationController
     end
 
     def show
+        # puts "AUTOLOGIN FIRING IN THE USER CONTROLLER"
         render json: @current_user
+    end
+
+    def get
+        user = User.find_by(username: params[:username])
+        render json: user
     end
 
     private

@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
   before_action :set_card, only: %i[ show update destroy ]
+  # skip_before_action :authorize
 
   # GET /cards
   def index
@@ -12,6 +13,12 @@ class CardsController < ApplicationController
   def show
     render json: @card
   end
+
+  def get_random_subset
+    collection = Collection.find_by(local_url: params[:local_url])
+    render json: collection.cards.order("RAND()").limit(params[:deck_size])
+  end
+
 
   # POST /cards
   def create
