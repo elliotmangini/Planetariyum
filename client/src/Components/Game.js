@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import Lobby from './Lobby';
 
 
 
@@ -11,6 +12,7 @@ export default function Game () {
     return (
         <>
             <div>Game Goes Here</div>
+            <Lobby />
         </>
     )
 }
