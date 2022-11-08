@@ -31,9 +31,43 @@
     position: absolute;
     bottom: 5%;
     right: 5%;
+    font-size: 4rem;
 }
+
 
 @keyframes fadein {
     0% { opacity: 0% };
     100% { opacity: 100% };
+}
+
+.collection_details {
+    position: absolute;
+    background-color: rgb(41, 41, 94);
+    border-radius: 3rem;
+    top: 10%;
+    left: 3.5%;
+    width: 93%;
+    height: 84%;
+    visibility: hidden;
+}
+
+.text_card {
+    margin: auto;
+    /* background-color: red; */
+    width: 90%;
+    height: 20%;
+}
+
+iframe {
+    scale: .8;
+}
+
+.visible {
+    visibility: visible;
+    animation: fadein .5s;
+    animation-fill-mode: forwards;
+}
+
+.hidden {
+    visibility: hidden;
 }

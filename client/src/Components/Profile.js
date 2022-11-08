@@ -1,4 +1,3 @@
-import { Navigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -7,9 +6,6 @@ import { useEffect, useState } from 'react';
 export default function Profile () {
   const { u } = useParams();
   const [ user , setUser ] = useState(null);
-
-
-  // ONLY FETCH IF THIS ISN'T THE LOGGED IN USER
 
   useEffect(() => {
     fetch(`/users/${u.toLowerCase()}`)

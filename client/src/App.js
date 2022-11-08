@@ -28,6 +28,9 @@ import DashRightUserless from './Components/DashRightUserless';
 import DashLeft from './Components/DashLeft';
 import DashLeftUserless from './Components/DashLeftUserless';
 
+// ITEM GETS A WHOLE PAGE
+import Collection from './Components/Collection';
+
 export default function App() {
   const [user, setUser] = useState(null);
   const [ path , setPath ] = useState("")
@@ -76,21 +79,19 @@ export default function App() {
               <Route path="/Resources" element={<Resources />} />
               <Route path="/Forums" element={<Forums />} />
 
-
-
-
-
             <Route path="/Sphere" element={<Planetariyum />} />
               <Route path="/Feed" element={<SocialFeed />} />
 
 
             <Route path="/Arena" element={<Arena />} />
             <Route path="/Mint" element={<Mint />} />
-            <Route path="u">
-              <Route path=":u" element={<Profile user={user} />} />
-            </Route>
 
+            {/* USER PROFILES */}
+            <Route path="u/:u" element={<Profile user={user} />} />
 
+            <Route path="/c/:c" element={<Collection />} />
+
+            {/* ACCOUNT CREATION */}
             <Route path="/signup" element={<SignUp user={user} setUser={setUser} />} />
             <Route path="/login" element={<Login user={user} setUser={setUser} />} />
             <Route path="/logout" element={<Logout user={user} setUser={setUser} />} />
