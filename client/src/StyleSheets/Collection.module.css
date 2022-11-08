@@ -1,0 +1,79 @@
+.collection_page {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.full_art_background {
+    filter: blur(1rem);
+    position: absolute;
+}
+
+.main_content_container {
+    margin: auto;
+    background-color: rgb(32, 48, 64);
+    opacity: 80%;
+    top: 5%;
+    border-radius: 1rem;
+    height: 70%;
+    width: 85%;
+    position: relative;
+}
+
+.nested_full_art {
+    opacity: 40%;
+    border-radius: 20%;
+}
+
+.description_text {
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    width: 70%;
+}
+
+.cover_and_quick_details {
+    display: flex;
+    position: relative;
+    margin-left: 5vw;
+    margin-right: 10vh;
+    
+}
+
+.cover_art {
+    margin-top: 3rem;
+    width: 20vh;
+    filter: blur(0);
+    border-radius: 1rem;
+}
+
+.quick_details {
+    position: absolute;
+    bottom: 0;
+    margin-top: 3rem;
+    width: fit-content;
+    height: fit-content;
+    /* background-color: gray; */
+    margin-left: 17rem;
+}
+
+.button_container {
+    position: relative;
+    width: 40%;
+    display: flex;
+    float: right;
+    margin-right: 5rem;
+}
+
+.main_button {
+    background-color: rgb(34, 80, 165);
+    margin: auto;
+    margin-right: 2rem;
+    width: 15rem;
+    height: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
