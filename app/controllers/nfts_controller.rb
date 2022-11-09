@@ -1,41 +1,46 @@
 class NftsController < ApplicationController
   before_action :set_nft, only: %i[ show update destroy ]
 
-  # GET /nfts
-  def index
-    @nfts = Nft.all
+  # # GET /nfts
+  # def index
+  #   @nfts = Nft.all
 
-    render json: @nfts
-  end
+  #   render json: @nfts
+  # end
 
-  # GET /nfts/1
-  def show
-    render json: @nft
-  end
+  # # GET /nfts/1
+  # def show
+  #   render json: @nft
+  # end
 
-  # POST /nfts
-  def create
-    @nft = Nft.new(nft_params)
+  # # POST /nfts
+  # def create
+  #   @nft = Nft.new(nft_params)
 
-    if @nft.save
-      render json: @nft, status: :created, location: @nft
-    else
-      render json: @nft.errors, status: :unprocessable_entity
-    end
-  end
+  #   if @nft.save
+  #     render json: @nft, status: :created, location: @nft
+  #   else
+  #     render json: @nft.errors, status: :unprocessable_entity
+  #   end
+  # end
 
-  # PATCH/PUT /nfts/1
-  def update
-    if @nft.update(nft_params)
-      render json: @nft
-    else
-      render json: @nft.errors, status: :unprocessable_entity
-    end
-  end
+  # # PATCH/PUT /nfts/1
+  # def update
+  #   if @nft.update(nft_params)
+  #     render json: @nft
+  #   else
+  #     render json: @nft.errors, status: :unprocessable_entity
+  #   end
+  # end
 
-  # DELETE /nfts/1
-  def destroy
-    @nft.destroy
+  # # DELETE /nfts/1
+  # def destroy
+  #   @nft.destroy
+  # end
+
+  def start_game
+    game = Game.find_by(local_url: params[:local_url])
+    game.playi
   end
 
   private

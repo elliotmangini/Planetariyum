@@ -74,6 +74,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_210325) do
 
   create_table "games", force: :cascade do |t|
     t.datetime "deadline"
+    t.string "game_type"
+    t.string "local_url"
+    t.integer "deck_size"
     t.integer "collection_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

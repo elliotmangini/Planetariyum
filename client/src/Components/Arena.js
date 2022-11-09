@@ -13,21 +13,25 @@ export default function Arena ({ setCurrentGame }) {
     const [ query , setQuery ] = useState("")
     const [ collections , setCollections ] = useState([]);
     const [ selectedCollection, setSelectedCollection ] = useState("");
-    const [ gameType , setGameType ] = useState("solo");
-    const [ gameURL , setGameURL ] = useState("testgame");
+    const [ gameType , setGameType ] = useState("draft");
+    const [ gameURL , setGameURL ] = useState("newwwww");
     const [ redirect , setRedirect ] = useState(null);
 
 
     function createGame () {
+        const gameObj = {
+            collection_id: selectedCollection.id,
+            deadline: "03 Feb 2023 04:05:06 +0000",
+            local_url: gameURL,
+            game_type: gameType,
+            deck_size: 50,
+        }
         fetch("/games", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                collection_id: selectedCollection.id,
-                deadline: "03 Feb 2023 04:05:06 +0000",
-            }),
+            body: JSON.stringify(gameObj),
         })
         .then(resp => resp.json())
         .then(data => setCurrentGame(data))

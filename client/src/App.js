@@ -41,15 +41,6 @@ export default function App() {
   // auto-login
   useEffect(() => { fetch("/me").then((r) => { if (r.ok) { r.json().then((user) => setUser(user))}})}, []);
 
-  // GET STUFF FOR HOME
-  const [ publications , setPublications ] = useState([]);
-
-  useEffect(() => {
-      fetch('/publications')
-      .then(resp => resp.json())
-      .then(data => setPublications(data));
-  },[]);
-
   return (
     <div id="theme_container" className={user ? user.site_theme : theme}>
 
@@ -75,10 +66,10 @@ export default function App() {
         <div id="main_content">
           <Routes>
             <Route path="/play/:gameType/:gameURL" element={
-              <Game />
+              <Game setCurrentGame={setCurrentGame}/>
             } />
 
-            <Route path="/" element={<Home publications={publications} />} />
+            <Route path="/" element={<Home />} />
               <Route path="/Browse" element={<Browse />} />
               <Route path="/Themes" element={<Themes />} />
               <Route path="/Resources" element={<Resources />} />

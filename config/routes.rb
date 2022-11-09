@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :nfts
+  # resources :nfts
   resources :playings
   resources :vods
-  resources :games
+  resources :games, :only => [:create]
   resources :follows
   resources :publications
   resources :collections, :except => [:show]
@@ -17,6 +17,12 @@ Rails.application.routes.draw do
   get "/users/:username", to: "users#get"
 
   get "collections/:local_url", to: "collections#find_by_local_url";
+
+  #GAMES
+  get "/games/:local_url", to: "games#get_live_game"
+
+  #NFTS
+  post "/nfts/:local_url/:staged_players", to: "nfts#start_game"
 
 
 end

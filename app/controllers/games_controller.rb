@@ -13,15 +13,19 @@ class GamesController < ApplicationController
     render json: @game
   end
 
+  def get_live_game
+    puts "getting live game"
+    puts params
+    game = Game.find_by(local_url: params[:local_url])
+    render json: game
+  end
+
   # POST /games
   def create
-    @game = Game.new(game_params)
-
-    if @game.save
-      render json: @game, status: :created, location: @game
-    else
-      render json: @game.errors, status: :unprocessable_entity
-    end
+    puts "creating game"
+    puts params
+    @game = Game.create!(game_params)
+    render json: @game, status: :created
   end
 
   # PATCH/PUT /games/1
@@ -46,6 +50,6 @@ class GamesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def game_params
-      params.require(:game).permit(:deadline, :collection_id)
+      params.require(:game).permit(:deck_size, :deadline, :local_url, :game_type, :collection_id)
     end
 end
