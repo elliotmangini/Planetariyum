@@ -46,6 +46,15 @@ story6_cover_blob = story6.cover_image.attach(io: File.open(File.join(Rails.root
 
 puts 'Creating Users 👤'
 # MUST MEET VALIDATIONS!!!
+planetariyumwallet = User.create(
+    username: 'planetariyumwallet',
+    display_name: 'Wallet',
+    password: '123456verysecure',
+    bio: 'account holding nfts by default',
+    email: 'yungbigsister@gmail.com'
+)
+wallet_avatar = planetariyumwallet.avatar.attach(io: File.open(File.join(Rails.root,'/app/assets/avatars/Octopus_God_pfp.png')), filename: 'Octopus_God_pfp.png')
+
 elliot = User.create(
     username: 'bigsister',
     display_name: 'Big Sister',

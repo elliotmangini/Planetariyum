@@ -1,6 +1,7 @@
 class NftSerializer < ActiveModel::Serializer
-  attributes :id, :edition, :scan_digest
+  attributes :id, :edition 
   has_one :card
-  has_one :game
-  has_one :user
+  belongs_to :game
+  belongs_to :owner
+  belongs_to :holder
 end

@@ -14,10 +14,10 @@ class CardsController < ApplicationController
     render json: @card
   end
 
-  def get_random_subset
-    collection = Collection.find_by(local_url: params[:local_url])
-    render json: collection.cards.order("RAND()").limit(params[:deck_size])
-  end
+  # def get_random_subset
+  #   collection = Collection.find_by(local_url: params[:local_url])
+  #   render json: collection.cards.order("RAND()").limit(params[:deck_size])
+  # end
 
 
   # POST /cards

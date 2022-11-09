@@ -14,7 +14,7 @@ export default function Arena ({ setCurrentGame }) {
     const [ collections , setCollections ] = useState([]);
     const [ selectedCollection, setSelectedCollection ] = useState("");
     const [ gameType , setGameType ] = useState("draft");
-    const [ gameURL , setGameURL ] = useState("newwwww");
+    const [ gameURL , setGameURL ] = useState("testingplanetariyum");
     const [ redirect , setRedirect ] = useState(null);
 
 

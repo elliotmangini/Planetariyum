@@ -23,7 +23,7 @@ export default function Game ({ setCurrentGame }) {
         .then(data => {
             setCurrentGame(data);
             setIsGameLoaded(true);
-            // console.log(data);
+            console.log(data);
         })
     }, [])
 
@@ -39,7 +39,8 @@ export default function Game ({ setCurrentGame }) {
         })
         .then(resp => resp.json())
         .then(data => {
-            
+            console.log("game start promise return");
+            console.log(data);
             setIsStart(true);
         })
     }

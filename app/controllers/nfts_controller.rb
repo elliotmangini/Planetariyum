@@ -40,7 +40,18 @@ class NftsController < ApplicationController
 
   def start_game
     game = Game.find_by(local_url: params[:local_url])
-    game.playi
+    card_subset = game.collection.cards.order(Arel.sql('RANDOM()')).limit(game.deck_size)
+
+    players = User.find(params[:staged_players].split(','));
+    players.each do |p|
+      game.playings.create!(player_id: p.id)
+
+      card_subset.each do |c|
+        newNft = game.nfts.create!(card_id: c.id, game_id: game.id, owner_id: p.id, holder_id: User.find_by(username: "planetariyumwallet").id)
+      end
+    end
+
+    render json: game
   end
 
   private
