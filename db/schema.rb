@@ -88,9 +88,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_210325) do
     t.string "scan_digest"
     t.string "address"
     t.integer "card_id", null: false
-    t.integer "game_id", null: false
-    t.integer "owner_id", null: false
-    t.integer "holder_id", null: false
+    t.integer "game_id"
+    t.integer "owner_id"
+    t.integer "holder_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_nfts_on_card_id"

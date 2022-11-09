@@ -13,7 +13,7 @@ export default function Game ({ setCurrentGame }) {
     const [ liveGame , setLiveGame ] = useState();
     const [ isStart , setIsStart ] = useState(false);
     const [ turnChange , setTurnChange ] = useState(false);
-    const [ stagedPlayers , setStagedPlayers ] = useState(["1", "2"]);
+    const [ stagedPlayers , setStagedPlayers ] = useState(["2", "3"]);
     const [ isGameLoaded , setIsGameLoaded ] = useState(false);
     // console.log({ gameType , gameURL })
 
