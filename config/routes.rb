@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :publications
   resources :collections, :except => [:show]
   resources :cards
+  resources :nfts
 
   # resources :users
   post "/signup", to: "users#create"

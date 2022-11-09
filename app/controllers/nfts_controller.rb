@@ -8,10 +8,10 @@ class NftsController < ApplicationController
   #   render json: @nfts
   # end
 
-  # # GET /nfts/1
-  # def show
-  #   render json: @nft
-  # end
+  # GET /nfts/1
+  def show
+    render json: @nft
+  end
 
   # # POST /nfts
   # def create
@@ -51,7 +51,7 @@ class NftsController < ApplicationController
       end
     end
 
-    render json: game
+    render json: game, include: ['nfts', 'nfts.owner', 'nfts.holder'],  status: :created
   end
 
   private
