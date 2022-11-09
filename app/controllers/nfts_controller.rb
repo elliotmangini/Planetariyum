@@ -43,7 +43,7 @@ class NftsController < ApplicationController
     card_subset = game.collection.cards.order(Arel.sql('RANDOM()')).limit(game.deck_size)
 
     card_subset.each do |c|
-      newNft = game.nfts.create(card_id: c.id, game_id: game.id)
+      newNft = game.nfts.create(card_id: c.id)
     end
 
     players = User.find(params[:staged_players].split(','));
