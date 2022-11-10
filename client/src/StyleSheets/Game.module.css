@@ -82,6 +82,7 @@
         opacity: 0%;
         scale: .8;
         filter: blur(10px);
+        transform: translateY(-50%);
     }
 }
 
@@ -121,11 +122,15 @@
     0% {
         transform: rotateY(0deg);
         /* filter: blur(10px); */
+        /* transform: translateY(-50%); */
+        /* opacity: 0%; */
 
     }
     100% {
         transform: rotateY(-180deg);
         /* filter: blur(0px); */
+        /* transform: translateY(0%); */
+        /* opacity: 100%; */
     }
 }
 
