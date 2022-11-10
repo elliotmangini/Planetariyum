@@ -66,7 +66,7 @@ export default function App() {
         <div id="main_content">
           <Routes>
             <Route path="/play/:gameType/:gameURL" element={
-              <Game setCurrentGame={setCurrentGame}/>
+              <Game setCurrentGame={setCurrentGame} currentGame={currentGame}/>
             } />
 
             <Route path="/" element={<Home />} />

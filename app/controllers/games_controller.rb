@@ -17,7 +17,7 @@ class GamesController < ApplicationController
     puts "getting live game"
     puts params
     game = Game.find_by(local_url: params[:local_url])
-    render json: game
+    render json: game, include: ['nfts', 'nfts.owner', 'nfts.holder', 'nfts.card']
   end
 
   # POST /games

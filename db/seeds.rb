@@ -1,3 +1,5 @@
+require 'faker'
+
 puts 'Clearing Database 💀💀💀'
 Publication.destroy_all
 User.destroy_all
@@ -129,7 +131,9 @@ puts 'Creating Cards 🃏🃏🃏🃏🃏'
         name: "card #{i}",
         asset_kind: 'kick',
         file_name: 'Big_Sister_Kick_Geef_01.wav',
-        variant: '1')
+        variant: '1'
+    )
+    cardArt = yumBase_card.card_art.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_arts/MTc0NDYwNzc3ODAxODUyMjY0.webp')), filename: 'testing.webp')
 end
 # ACTIVE STORAGE SEED EXAMPLE THREE
 # yumBase_card1_asset_blob = yumBase_card1.card_asset.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_assets/Big_Sister_Kick_Geef_01.wav')), filename: 'Big_Sister_Kick_Geef_01.wav')
