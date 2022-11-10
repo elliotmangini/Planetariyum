@@ -29,12 +29,11 @@ export default function AudioPlayer ({ setDuration , sound , action , clearActio
     }
 
     audio.onloadedmetadata = () => {
+        // setDuration(audio.duration);
         clearAction("");
-        setDuration(audio.duration);
+        // console.log(audio.duration);
         functionSelector(action);
     }
-
-    // console.log(audio)
 
     return (
         <>

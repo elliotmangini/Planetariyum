@@ -9,22 +9,16 @@ export default function Card ({ nft, selectedCard, isTurnEnding, lastSelected, h
     const [ duration , setDuration ] = useState(100000);
     // console.log(nft)
 
-    // add set down to selected card only
-
-    // function hit () {
-    //     console.log("hit!");
-    //     return style.add_flip_facedown;
-    // }
-
+    
+    console.log(duration);
     function handleClick () {
-        console.log("hit");
         setAudioAction("play");
         const timer = setTimeout(() => {
             if (!(selectedCard.id === nft.id)) {
+                // console.log(duration);
                 handleSelect(nft)
-                console.log("done!")
             }
-          }, 1
+        }, 100
         );
         return () => clearTimeout(timer);
     }
