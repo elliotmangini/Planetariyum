@@ -25,7 +25,7 @@ export default function Game ({ setCurrentGame , currentGame }) {
         .then(resp => resp.json())
         .then(data => {
             setCurrentGame(data);
-            console.log(data);
+            // console.log(data);
             setIsGameLoaded(true);
         })
     }, [])

@@ -13,3 +13,73 @@
 .fade_away {
     opacity: 0%;
 }
+
+.cards_container {
+    position: relative;
+    white-space: none;
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+    height: 100%;
+    margin: auto;
+}
+
+
+.card_outer_container {
+    position: relative;
+    width: 20%;
+    /* border: 3px solid rgb(255, 0, 238); */
+    transition: scale .2s ease-out;
+}
+
+.hoverable {
+    scale: 1;
+}
+
+.set_down {
+    animation: set_down .2s ease-out;
+}
+
+@keyframes set_down {
+    0% {scale: 1.25}
+    100% {scale: 1}
+}
+
+.unhoverable {
+    /* animation: set_half_way .2s ease-out; */
+    scale: 1.25;
+}
+
+.hoverable:hover {
+    scale: 1.25;
+}
+
+@keyframes set_half_way {
+    0% {scale: 1.25}
+    100% {scale: .8}
+}
+
+.selected {
+    border: 3px solid rgb(255, 0, 238);
+}
+
+.card_inner_container {
+    margin: 10%;
+    position: relative;
+}
+
+.card_image {
+    width: 100%;
+    height: auto;
+}
+
+.card_absolute_overlay {
+    position: absolute;
+    text-align: right;
+    bottom: 0%;
+    right: 0%;
+    /* border: 3px solid rgb(255, 0, 238); */
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+}
