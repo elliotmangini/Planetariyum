@@ -8,16 +8,16 @@ export default function Card ({ nft, selectedCard, isTurnEnding, lastSelected, h
 
     // add set down to selected card only
 
-    function hit () {
-        console.log("hit!");
-        return style.add_flip_facedown;
-    }
+    // function hit () {
+    //     console.log("hit!");
+    //     return style.add_flip_facedown;
+    // }
 
 
     return (
         <>  
                 <div className={`${style.flip_card}`}>
-                    <div className={`${style.flip_card_inner} ${!selectedCard.id && !isTurnEnding ? style.add_flip_reveal : style.no_flip} ${isTurnEnding ? hit() : null}`}>
+                    <div className={`${style.flip_card_inner} ${!selectedCard.id && !isTurnEnding ? style.add_flip_reveal : style.no_flip} ${isTurnEnding ? style.add_flip_facedown : null}`}>
                         <div className={`${style.flip_card_front}`}>
                             <img onClick={() => handleSelect(nft)} className={`${style.image_sizing_selectable} ${selectedCard.id === nft.id ? style.selected_unhoverable : style.unselected_hoverable} ${lastSelected.id === nft.id ? style.set_down : null } ${selectedCard.id === nft.id && isTurnEnding ? style.set_selected_down : null}`} src={nft.card.art_url} alt="Avatar" />
                         </div>
