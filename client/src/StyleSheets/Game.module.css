@@ -163,8 +163,8 @@
 /* Style the back side */
 .flip_card_back {
     border-radius: 5%;
-    background-color: dodgerblue;
     color: white;
+    pointer-events: none;
     /* transform: rotateY(180deg); */
 }
 

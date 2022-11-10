@@ -1,5 +1,6 @@
 import style from '../StyleSheets/Game.module.css'
 // import { useState } from 'react';
+import AudioPlayer from './AudioPlayer';
 
 
 
@@ -26,6 +27,8 @@ export default function Card ({ nft, selectedCard, isTurnEnding, lastSelected, h
                         </div>
                     </div>
                 </div>
+
+                {/* <AudioPlayer /> */}
         </>
     )
 }
