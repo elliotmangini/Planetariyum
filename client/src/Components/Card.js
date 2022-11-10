@@ -5,7 +5,7 @@ import AudioPlayer from './AudioPlayer';
 
 
 export default function Card ({ nft, selectedCard, isTurnEnding, lastSelected, handleSelect }) {
-    // console.log(nft)
+    console.log(nft)
 
     // add set down to selected card only
 
@@ -28,7 +28,7 @@ export default function Card ({ nft, selectedCard, isTurnEnding, lastSelected, h
                     </div>
                 </div>
 
-                {/* <AudioPlayer /> */}
+                <AudioPlayer sound={nft.card.asset_url} />
         </>
     )
 }

@@ -135,7 +135,9 @@ puts 'Creating Cards 🃏🃏🃏🃏🃏'
         file_name: 'Big_Sister_Kick_Geef_01.wav',
         variant: '1'
     )
-    cardArt = yumBase_card.card_art.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_arts/MTc0NDYwNzc3ODAxODUyMjY0.webp')), filename: 'testing.webp')
+    art_blob = yumBase_card.card_art.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_arts/MTc0NDYwNzc3ODAxODUyMjY0.webp')), filename: 'testing.webp')
+    asset_blob = yumBase_card.card_asset.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_assets/Big_Sister_Kick_Geef_01.wav')), filename: 'Big_Sister_Kick_Geef_01.wav')
+
 end
 
 # GENERIC
@@ -149,76 +151,6 @@ end
         variant: '1'
     )
 end
-# 100.times do |i|
-#     card = elliot.cards.create(
-#         # chosen_count: DEFAULTS TO 0
-#         collection_id: coll1.id,
-#         name: "card #{i}",
-#         asset_kind: 'kick',
-#         file_name: 'Big_Sister_Kick_Geef_01.wav',
-#         variant: '1'
-#     )
-# end
-# 100.times do |i|
-#     card = elliot.cards.create(
-#         # chosen_count: DEFAULTS TO 0
-#         collection_id: coll2.id,
-#         name: "card #{i}",
-#         asset_kind: 'kick',
-#         file_name: 'Big_Sister_Kick_Geef_01.wav',
-#         variant: '1'
-#     )
-# end
-# 100.times do |i|
-#     card = elliot.cards.create(
-#         # chosen_count: DEFAULTS TO 0
-#         collection_id: coll3.id,
-#         name: "card #{i}",
-#         asset_kind: 'kick',
-#         file_name: 'Big_Sister_Kick_Geef_01.wav',
-#         variant: '1'
-#     )
-# end
-# 100.times do |i|
-#     card = elliot.cards.create(
-#         # chosen_count: DEFAULTS TO 0
-#         collection_id: coll4.id,
-#         name: "card #{i}",
-#         asset_kind: 'kick',
-#         file_name: 'Big_Sister_Kick_Geef_01.wav',
-#         variant: '1'
-#     )
-# end
-# 100.times do |i|
-#     card = elliot.cards.create(
-#         # chosen_count: DEFAULTS TO 0
-#         collection_id: coll5.id,
-#         name: "card #{i}",
-#         asset_kind: 'kick',
-#         file_name: 'Big_Sister_Kick_Geef_01.wav',
-#         variant: '1'
-#     )
-# end
-# 100.times do |i|
-#     card = elliot.cards.create(
-#         # chosen_count: DEFAULTS TO 0
-#         collection_id: coll6.id,
-#         name: "card #{i}",
-#         asset_kind: 'kick',
-#         file_name: 'Big_Sister_Kick_Geef_01.wav',
-#         variant: '1'
-#     )
-# end
-# 100.times do |i|
-#     card = elliot.cards.create(
-#         # chosen_count: DEFAULTS TO 0
-#         collection_id: coll7.id,
-#         name: "card #{i}",
-#         asset_kind: 'kick',
-#         file_name: 'Big_Sister_Kick_Geef_01.wav',
-#         variant: '1'
-#     )
-# end
 # ACTIVE STORAGE SEED EXAMPLE THREE
 # yumBase_card1_asset_blob = yumBase_card1.card_asset.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_assets/Big_Sister_Kick_Geef_01.wav')), filename: 'Big_Sister_Kick_Geef_01.wav')
 # yumBase_card1_art_blob = yumBase_card1.card_art.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_arts/Big_Sister_Kick_Geef_01_art.png')), filename: 'Big_Sister_Kick_Geef_01_art.png')

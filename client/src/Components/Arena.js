@@ -110,7 +110,7 @@ export default function Arena ({ setCurrentGame }) {
                             </form>
 
                         </div>
-                        <div onClick={createGame} className={style.create_button}>Create Draft</div>
+                        <div onClick={gameURL ? createGame : null} className={style.create_button}>Create Draft</div>
                     </div>
 
                     {/* <button onClick={() => setIsPopUp(!isPopUp)}>Select Set</button> */}
