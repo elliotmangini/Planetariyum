@@ -96,6 +96,7 @@ yumBase = elliot.collections.create(
     featured_content: 'none at this time'
 )
 yumBase_art_blob = yumBase.collection_art.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/collection_arts/Planetariyum_Base_art.png')), filename: 'Planetariyum_Base_art.png')
+yumBase_card_back_blob = yumBase.card_back.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/card_back.jpg')), filename: 'card_back.jpg')
 
 coll1 = elliot.collections.create(name: 'Test Collection 1')
 coll1_art_blob = coll1.collection_art.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/collection_arts/Test_Collection_Art_1.png')), filename: 'Test_Collection_Art_1.png')
