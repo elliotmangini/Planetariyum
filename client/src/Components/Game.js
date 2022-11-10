@@ -20,6 +20,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     const [ cardsInGame , setCardsInGame ] = useState(null);
     const [ selectedCard , setSelectedCard ] = useState({});
     const [ remainingTurns , setRemainingTurns ] = useState();
+    const [ isTurnEnding , setIsTurnEnding ] = useState(false);
     // console.log({ gameType , gameURL })
 
     // CALCULATE REMAINING TURNS
@@ -43,17 +44,11 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     function startGame () {
         fetch(`/nfts/${gameURL}/${stagedPlayers}`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            // body: JSON.stringify({
-                //     collection_id: "",
-                // }),
+            headers: { "Content-Type": "application/json" },
             })
             .then(resp => resp.json())
             .then(data => {
             setCurrentGame(data);
-            // console.log(data);
             setRemainingTurns(data.deck_size)
             setIsStart(true);
         })
@@ -62,21 +57,22 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     function handleSubmitTurn () {
 
         if (Object.keys(selectedCard).length !== 0 && user) {
+            setIsTurnEnding(true);
             fetch(`/nfts/claim/${selectedCard.id}/${user.id}`, {
                 method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                // body: JSON.stringify({
-                    //     collection_id: "",
-                    // }),
+                headers: { "Content-Type": "application/json" },
                 })
                 .then(resp => resp.json())
                 .then(data => {
-                    setSelectedCard({});
-                setCurrentGame(data);
-                setRemainingTurns(data.deck_size)
-            })
+                    const timer = setTimeout(() => {
+                        setSelectedCard({});
+                        setCurrentGame(data);
+                        setRemainingTurns(data.deck_size);
+                        setIsTurnEnding(false);
+                      }, 3700
+                    );
+                    return () => clearTimeout(timer);
+                })
         } else {
             // HANDLE THIS ERROR
         }
@@ -95,7 +91,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                 { currentGame.nfts.length > 0 ?
                 <div className={style.game_container}>
                     <div className={style.position_cardlist}>
-                        <CardList remainingTurns={remainingTurns} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
+                        <CardList remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
                     </div>
                     
                     <div onClick={handleSubmitTurn} className={`${style.finalize_turn_button} ${Object.keys(selectedCard).length === 0 ? style.turn_unfinishable : null}`}>Finalize<br />Turn</div>

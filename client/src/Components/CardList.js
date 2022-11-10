@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 
 
-export default function CardList ({ selectedCard, setSelectedCard, currentGame, remainingTurns }) {
+export default function CardList ({ selectedCard, isTurnEnding, setSelectedCard, currentGame, remainingTurns }) {
     const [ lastSelected , setLastSelected ] = useState({});
 
     function leftInPack () {
@@ -43,13 +43,13 @@ export default function CardList ({ selectedCard, setSelectedCard, currentGame, 
     const cardsToRender = remainingCards.slice(0, leftInPack()).map((n) => {
         // console.log(n);
         return (
-            <Card nft={n} lastSelected={lastSelected} handleSelect={handleSelect} selectedCard={selectedCard} key={uuid()} />
+            <Card nft={n} isTurnEnding={isTurnEnding} lastSelected={lastSelected} handleSelect={handleSelect} selectedCard={selectedCard} key={uuid()} />
         )
     })
 
     return (
         <>
-            <div className={style.cards_container}>
+            <div className={`${style.cards_container} ${true ? style.add_snappy_fade_in : null} ${isTurnEnding ? style.add_small_and_fade : null}`}>
                 {cardsToRender}
             </div>
         </>

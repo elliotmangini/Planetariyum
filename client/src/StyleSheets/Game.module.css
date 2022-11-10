@@ -126,18 +126,54 @@
 .cards_container {
     display: flex;
     position: absolute;
+    justify-content: center;
     bottom: 10%;
     width: 100%;
     height: 27%;
     margin: auto;
     border: 3px solid rgb(255, 0, 0);
-
+    /* transition: scale 3s ease-in; */
 }
+
+.add_snappy_fade_in {
+    animation: snappy_fade_in .05s ease-in;
+    /* animation-delay: 1s; */
+}
+
+@keyframes snappy_fade_in {
+    0% { opacity: 0% }
+    100% { opacity: 100% }
+}
+
+.add_small_and_fade {
+    /* scale: .8; */
+    animation: small_and_fade 3s ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes small_and_fade {
+    0% { 
+        opacity: 100%;
+        filter: blur(0px);
+    }
+    60% {
+        opacity: 93%;
+    }
+    85% {
+        opacity: 50%;
+    }
+    100% {
+        opacity: 0%;
+        scale: .8;
+        filter: blur(10px);
+    }
+}
+
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip_card {
     background-color: transparent;
     width: 15%;
-    margin: auto;
+    margin: 1vw;
     height: 100%;
     border: 1px solid #f1f1f1;
     border: 10px solid rgb(255, 0, 238);
@@ -154,8 +190,8 @@
     transform-style: preserve-3d;
 }
 
-.add_flip {
-    animation: flip_reveal 1s;
+.add_flip_reveal {
+    animation: flip_reveal .7s ease-in;
     animation-delay: 1s;
     animation-fill-mode: forwards;
 }
@@ -165,8 +201,27 @@
 }
 
 @keyframes flip_reveal {
-    0% { transform: rotateY(0deg) }
-    100% { transform: rotateY(-180deg) }
+    0% {
+        transform: rotateY(0deg)
+    }
+    100% {
+        transform: rotateY(-180deg)
+    }
+}
+
+.add_flip_facedown {
+    animation: flip_facedown 3s;
+    animation-delay: .1s;
+    animation-fill-mode: forwards ease-in-out;
+}
+
+@keyframes flip_facedown {
+    0% { 
+        transform: rotateY(-180deg);
+    }
+    100% {
+        transform: rotateY(-360deg);
+    }
 }
 
 /* Position the front and back side */
@@ -212,11 +267,12 @@
     /* box-shadow: 0 0 2px #fff, 0 0 10px #fff, 0 0 20px #0ba9ca, 0 0 30px #0ba9ca,
     0 0 40px #0ba9ca, 0 0 50px #0ba9ca; */
     animation: slow_pulse 1.3s infinite alternate ease-out;
+    border-radius: 5%;
 }
 
 @keyframes slow_pulse {
     100% {
-      box-shadow: 0 0 3px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #0ba9ca,
+        box-shadow: 0 0 3px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #0ba9ca,
         0 0 70px #0ba9ca, 0 0 80px #0ba9ca;
     }
 }
@@ -226,6 +282,16 @@
 }
 
 @keyframes set_down {
+    0% {scale: 1.25}
+    100% {scale: 1}
+}
+
+.set_selected_down {
+    animation: set_down .8s ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes set_selected_down {
     0% {scale: 1.25}
     100% {scale: 1}
 }
