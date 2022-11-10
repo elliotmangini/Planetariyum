@@ -60,20 +60,22 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     }
 
     function handleSubmitTurn () {
-        fetch(`/nfts/claim/${selectedCard.id}/${user.id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            // body: JSON.stringify({
-                //     collection_id: "",
-                // }),
-            })
-            .then(resp => resp.json())
-            .then(data => {
-            setCurrentGame(data);
-            setRemainingTurns(data.deck_size)
-        })
+        
+        // fetch(`/nfts/claim/${selectedCard.id}/${user.id}`, {
+        //     method: "PATCH",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     // body: JSON.stringify({
+        //         //     collection_id: "",
+        //         // }),
+        //     })
+        //     .then(resp => resp.json())
+        //     .then(data => {
+        //     setCurrentGame(data);
+        //     setRemainingTurns(data.deck_size)
+        //     setSelectedCard({});
+        // })
     }
 
 

@@ -66,6 +66,7 @@
     width: 20%;
     /* border: 3px solid rgb(255, 0, 238); */
     transition: scale .3s ease-out;
+    perspective: 1000px;
 }
 
 .hoverable {
@@ -102,7 +103,21 @@
 .card_inner_container {
     margin: 10%;
     position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
 }
+
+
+
+.card_outer_container:hover, .card_inner_container {
+    transform: rotateY(180deg);
+}
+
+.flip-card-back {
+    background-color: dodgerblue;
+    color: white;
+    transform: rotateY(180deg);
+  }
 
 .card_image {
     width: 100%;
