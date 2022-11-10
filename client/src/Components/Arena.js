@@ -14,15 +14,27 @@ export default function Arena ({ setCurrentGame }) {
     const [ collections , setCollections ] = useState([]);
     const [ selectedCollection, setSelectedCollection ] = useState("");
     const [ gameType , setGameType ] = useState("draft");
-    const [ gameURL , setGameURL ] = useState("testingplanetariyum");
+    const [ gameURL , setGameURL ] = useState("");
     const [ redirect , setRedirect ] = useState(null);
+    const [ popSequence , setPopSequence ] = useState(0);
+
+    // POPUP SEQUENCE HANDLERS
+    function handleSetCollection () {
+        setPopSequence(2);
+        setIsPopUp(false);
+    }
+
+    function handleEditCollection () {
+        setIsPopUp(true);
+        setPopSequence(1);
+    }
 
 
     function createGame () {
         const gameObj = {
             collection_id: selectedCollection.id,
             deadline: "03 Feb 2023 04:05:06 +0000",
-            local_url: gameURL,
+            local_url: gameURL.replace(/\s/g, ""),
             game_type: gameType,
             deck_size: 50,
         }
@@ -35,7 +47,7 @@ export default function Arena ({ setCurrentGame }) {
         })
         .then(resp => resp.json())
         .then(data => setCurrentGame(data))
-        setRedirect([gameType, gameURL]);
+        setRedirect([gameType, gameURL.replace(/\s/g, "")]);
     }
 
 
@@ -61,27 +73,84 @@ export default function Arena ({ setCurrentGame }) {
 
     return (
         <>
-        { redirect ? <Navigate to={`/play/${gameType}/${gameURL}`} /> : null}
+        { redirect ? <Navigate to={`/play/${gameType}/${gameURL.replace(/\s/g, "")}`} /> : null}
             <div className={style.main_and_pop_up}>
                 <div className={`${style.main_content} ${isPopUp ? style.blur : null}`}>
-                    <button onClick={() => setIsPopUp(!isPopUp)}>Select Set</button>
-                    <p>{selectedCollection.name}</p>
+                    <div className={style.game_details_panel}>
+                        <div className={style.header_box}>
+                            Configure Draft
+                        </div>
+                        <div className={style.game_settings_box}>
 
+                            <div onClick={handleEditCollection} className={style.collection_slot}>
+                                <div className={style.thumb_container}>
+                                    <div className={style.thumb_text_container}>
+                                        <img className={style.cover_art} src={selectedCollection ? selectedCollection.cover_url : null}></img>
+                                        <div className={style.collection_title}>
+                                            {selectedCollection ? selectedCollection.creator.display_name : null}
+                                            <br />
+                                            {selectedCollection ? selectedCollection.name : "Choose A Set"}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div className={style.game_type_selector}>
 
+                            </div>
+                        </div>
+                        <div className={style.custom_settings_box}>
+                            <form>
+                                <input
+                                type="text"
+                                placeholder="Custom URL"
+                                value={gameURL}
+                                onChange={(e) => setGameURL(e.target.value)}
+                                />
+                            </form>
+
+                        </div>
+                        <div onClick={createGame} className={style.create_button}>Create Draft</div>
+                    </div>
+
+                    {/* <button onClick={() => setIsPopUp(!isPopUp)}>Select Set</button> */}
+                    {/* <p>{selectedCollection.name}</p> */}
 
                 </div>
 
-                {/* EVERYTHING IN POPUP */}
+                {/* EVERYTHING IN POPUPS */}
                 <div className={`${style.pop_up} ${isPopUp ? null : style.hidden}`}>
-                    <div className={style.directions}>
-                        <div className={style.heading}>Select Set</div>
-                        <div className={style.sub_heading}></div>
-                    </div>
-                    <div className={style.thumbs_container}>
-                        {thumbsToDisplay}
-                    </div>
-                    <button onClick={createGame} className={style.start_button}>Start Draft</button>
+
+                    {/* POP 1 */}
+                    { popSequence === 1 ?
+                    <>
+                        <div className={style.directions}>
+                            <div className={style.heading}>Select Set</div>
+                            <div className={style.sub_heading}></div>
+                        </div>
+                        <div className={style.thumbs_container}>
+                            <div className={style.inset_thumbs}>
+                                {thumbsToDisplay}
+                            </div>
+                        </div>
+                    </>
+                    : null }
+
+                    {/* { popSequence === 1 ?
+                    <>
+                        <div className={style.directions}>
+                            <div className={style.heading}>Select Set</div>
+                            <div className={style.sub_heading}></div>
+                        </div>
+                        <div className={style.thumbs_container}>
+                            <div className={style.inset_thumbs}>
+                                {thumbsToDisplay}
+                            </div>
+                        </div>
+                    </>
+                    : null } */}
+
+                    <button onClick={handleSetCollection} className={style.next_button}>Next</button>
                 </div>
             </div>
         </>

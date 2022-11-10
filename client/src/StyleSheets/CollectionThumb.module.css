@@ -2,6 +2,10 @@
     margin: auto;
 }
 
+.thumb_text_container {
+    position: relative;
+}
+
 .cover_art {
     position: relative;
     width: 200px;
@@ -18,10 +22,6 @@
     0 0 0px 3px rgb(67, 67, 67),  /* inner black */
     0 0 10px 6px #f0f, /* middle magenta */
     0 0 14px 9px #0ff; /* outer cyan */
-}
-
-.thumb_text_container {
-    position: relative;
 }
 
 .collection_title {
@@ -59,6 +59,8 @@
 
 .hidden {
     visibility: hidden;
+    
+    opacity: 0%;
 }
 
 .visit_button {

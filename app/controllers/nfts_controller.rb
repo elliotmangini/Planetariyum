@@ -1,5 +1,6 @@
 class NftsController < ApplicationController
-  before_action :set_nft, only: %i[ show update destroy ]
+  before_action :set_nft, only: %i[ show update destroy claim_nft ]
+  before_action :set_game, only: %i[ claim_nft ]
 
   # # GET /nfts
   # def index
@@ -40,24 +41,38 @@ class NftsController < ApplicationController
 
   def start_game
     game = Game.find_by(local_url: params[:local_url])
-    card_subset = game.collection.cards.order(Arel.sql('RANDOM()')).limit(game.deck_size)
-
-    card_subset.each do |c|
-      newNft = game.nfts.create(card_id: c.id, holder_id: User.find_by(username: "planetariyumwallet"))
-    end
 
     players = User.find(params[:staged_players].split(','));
     players.each do |p|
       playing = game.playings.create(player_id: p.id)
     end
 
+    card_subset = game.collection.cards.order(Arel.sql('RANDOM()')).limit(game.deck_size * players.length)
+
+    card_subset.each do |c|
+      newNft = game.nfts.create(card_id: c.id, holder_id: User.find_by(username: "planetariyumwallet").id)
+    end
+
+    # GET BACK INFORMATION ABOUT WHAT CARDS ARE IN WHAT PACKS
+
     render json: game, include: ['nfts', 'nfts.owner', 'nfts.holder', 'nfts.card'],  status: :created
+  end
+
+  def claim_nft
+    # byebug
+    @nft.update_attribute(:owner_id, params[:owner_id])
+    @game.update_attribute(:deck_size, @game.deck_size - 1)
+    render json: @game, include: ['nfts', 'nfts.owner', 'nfts.holder', 'nfts.card'],  status: :accepted
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_nft
       @nft = Nft.find(params[:id])
+    end
+
+    def set_game
+      @game = Nft.find(params[:id]).game
     end
 
     # Only allow a list of trusted parameters through.

@@ -10,23 +10,138 @@
     border: 3px solid rgb(255, 0, 238);
 }
 
+.game_details_panel {
+    position: relative;
+    width: 85%;
+    height: 60%;
+    border: 1.7px solid rgb(177, 46, 225);
+    border-radius: .5vw;
+    background-color: rgb(47, 28, 65);
+    margin: auto;
+    margin-top: 5vh;
+    display: flex-block;
+    align-items: center;
+    justify-content: center;
+}
+
+.header_box {
+    height: 10%;
+    width: 65%;
+    margin: auto;
+    margin-bottom: 3vh;
+    margin-top: 5vh;
+    border: 1.7px solid rgb(177, 46, 225);
+
+    text-align: center;
+    font-size: 3vh;
+}
+
+.game_settings_box {
+    position: relative;
+    display: flex;
+    flex-direction: flex-end;
+    height: 40%;
+    width: 85%;
+    margin: auto;
+    margin-bottom: 3vh;
+    border: 1.7px solid rgb(177, 46, 225);
+}
+
+.collection_slot {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    /* border: 1.7px solid rgb(177, 46, 225); */
+}
+
+.thumb_container {
+    margin: auto;
+}
+
+.thumb_text_container {
+    position: relative;
+    /* border: 1.7px solid rgb(177, 46, 225);
+    width: fit-content; */
+}
+
+.cover_art {
+    position: relative;
+    /* bottom: 0%; */
+    width: 200px;
+    height: 60px;
+    border-radius: 2em;
+    transition: filter .5s;
+    margin: 7px;
+}
+
+.cover_art:hover {
+    filter: brightness(2);
+    background-color: #fff;
+    box-shadow:
+    0 0 0px 3px rgb(67, 67, 67),  /* inner black */
+    0 0 10px 6px #f0f, /* middle magenta */
+    0 0 14px 9px #0ff; /* outer cyan */
+}
+
+.collection_title {
+    position: absolute;
+    bottom: 20%;
+    left: 10%;
+    margin-top: 3rem;
+    width: 100%;
+    height: fit-content;
+    /* background-color: gray; */
+    margin-left: 17rem;
+    font-size: 2vh;
+}
+
+.game_type_selector {
+    height: 100%;
+    width: 100%;
+    /* background-color: white; */
+}
+
+.custom_settings_box {
+    height: 20%;
+    width: 65%;
+    margin: auto;
+    margin-bottom: 3vh;
+    border: 1.7px solid rgb(177, 46, 225);
+}
+
+.create_button {
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    background-color: green;
+    color: white;
+    width: 10vh;
+    height: 3vh;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .pop_up {
     position: absolute;
     top: 5%;
     left: 5%;
     width: 90%;
     height: 80%;
-    border: 3px solid rgb(255, 0, 238);
+    /* border: 3px solid rgb(255, 0, 238); */
     margin: auto;
     background-color: rgb(57, 57, 107);
     opacity: 60%;
     overflow: auto;
     transition: opacity .2s;
+    border: 1.7px solid rgb(247, 225, 255);
+    border-radius: .5vw;
 }
 
 .directions {
-    margin: 1rem;
-    margin-top: 1.618rem;
+    margin: 2rem;
+    margin-top: 3rem;
     text-align: center;
 }
 
@@ -35,11 +150,18 @@
 }
 
 .thumbs_container {
+    width: 85%;
+    margin: auto;
+    background-color: rgb(69, 69, 107);
+    border: 1px solid rgb(234, 175, 255);
+    border-radius: .5vw;
+}
+
+.inset_thumbs {
     display: flex;
     flex-wrap: wrap;
-    width: 90%;
-    margin: auto;
-    border: 3px solid rgb(187, 0, 255);
+    margin: 1rem;
+    margin-bottom: 3rem;
 }
 
 .blur {
@@ -61,15 +183,17 @@
 
 .hidden {
     opacity: 0%;
+    pointer-events: none;
 }
 
 
 
-.start_button {
+.next_button {
     position: absolute;
     bottom: 5%;
     right: 5%;
     background-color: green;
+    color: white;
     width: 5rem;
     height: 2rem;
     border-radius: 1rem;
