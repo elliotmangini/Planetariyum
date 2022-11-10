@@ -60,43 +60,52 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     }
 
     function handleSubmitTurn () {
-        
-        // fetch(`/nfts/claim/${selectedCard.id}/${user.id}`, {
-        //     method: "PATCH",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     // body: JSON.stringify({
-        //         //     collection_id: "",
-        //         // }),
-        //     })
-        //     .then(resp => resp.json())
-        //     .then(data => {
-        //     setCurrentGame(data);
-        //     setRemainingTurns(data.deck_size)
-        //     setSelectedCard({});
-        // })
+
+        if (Object.keys(selectedCard).length !== 0 && user) {
+            fetch(`/nfts/claim/${selectedCard.id}/${user.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                // body: JSON.stringify({
+                    //     collection_id: "",
+                    // }),
+                })
+                .then(resp => resp.json())
+                .then(data => {
+                    setSelectedCard({});
+                setCurrentGame(data);
+                setRemainingTurns(data.deck_size)
+            })
+        } else {
+            // HANDLE THIS ERROR
+        }
     }
 
 
 
     return (
-        <>
-            <div>Game Goes Here</div>
-            <Lobby startGame={startGame}/>
+        <div className={style.give_game_fullscreen}>
+            { isGameLoaded ?
+            <>
+                { currentGame.nfts.length === 0 ?
+                    <Lobby startGame={startGame}/>
+                : null }
 
-            { currentGame ?
-            <div className={style.game_container}>
-                <div className={style.position_cardlist}>
-                    <CardList remainingTurns={remainingTurns} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
+                { currentGame.nfts.length > 0 ?
+                <div className={style.game_container}>
+                    <div className={style.position_cardlist}>
+                        <CardList remainingTurns={remainingTurns} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
+                    </div>
+                    
+                    <div onClick={handleSubmitTurn} className={`${style.finalize_turn_button} ${Object.keys(selectedCard).length === 0 ? style.turn_unfinishable : null}`}>Finalize<br />Turn</div>
+                    
                 </div>
-                
-                <div onClick={handleSubmitTurn} className={`${style.finalize_turn_button} ${Object.keys(selectedCard).length === 0 ? style.turn_unfinishable : null}`}>Finalize<br />Turn</div>
-                
-            </div>
+                : null }
+            </>
             : null }
 
-            <div className={`${style.loading_screen} ${isGameLoaded ? style.fade_away : null}`}>Loading . . .</div>
-        </>
+            <div className={`${style.loading_screen} ${isGameLoaded ? style.transition_fade : null}`}>Loading . . .</div>
+        </div>
     )
 }

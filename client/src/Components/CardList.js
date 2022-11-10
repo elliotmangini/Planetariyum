@@ -20,7 +20,7 @@ export default function CardList ({ selectedCard, setSelectedCard, currentGame, 
         }
     }
 
-    console.log(leftInPack())
+    // console.log(leftInPack())
 
     function handleSelect (nft) {
         setLastSelected(selectedCard);
