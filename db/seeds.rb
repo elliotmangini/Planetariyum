@@ -135,7 +135,7 @@ puts 'Creating Cards 🃏🃏🃏🃏🃏'
         file_name: 'Big_Sister_Kick_Geef_01.wav',
         variant: '1'
     )
-    art_blob = yumBase_card.card_art.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_arts/MTc0NDYwNzc3ODAxODUyMjY0.webp')), filename: 'testing.webp')
+    art_blob = yumBase_card.card_art.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_arts/Test-Card.png')), filename: 'Test-Card.png')
     asset_blob = yumBase_card.card_asset.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_assets/Big_Sister_Kick_Geef_01.wav')), filename: 'Big_Sister_Kick_Geef_01.wav')
 
 end

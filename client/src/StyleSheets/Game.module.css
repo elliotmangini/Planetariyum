@@ -2,9 +2,24 @@
     position: absolute;
     height: 100%;
     width: 100%;
+}
+
+.arena_background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
     background-image: radial-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, .8)), url("https://openailabsprodscus.blob.core.windows.net/private/user-ZX9sdPsHMBN5ywyiabqtllE5/generations/generation-CkPN1TSYgwDjIHWr8Zvhe5Jh/image.webp?st=2022-11-10T18%3A26%3A09Z&se=2022-11-10T20%3A24%3A09Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/webp&skoid=15f0b47b-a152-4599-9e98-9cb4a58269f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-11-10T17%3A23%3A37Z&ske=2022-11-17T17%3A23%3A37Z&sks=b&skv=2021-08-06&sig=HrsLB/3VmeKZpvbZGjTdXnkfz5xTQrgUg4xyHSXd1I0%3D");
     background-size: 100vw;
+    transition: background-position 4s ease-in-out;
 }
+
+.arena_background {
+    background-position : 20px -20px;
+}
+
+/* @keyframes slide {
+    0% { background-position : 10px 0px }
+} */
 
 .loading_screen {
     position: fixed;
@@ -200,7 +215,7 @@
 }
 
 .binder_card_image {
-    box-shadow: 0 45px 65px rgba(0,0,0,0.50), 0 35px 22px rgba(0,0,0,0.16);
+    box-shadow: 0 45px 65px rgba(0,0,0,60.50), 0 35px 22px rgba(0,0,0,60.16);
     width: 2rem;
     margin-right: .2rem;
 
@@ -298,4 +313,47 @@
     0% { transform: scale(1) }
     30% { transform: scale(.8) }
     100% { transform: scale(1) }
+}
+
+.big_card_container {
+    position: absolute;
+    top: 15%;
+    left: 50vw;
+    border: 10px red;
+    animation: blur_in .3s ease-in-out;
+}
+
+.big_card_image {
+    position: absolute;
+    top: 30%;
+    width: 25vh;
+    transform: translateX(-12.5vh);
+    border: 10px red;
+}
+
+@keyframes blur_in {
+    0% { filter: blur(10px) }
+    100% { filter: blur(0px) }
+}
+
+.add_off_stage_left {
+    animation: off_stage_left 3s ease-in-out;
+    animation-fill-mode: forwards;
+
+}
+
+@keyframes off_stage_left {
+    0% { 
+        transform: rotateY(-180deg);
+        transform: translateX(-12.5vh)
+    }
+    20% {
+        transform: rotateY(-360deg);
+        transform: translateX(-12.5vh)
+    }
+    100% {
+        transform: rotateY(-360deg);
+        transform: translateX(-150vh)
+    }
+
 }
