@@ -2,7 +2,9 @@ import { useParams } from 'react-router-dom';
 import Lobby from './Lobby';
 import { useState, useEffect } from 'react'
 
-import CardList from './CardList';
+import CardList from './CardPack';
+import CardBinder from './CardBinder';
+
 
 import style from '../StyleSheets/Game.module.css'
 
@@ -82,7 +84,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
 
     return (
         <div className={style.give_game_fullscreen}>
-            { isGameLoaded ?
+            { isGameLoaded && user ?
             <>
                 { currentGame.nfts.length === 0 ?
                     <Lobby startGame={startGame}/>
@@ -90,6 +92,11 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
 
                 { currentGame.nfts.length > 0 ?
                 <div className={style.game_container}>
+
+                    <div className={style.binder_container}>
+                        <CardBinder user={user} remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
+                    </div>
+
                     <div className={style.position_cardlist}>
                         <CardList remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
                     </div>

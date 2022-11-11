@@ -13,7 +13,7 @@
     height: 100%;
     width: 100%;
     text-align: center;
-    background-color: white;
+    background-color: rgb(25, 7, 7);
     transition: opacity 1s;
     pointer-events: none;
 }
@@ -49,6 +49,18 @@
     margin: auto;
     /* border: 3px solid rgb(255, 0, 0); */
     /* transition: scale 3s ease-in; */
+}
+
+.binder_cards_container {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20% ;
+    flex-wrap: wrap;
+    position: absolute;
+    /* justify-content: center; */
+    /* bottom: 10%; */
+    width: 100%;
+    height: 48%;
+    margin: auto;
 }
 
 .add_snappy_fade_in {
@@ -150,7 +162,7 @@
 }
 
 /* Position the front and back side */
-.flip_card_front, .flip_card_back {
+.flip_card_front, .flip_card_back, .binder_card_front {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -163,6 +175,12 @@
     /* background-color: #bbb; */
     color: black;
     transform: rotateY(180deg);
+}
+
+/* OR */
+
+.binder_card_front {
+
 }
 
 /* Style the back side */
@@ -179,6 +197,17 @@
     transition: scale .2s ease-out;
     border-radius: 5%;
     /* transition: scale .3s ease-out, box-shadow 2s ease-out; */
+}
+
+.binder_card_image {
+    box-shadow: 0 45px 65px rgba(0,0,0,0.50), 0 35px 22px rgba(0,0,0,0.16);
+    width: 2rem;
+    margin-right: .2rem;
+
+    border-radius: 5%;
+    /* animation: small_and_fade .7s ease-in reverse;
+    animation-delay: 1s;
+    animation-fill-mode: forwards; */
 
 }
 
@@ -246,4 +275,13 @@
 
 .finalize_turn_button:hover {
     filter: brightness(1.25)
+}
+
+.binder_container {
+    /* background: red; */
+    position: absolute;
+    top: 8%;
+    left: 5%;
+    height: 40%;
+    width: 12%;
 }

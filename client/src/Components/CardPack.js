@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 
 
-export default function CardList ({ selectedCard, isTurnEnding, setSelectedCard, currentGame, remainingTurns }) {
+export default function CardPack ({ selectedCard, isTurnEnding, setSelectedCard, currentGame, remainingTurns }) {
     const [ lastSelected , setLastSelected ] = useState({});
 
     function leftInPack () {
