@@ -1,3 +1,8 @@
 .signup_link, .signup_link:visited {
     color: var(--text-link);
+    text-decoration: underline;
+}
+
+.signup_link:hover {
+    cursor: pointer;
 }

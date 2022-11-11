@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FileUploader from './FileUploader';
+
+import style from '../StyleSheets/AvatarUpload.module.css';
 
 
 
@@ -7,11 +9,9 @@ export default function AvatarUpload ({ user, setUser }) {
     const [ selectedFile, setSelectedFile ] = useState(null);
     const [ errors, setErrors ] = useState([]);
 
-    function submitForm (e) {
-        e.preventDefault();
-
-        // console.log(selectedFile);
-
+    function postAvatar () {
+        console.log("selectedFile is")
+        console.log(selectedFile);
         const avatar = new FormData();
         avatar.append('avatar', selectedFile);
 
@@ -27,28 +27,19 @@ export default function AvatarUpload ({ user, setUser }) {
         });
     }
 
+    useEffect(() => {
+        postAvatar();
+    }, [selectedFile])
+
 
     return (
         <form >
-            {/* <label htmlFor="avatar_upload_btn" >Upload Avatar</label> */}
-            {/* <input
-            onChange={(e) => setSelectedFile(e.target.files[0])}
-            type="file"
-            name="avatar_upload_btn"
-            id="avatar_upload_btn"
-            placeholder="avatar"
-            value={selectedFile}
-            style={{visibility:"hidden"}}
-            /> */}
-
             <FileUploader
-            maxSize={6291456}
+            uploadType={"Avatar"}
+            maxSizeInMB={6}
             onFileSelectSuccess={setSelectedFile}
             onFileSelectError={({ error }) => alert(error)}
             />
-
-            <button onClick={(e) => submitForm(e)}>Upload Avatar</button>
-
         </form>
     )
 

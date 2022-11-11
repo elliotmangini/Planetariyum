@@ -2,7 +2,7 @@ import { useState , useEffect } from 'react';
 
 
 
-export default function ProfileEditor () {
+export default function ProfileEditor ({ user }) {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -12,13 +12,13 @@ export default function ProfileEditor () {
     const [sequence , setSequence ] =useState(1);
 
     function handleProfileUpdate () {
-        
+
     }
 
     return (
         <>
             <div className="pop-up-container">
-          <div className="pop-up-title">Create An Account</div>
+          <div className="pop-up-title">{user.display_name}</div>
           <div className="form-container">
             <form className="form" onSubmit={handleProfileUpdate}>
               <div className="form-item-div">

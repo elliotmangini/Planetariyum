@@ -73,10 +73,15 @@ export default function Login ({ user, setUser }) {
               </form>
             </div>
             <div className="pop-up-text">
+              
               Need to make an account?
               <br />
-              <Link to="/signup" className={style.signup_link} id={style.signup}> Sign Up</Link>
-              . 💫
+              <br />
+              💫
+              <br />
+              <Link to="/signup" className={style.signup_link} id={style.signup}>Sign Up</Link>
+              .
+              <br />&nbsp;
             </div>
           </div>
           
