@@ -126,6 +126,15 @@ coll8_art_blob = coll8.collection_art.attach(io: File.open(File.join(Rails.root,
 
 puts 'Creating Cards 🃏🃏🃏🃏🃏'
 
+art_array = ["NMT_Card_Art.png", "MetalPopcorn_Card_Art.png", "SquidPortal_Card_Art.png", "Remnant_Card_Art.png", "Midterm_Card_Art.png"]
+sound_hash = {
+    "Midterm_Card_Art.png" => "Big_Sister_Snare_Midterm_04.wav",
+    "NMT_Card_Art.png" => "Big_Sister_Snare_NMT_02.wav",
+    "MetalPopcorn_Card_Art.png" => "Big_Sister_Snare_MetalPopcorn_05.wav",
+    "SquidPortal_Card_Art.png" => "Big_Sister_Snare_Clap_Squid_01.wav",
+    "Remnant_Card_Art.png" => "Big_Sister_Snare_Clap_Remnants_04.wav"
+}
+
 100.times do |i|
     yumBase_card = elliot.cards.create(
         # chosen_count: DEFAULTS TO 0
@@ -135,8 +144,10 @@ puts 'Creating Cards 🃏🃏🃏🃏🃏'
         file_name: 'Big_Sister_Kick_Geef_01.wav',
         variant: '1'
     )
-    art_blob = yumBase_card.card_art.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_arts/Test-Card.png')), filename: 'Test-Card.png')
-    asset_blob = yumBase_card.card_asset.attach(io: File.open(File.join(Rails.root,'/app/assets/cards/card_assets/Big_Sister_Kick_Geef_01.wav')), filename: 'Big_Sister_Kick_Geef_01.wav')
+    random_sample = art_array.sample
+    key = random_sample
+    art_blob = yumBase_card.card_art.attach(io: File.open(File.join(Rails.root,"/app/assets/cards/card_arts/" + random_sample)), filename: random_sample)
+    asset_blob = yumBase_card.card_asset.attach(io: File.open(File.join(Rails.root,"/app/assets/cards/card_assets/" + sound_hash[key])), filename: sound_hash[key])
 
 end
 
