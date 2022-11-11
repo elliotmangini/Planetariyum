@@ -45,7 +45,6 @@ body {
   --selected-subheading: rgb(69, 69, 69);
   --text-primary: rgb(236, 231, 231);
   --text-secondary: grey;
-  --accent: darkred;
 
   background-color: var(--background);
   color: var(--text-primary);
@@ -62,7 +61,7 @@ body {
   --selected-subheading: rgb(69, 69, 69);
   --text-primary: rgb(236, 231, 231);
   --text-secondary: grey;
-  --accent: darkred;
+  --accent-color: #9b5486;
   --text-link: lightblue;
   
   background-color: var(--background);
@@ -207,12 +206,17 @@ body {
 
 input {
   width: 12rem;
+  margin: .5rem;
 }
 
 .pop-up-title {
   font-size: calc(var(--g) * 1.2rem);
   margin-top: calc(var(--g) * 1rem);
   margin-bottom: calc(var(--g2) * 1rem);
+}
+
+.pop-up-keyword {
+  color: var(--accent-color);
 }
 
 .pop-up-text {
@@ -237,14 +241,24 @@ input {
 .submit-button, .submit-button:visited {
   /* border: 3px solid rgb(255, 79, 79); */
   background-color: var(--accent-color);
+  width: fit-content;
+  height: fit-content;
   border: none;
   border-radius: 1vh;
   color: white;
-  padding: calc(1 * 1.1vh) calc(var(--g) * 1.1vh);
+  padding: 10px 15px 10px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 20px 15px 10px 15px;
+  margin-bottom: 3rem;
   cursor: pointer;
+}
+
+#file-being-uploaded {
+  visibility: hidden;
+  position: absolute;
+  width: 0%;
+  height: 0%;
 }

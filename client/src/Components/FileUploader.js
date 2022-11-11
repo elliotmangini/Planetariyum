@@ -1,5 +1,5 @@
 
-export default function FileUploader ({uploadType, maxSizeInMB, onFileSelectError, onFileSelectSuccess }) {
+export default function FileUploader ({selectedFile, uploadType, maxSizeInMB, onFileSelectError, onFileSelectSuccess }) {
     const maxSizeInBytes = maxSizeInMB * 1000000;
 
     const handleFileInput = (e) => {
@@ -13,8 +13,11 @@ export default function FileUploader ({uploadType, maxSizeInMB, onFileSelectErro
     };
 
     return (
-        <div className="file-uploader">
-            <input id="file-being-uploaded" type="file" onChange={(e) => handleFileInput(e)}/>
-        </div>
+        // <div className="file-uploader">
+            <label className="submit-button">
+                <input id="file-being-uploaded" type="file" onChange={(e) => handleFileInput(e)}/>
+                { !selectedFile ? "Upload" : "Change"}
+            </label>
+        // </div>
     )
 }

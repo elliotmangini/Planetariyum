@@ -5,42 +5,54 @@ import style from '../StyleSheets/AvatarUpload.module.css';
 
 
 
-export default function AvatarUpload ({ user, setUser }) {
+export default function AvatarUpload ({ setSequence, user, setUser }) {
     const [ selectedFile, setSelectedFile ] = useState(null);
     const [ errors, setErrors ] = useState([]);
 
-    function postAvatar () {
-        console.log("selectedFile is")
-        console.log(selectedFile);
-        const avatar = new FormData();
-        avatar.append('avatar', selectedFile);
+    // console.log(selectedFile)
 
-        fetch("/avatar", {
-            method: 'post',
-            body: avatar,
-        }).then((r) => {
-            if (r.ok) {
-                r.json().then((user) => setUser(user));
-            } else {
-                r.json().then((err) => setErrors(err.errors));
-            }
-        });
+
+
+    function postAvatar () {
+        if (selectedFile) {
+            const avatar = new FormData();
+            avatar.append('avatar', selectedFile);
+    
+            fetch("/avatar", {
+                method: 'post',
+                body: avatar,
+            }).then((r) => {
+                if (r.ok) {
+                    r.json().then((user) => setUser(user));
+                } else {
+                    r.json().then((err) => setErrors(err.errors));
+                }
+            });
+        }
     }
 
     useEffect(() => {
         postAvatar();
     }, [selectedFile])
 
+    function goTo3 () {
+        setSequence(3)
+    }
+
 
     return (
-        <form >
-            <FileUploader
-            uploadType={"Avatar"}
-            maxSizeInMB={6}
-            onFileSelectSuccess={setSelectedFile}
-            onFileSelectError={({ error }) => alert(error)}
-            />
-        </form>
+        <>
+            <form >
+                <FileUploader
+                selectedFile={selectedFile}
+                uploadType={"Avatar"}
+                maxSizeInMB={6}
+                onFileSelectSuccess={setSelectedFile}
+                onFileSelectError={({ error }) => alert(error)}
+                />
+            <div className="submit-button" onClick={goTo3} >{ selectedFile ? "Confirm" : "Skip?"}</div>
+            </form>
+        </>
     )
 
 }

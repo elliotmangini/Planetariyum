@@ -20,7 +20,8 @@ export default function SignUp1 ({ user, setUser, setSequence }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            username: username,
+            display_name: username,
+            username: username.replace(/\s/g, ""),
             email: email,
             password: password,
             site_theme: "dark",
@@ -42,13 +43,13 @@ export default function SignUp1 ({ user, setUser, setSequence }) {
     return (
         <>
             <div className="pop-up-container">
-                <div className="pop-up-title">Create An Account</div>
+                <div className="pop-up-title">Create Account</div>
                     <div className="form-container">
                         <form className="form" onSubmit={handleSubmit}>
                         <div className="form-item-div">
                             <input
                             type="text"
-                            id="username"
+                            id="Display Name"
                             placeholder="Username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
