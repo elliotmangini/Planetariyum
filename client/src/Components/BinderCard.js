@@ -36,8 +36,10 @@ export default function Card ({ nft, selectedCard, isTurnEnding, lastSelected, h
                         </div>
                     </div>
                 </div> */}
-
-                <img className={`${style.binder_card_image}`} src={nft.card.art_url} alt="Avatar" />
+                <div>
+                    <div></div>
+                    <img onClick={() => setAudioAction("play")} className={`${style.binder_card_image}`} src={nft.card.art_url} alt="Avatar" />
+                </div>
 
                 {audioAction ? <AudioPlayer setDuration={setDuration} action={audioAction} clearAction={setAudioAction}  sound={nft.card.asset_url} /> : null }
         </>

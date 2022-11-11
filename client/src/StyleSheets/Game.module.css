@@ -280,8 +280,22 @@
 .binder_container {
     /* background: red; */
     position: absolute;
-    top: 8%;
+    top: 14%;
     left: 5%;
     height: 40%;
     width: 12%;
+}
+
+.add_play_animation {
+    animation: play_bounce 3s;
+}
+
+.remove_play_animation {
+    animation: none;
+}
+
+@keyframes play_bounce {
+    0% { transform: scale(1) }
+    30% { transform: scale(.8) }
+    100% { transform: scale(1) }
 }

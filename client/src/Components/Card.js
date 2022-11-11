@@ -23,6 +23,9 @@ export default function Card ({ nft, selectedCard, isTurnEnding, lastSelected, h
         return () => clearTimeout(timer);
     }
 
+    // console.log(audioAction)
+    // ${audioAction === "play" ? style.add_play_animation : null}
+
 
     return (
         <>  

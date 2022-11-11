@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import Lobby from './Lobby';
 import { useState, useEffect } from 'react'
 
-import CardList from './CardPack';
+import CardPack from './CardPack';
 import CardBinder from './CardBinder';
 
 
@@ -98,7 +98,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                     </div>
 
                     <div className={style.position_cardlist}>
-                        <CardList remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
+                        <CardPack remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
                     </div>
                     
                     <div onClick={handleSubmitTurn} className={`${style.finalize_turn_button} ${Object.keys(selectedCard).length === 0 ? style.turn_unfinishable : null}`}>Finalize<br />Turn</div>
