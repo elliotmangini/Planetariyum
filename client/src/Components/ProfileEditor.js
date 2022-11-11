@@ -1,59 +1,26 @@
-import React, { useState } from "react";
-import { Navigate } from 'react-router-dom';
-
-import AvatarUpload from './AvatarUpload';
-import ProfileEditor from "./ProfileEditor";
+import { useState , useEffect } from 'react';
 
 
-export default function SignUp ({ user, setUser }) {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [errors, setErrors] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [sequence , setSequence ] =useState(1);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    setErrors([]);
-    setIsLoading(true);
-    fetch("/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        email: email,
-        password: password,
-        site_theme: "dark",
-        password_confirmation: passwordConfirmation,
-      }),
-    }).then((r) => {
-      setIsLoading(false);
-      if (r.ok) {
-        r.json().then((user) => {
-          setUser(user);
-          setSequence(2);
-        });
-      } else {
-        r.json().then((err) => setErrors(err.errors));
-      }
-    });
-  }
+export default function ProfileEditor () {
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [errors, setErrors] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [sequence , setSequence ] =useState(1);
 
-  return (
-    <>
-        {/* BACKWARD PATH */}
-        { user ? <Navigate to="/" /> : null}
-        {/* FORWARD PATH */}
-        { sequence === 5 ? <Navigate to="/" /> : null}
+    function handleProfileUpdate () {
         
-        <div className="pop-up-container">
+    }
+
+    return (
+        <>
+            <div className="pop-up-container">
           <div className="pop-up-title">Create An Account</div>
           <div className="form-container">
-            <form className="form" onSubmit={handleSubmit}>
+            <form className="form" onSubmit={handleProfileUpdate}>
               <div className="form-item-div">
                 <input
                 type="text"
@@ -105,14 +72,6 @@ export default function SignUp ({ user, setUser }) {
             </form>
           </div>
         </div>
-
-        { sequence === 2 ?
-        <ProfileEditor user={user} setUser={setUser}/>
-        : null }
-        
-        { sequence === 2 ?
-        <AvatarUpload user={user} setUser={setUser}/>
-        : null }
-    </>
-  );
+        </>
+    )
 }

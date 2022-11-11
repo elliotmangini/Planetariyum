@@ -63,6 +63,7 @@ body {
   --text-primary: rgb(236, 231, 231);
   --text-secondary: grey;
   --accent: darkred;
+  --text-link: lightblue;
   
   background-color: var(--background);
   color: var(--text-primary);
@@ -236,7 +237,7 @@ input {
   /* border: 3px solid rgb(170, 79, 255); */
 }
 
-.submit-button {
+.submit-button, .submit-button:visited {
   /* border: 3px solid rgb(255, 79, 79); */
   background-color: var(--primary-theme-color);
   border: none;

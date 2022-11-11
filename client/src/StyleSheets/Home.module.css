@@ -6,12 +6,13 @@
 
 .grid {
     /* border: 3px solid rgb(0, 255, 47); */
-    width: 95%;
+    width: 100%;
+    top: 3%;
     /* display: flex; */
     display: grid;
     /* grid-template-columns: 30% 30% 40%; */
     /* gap: .2rem; */
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(8, 1fr);
 }
 
 .grid_box {

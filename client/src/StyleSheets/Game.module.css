@@ -58,7 +58,7 @@
     display: flex;
     position: absolute;
     justify-content: center;
-    bottom: 10%;
+    bottom: 5%;
     width: 100%;
     height: 27%;
     margin: auto;
@@ -317,17 +317,16 @@
 
 .big_card_container {
     position: absolute;
-    top: 15%;
+    top: 10%;
     left: 50vw;
     border: 10px red;
-    animation: blur_in .3s ease-in-out;
+    animation: blur_in .2s ease-in;
 }
 
 .big_card_image {
     position: absolute;
-    top: 30%;
-    width: 25vh;
-    transform: translateX(-12.5vh);
+    width: 32vh;
+    transform: translateX(-16vh);
     border: 10px red;
 }
 
@@ -344,14 +343,19 @@
 
 @keyframes off_stage_left {
     0% { 
+        filter: blur(0px);
         transform: rotateY(-180deg);
-        transform: translateX(-12.5vh)
+        transform: translateX(-16vh)
     }
     20% {
         transform: rotateY(-360deg);
-        transform: translateX(-12.5vh)
+        transform: translateX(-16vh)
+    }
+    75% {
+        filter: blur(1.5px);
     }
     100% {
+        filter: blur(8px);
         transform: rotateY(-360deg);
         transform: translateX(-150vh)
     }

@@ -1,0 +1,3 @@
+.signup_link, .signup_link:visited {
+    color: var(--text-link);
+}
