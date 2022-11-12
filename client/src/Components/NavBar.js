@@ -27,7 +27,7 @@ export default function NavBar ({ path, setPath }) {
                     <>
                         <Link id={openTab === "Browse" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["", "Browse"])} to="/Browse" className={style.sub_items}>Browse</Link>
                         <Link id={openTab === "Forums" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["", "Forums"])} to="/Forums" className={style.sub_items}>🔒 Forums</Link>
-                        <Link id={openTab === "Themes" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["", "Themes"])} to="/Themes" className={style.sub_items}>🔒 Themes</Link>
+                        {/* <Link id={openTab === "Themes" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["", "Themes"])} to="/Themes" className={style.sub_items}>🔒 Themes</Link> */}
                         <Link id={openTab === "Resources" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["", "Resources"])} to="/Resources" className={style.sub_items}>🔒 Resources</Link>
                     </>
                 {/* : null } */}

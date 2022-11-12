@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import FileUploader from './FileUploader';
 
-import style from '../StyleSheets/AvatarUpload.module.css';
-
 
 
 export default function AvatarUpload ({ setSequence, user, setUser }) {
@@ -36,6 +34,7 @@ export default function AvatarUpload ({ setSequence, user, setUser }) {
     }, [selectedFile])
 
     function goTo3 () {
+        console.log("trying to set to 3")
         setSequence(3)
     }
 

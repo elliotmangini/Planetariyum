@@ -71,7 +71,7 @@ export default function App() {
 
             <Route path="/" element={<Home />} />
               <Route path="/Browse" element={<Browse />} />
-              <Route path="/Themes" element={<Themes />} />
+              {/* <Route path="/Themes" element={<Themes />} /> */}
               <Route path="/Resources" element={<Resources />} />
               <Route path="/Forums" element={<Forums />} />
 

@@ -106,10 +106,16 @@ body {
   background-color: var(--popup-background);
   width: 50%;
   height: calc(fit-content * var(--g));
+  height: fit-content;
   position: fixed;
   margin-top: 2rem;
   left: 50%;
   transform: translateX(-50%);
+  overflow: scroll;
+}
+
+.test {
+
 }
 
 .tab-header {
@@ -211,7 +217,7 @@ input {
 
 .pop-up-title {
   font-size: calc(var(--g) * 1.2rem);
-  margin-top: calc(var(--g) * 1rem);
+  margin-top: calc(var(--g) * 1.9rem);
   margin-bottom: calc(var(--g2) * 1rem);
 }
 

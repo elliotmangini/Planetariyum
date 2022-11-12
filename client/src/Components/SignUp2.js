@@ -1,7 +1,7 @@
 import AvatarUpload from "./AvatarUpload"
 import avatarPlaceholder from '../Assets/placeholders/Avatar_Placeholder.png';
 
-import style from '../StyleSheets/AvatarUpload.module.css';
+import style from '../StyleSheets/WelcomeSequence.module.css';
 
 
 

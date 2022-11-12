@@ -2,10 +2,8 @@ class UsersController < ApplicationController
     skip_before_action :authorize, only: [:create]
 
     def create
-        # puts "HEREHEREHEREHEREHEREHEREHEREHEREHEREH"
-        # username = params[:display_name].delete(' ')
         user = User.create!(user_params)
-        # user.update_attribute(:username, username)
+        # user.update_attribute(:display_name, user.username)
         session[:user_id] = user.id
         render json: user, status: :created
     end

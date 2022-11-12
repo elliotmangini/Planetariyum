@@ -12,11 +12,12 @@ export default function SignUp ({ user, setUser, isLogout }) {
 
   return (
     <>
+        { !user ? <SignUp1 setSequence={setSequence} user={user} setUser={setUser} /> : null}
+        
         {/* BACKWARD PATH */}
         {/* Encourage Avatar Upload, Allow Refresh, Make Unusable if steps completed */}
         { user ? <>{ !user.avatar_url || sequence == 2 ? <SignUp2 setSequence={setSequence} user={user} setUser={setUser} /> : null }</> : null}
 
-        { !user ? <SignUp1 setSequence={setSequence} user={user} setUser={setUser} /> : null}
 
         { sequence == 3 ? <SignUp3 setSequence={setSequence} user={user} setUser={setUser} /> : null}
 
