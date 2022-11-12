@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import { Navigate } from 'react-router-dom';
 
 import style from '../StyleSheets/WelcomeSequence.module.css';
@@ -17,15 +17,21 @@ import Spooky from '../Assets/vibes/spooky.png';
 
 
 
-export default function SignUp3 ({ setSequence, user, setUser }) {
+export default function SignUp3 ({ setCurrentGame, dimUI, setDimUI, setSequence, user, setUser }) {
     const [ isWelcomeEnding , setIsWelcomeEnding ] = useState(false);
     const [ isRedirect , setIsRedirect ] = useState(false);
 
+    useEffect(() => {
+        setDimUI("opacity_25");
+        setCurrentGame(null);
+    },[])
+
     function handleCollectionRecommendation () {
+        setDimUI("opacity_0")
         setIsWelcomeEnding(true);
         setTimeout(() => {
             createGame();
-        }, 5000)
+        }, 10000)
     }
     
     // const forceCollection = 1
@@ -56,46 +62,39 @@ export default function SignUp3 ({ setSequence, user, setUser }) {
                 <div className={style.avatar_title_container}>
                     <img className={style.avatar_title_bubble} src={user.avatar_url ? user.avatar_url : avatarPlaceholder}></img>
                 </div>
-                <div className="pop-up-title">Have a Draft on us, {user.display_name} ?</div>
+                <div className="pop-up-title">Have a Draft on us,<br /><span>{user.display_name}</span><br />?</div>
                 <div className={style.text_body_container}>
                     <div>There'll be time to explore soon, but we'd like to show you the game and start your collection first.</div>
                     <div>We'd like to recommend a curated set...</div>
-                    <div>What kind of sounds would you like to draft from?</div>
+                    <div>How are you feeling?</div>
                 </div>
                 <div className={style.moods_container}>
                     <div></div>
                     <div className={style.mood_container}>
-                        Heady
                         <img onClick={handleCollectionRecommendation} className={style.mood_thumb} src={Heady}></img>
                     </div>
                     <div></div>
                     <div className={style.mood_container}>
-                        Prismatic
                         <img onClick={handleCollectionRecommendation} className={style.mood_thumb} src={Modern2}></img>
                     </div>
                     <div></div>
                     <div className={style.mood_container}>
-                        Organic
                         <img onClick={handleCollectionRecommendation} className={style.mood_thumb} src={Organic}></img>
                     </div>
                     <div></div>
                     <div className={style.mood_container}>
-                        Techy
                         <img onClick={handleCollectionRecommendation} className={style.mood_thumb} src={Prismatic}></img>
                     </div>
                     <div></div>
                     <div className={style.mood_container}>
-                        Cinematic
                         <img onClick={handleCollectionRecommendation} className={style.mood_thumb} src={Cinematic}></img>
                     </div>
                     <div></div>
                     <div className={style.mood_container}>
-                        Spooky
                         <img onClick={handleCollectionRecommendation} className={style.mood_thumb} src={Spooky}></img>
                     </div>
                     <div></div>
                     <div className={style.mood_container}>
-                        Not Sure
                         <img onClick={handleCollectionRecommendation} className={style.mood_thumb} src={Notsure}></img>
                     </div>
                 </div>

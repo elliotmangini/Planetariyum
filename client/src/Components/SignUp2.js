@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from "react";
+
 import AvatarUpload from "./AvatarUpload"
 import avatarPlaceholder from '../Assets/placeholders/Avatar_Placeholder.png';
 
@@ -5,7 +7,12 @@ import style from '../StyleSheets/WelcomeSequence.module.css';
 
 
 
-export default function SignUp2 ({ setSequence, user, setUser }) {
+export default function SignUp2 ({ setCurrentGame, dimUI, setDimUI, setSequence, user, setUser }) {
+    useEffect(() => {
+        setDimUI("opacity_50");
+        setCurrentGame(null);
+    },[])
+    
 
     return (
         <>

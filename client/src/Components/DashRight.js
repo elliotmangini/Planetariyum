@@ -44,13 +44,13 @@ export default function DashRight ({ user, setUser, setPath }) {
                     </div>
                 : null }
 
-                <div className={styleRightGeneric.dash_contents_container}>
+                {/* <div className={styleRightGeneric.dash_contents_container}>
                     <p>contents</p>
                     <p>contents</p>
                     <p>contents</p>
                     <p>contents</p>
                     <p>contents</p>
-                </div>
+                </div> */}
 
             </div>
         </>

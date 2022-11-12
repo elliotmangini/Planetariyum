@@ -35,7 +35,7 @@ body {
 }
 
 .light {
-  --background: rgb(28, 28, 28);
+  --background: rgb(247, 0, 255);
   --background-secondary: rgb(15, 15, 15);
   --header-background: rgb(49, 49, 49);
   --element-background: rgb(58, 58, 58);
@@ -215,10 +215,18 @@ input {
   margin: .5rem;
 }
 
+input:focus {
+  outline-width: 0;
+}
+
 .pop-up-title {
   font-size: calc(var(--g) * 1.2rem);
-  margin-top: calc(var(--g) * 1.9rem);
+  margin-top: calc(var(--g) * 1.2rem);
   margin-bottom: calc(var(--g2) * 1rem);
+}
+
+.pop-up-title span {
+  color: var(--accent-color);
 }
 
 .pop-up-keyword {
@@ -280,4 +288,25 @@ input {
 @keyframes fade_in {
   0% { opacity: 0% }
   100% { opacity: 100% }
+}
+
+.opacity_0 {
+  transition: opacity 3s ease-in-out;
+  opacity: 0%;
+}
+.opacity_25 {
+  transition: opacity 3s ease-in-out;
+  opacity: 25%;
+}
+.opacity_50 {
+  transition: opacity 3s ease-in-out;
+  opacity: 50%;
+}
+.opacity_75 {
+  transition: opacity 3s ease-in-out;
+  opacity: 75%;
+}
+.opacity_100 {
+  transition: opacity 3s ease-in-out;
+  opacity: 100%;
 }

@@ -1,14 +1,19 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from "react";
 
 
 
-export default function SignUp1 ({ user, setUser, setSequence }) {
+export default function SignUp1 ({ setCurrentGame, dimUI, setDimUI, user, setUser, setSequence }) {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([]);
+
+    useEffect(() => {
+        setDimUI("opacity_75");
+        setCurrentGame(null);
+      },[])
 
     function handleSubmit(e) {
         e.preventDefault();

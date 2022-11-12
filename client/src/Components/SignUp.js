@@ -7,11 +7,16 @@ import SignUp3 from "./SignUp3";
 
 
 
-export default function SignUp ({ user, setUser, isLogout }) {
+export default function SignUp ({ setCurrentGame, dimUI, setDimUI, user, setUser, isLogout }) {
   const [sequence , setSequence ] = useState(0);
   // console.log({ sequence })
   // console.log("user" + user)
   // console.log("url save" + user.avatar_url)
+
+  useEffect(() => {
+    setDimUI("opacity_100")
+    setCurrentGame(null);
+  },[])
 
 
   // refresh helper
@@ -26,15 +31,15 @@ export default function SignUp ({ user, setUser, isLogout }) {
 
   return (
     <>
-        { !user ? <SignUp1 setSequence={setSequence} user={user} setUser={setUser} /> : null}
+        { !user ? <SignUp1 setCurrentGame={setCurrentGame} dimUI={dimUI} setDimUI={setDimUI} setSequence={setSequence} user={user} setUser={setUser} /> : null}
         
         {/* BACKWARD PATH */}
         {/* Encourage Avatar Upload, Allow Refresh, Make Unusable if steps completed */}
-        { user ? <>{ (!user.avatar_url || (sequence === 2)) && (sequence !== 3 )? <SignUp2 setSequence={setSequence} user={user} setUser={setUser} /> : null }</> : null}
+        { user ? <>{ (!user.avatar_url || (sequence === 2)) && (sequence !== 3 )? <SignUp2 setCurrentGame={setCurrentGame} dimUI={dimUI} setDimUI={setDimUI} setSequence={setSequence} user={user} setUser={setUser} /> : null }</> : null}
 
 
         {/* REFRESH AFTER UPLOADED, OR SKIP, OR CONFIRM */}
-        { user ? <>{ user.avatar_url && (sequence !== 2) || sequence === 3 ? <SignUp3 setSequence={setSequence} user={user} setUser={setUser} /> : null }</> : null}
+        { user ? <>{ user.avatar_url && (sequence !== 2) || sequence === 3 ? <SignUp3 setCurrentGame={setCurrentGame} dimUI={dimUI} setDimUI={setDimUI} setSequence={setSequence} user={user} setUser={setUser} /> : null }</> : null}
 
         
 

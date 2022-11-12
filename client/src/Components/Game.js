@@ -8,13 +8,14 @@ import CardBinder from './CardBinder';
 
 import style from '../StyleSheets/Game.module.css'
 
+import playerCamp from '../Assets/gamepieces/gamepiece_playercamp.png'
+
 
 
 
 
 export default function Game ({ setCurrentGame , currentGame, user }) {
     const { gameType , gameURL } = useParams();
-    const [ liveGame , setLiveGame ] = useState();
     const [ isStart , setIsStart ] = useState(false);
     const [ turnChange , setTurnChange ] = useState(false);
     const [ stagedPlayers , setStagedPlayers ] = useState(["1"]);
@@ -97,6 +98,13 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                     <div className={style.binder_container}>
                         <CardBinder user={user} remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
                     </div>
+
+                    <div id={style.playercamp_positioning_container}>
+                        <div id={style.playercamp_image_container}>
+                            <img id={style.playercamp_image} src={playerCamp}/>
+                        </div>
+                    </div>
+
 
                     <div className={style.position_cardlist}>
                         <CardPack remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>

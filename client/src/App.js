@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './Components/NavBar';
 
-
 import './StyleSheets/App.css';
 
 import Header from './Components/Header';
@@ -37,6 +36,7 @@ export default function App() {
   const [ path , setPath ] = useState("")
   const [theme, setTheme] = useState('dark');
   const [ currentGame , setCurrentGame ] = useState(null);
+  const [ dimUI , setDimUI] = useState(null);
 
   // auto-login
   useEffect(() => { fetch("/me").then((r) => { if (r.ok) { r.json().then((user) => setUser(user))}})}, []);
@@ -44,16 +44,12 @@ export default function App() {
   return (
     <div id="theme_container" className={user ? user.site_theme : theme}>
 
-        { !currentGame ?
-        <div id="header_container">
-          <Header />
-        </div>
-        : null }
+        { !currentGame ? <div className={dimUI} id="header_container"> <Header /> </div> : null }
 
         <div id="nav_main_and_dash_container">
           
           { !currentGame ?
-          <div id="nav_and_left_dash_container">
+          <div className={dimUI} id="nav_and_left_dash_container">
             <NavBar path={path} setPath={setPath} user={user} />
 
             { user ?
@@ -89,19 +85,19 @@ export default function App() {
             <Route path="sets/:c" element={<Collection />} />
 
             {/* ACCOUNT CREATION */}
-            <Route path="/signup" element={<SignUp user={user} setUser={setUser} />} />
+            <Route path="/signup" element={<SignUp setCurrentGame={setCurrentGame} dimUI={dimUI} setDimUI={setDimUI} user={user} setUser={setUser} />} />
             <Route path="/login" element={<Login user={user} setUser={setUser} />} />
             <Route path="/logout" element={<Logout user={user} setUser={setUser} />} />
           </Routes>
         </div>
         { !currentGame ?
-        <>
+        <div className={dimUI}>
           { user ?
           <DashRight setUser={setUser} user={user} setPath={setPath} />
           :
           <DashRightUserless />
           }
-        </>
+        </div>
         : null }
       </div>
 
