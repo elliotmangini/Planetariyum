@@ -30,7 +30,7 @@ export default function SignUp ({ user, setUser, isLogout }) {
         
         {/* BACKWARD PATH */}
         {/* Encourage Avatar Upload, Allow Refresh, Make Unusable if steps completed */}
-        { user ? <>{ !user.avatar_url || sequence === 2 ? <SignUp2 setSequence={setSequence} user={user} setUser={setUser} /> : null }</> : null}
+        { user ? <>{ (!user.avatar_url || (sequence === 2)) && (sequence !== 3 )? <SignUp2 setSequence={setSequence} user={user} setUser={setUser} /> : null }</> : null}
 
 
         {/* REFRESH AFTER UPLOADED, OR SKIP, OR CONFIRM */}
