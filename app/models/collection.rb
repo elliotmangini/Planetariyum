@@ -2,7 +2,12 @@ class Collection < ApplicationRecord
   belongs_to :creator, foreign_key: 'creator_id', class_name: 'User'
   has_one_attached :collection_art
   has_one_attached :card_back
+  has_one_attached :arena_art
   has_many :cards
+
+  def arena_art_url
+    Rails.application.routes.url_helpers.url_for(arena_art) if arena_art.attached?
+  end
 
   def cover_url
     Rails.application.routes.url_helpers.url_for(collection_art) if collection_art.attached?

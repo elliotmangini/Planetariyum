@@ -84,7 +84,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
 
     return (
         <div className={style.give_game_fullscreen}>
-            <div className={style.arena_background}></div>
+            <img className={style.arena_background} src={currentGame ? currentGame.collection.arena_art_url : null}></img>
             { isGameLoaded && user ?
             <>
                 { currentGame.nfts.length === 0 ?
@@ -97,16 +97,16 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                     <div className={style.binder_container}>
                         <CardBinder user={user} remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
                     </div>
+
+                    <div className={style.position_cardlist}>
+                        <CardPack remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
+                    </div>
                     
                     { Object.keys(selectedCard).length > 0 ?
                     <div className={style.big_card_container}>
                         <img className={`${style.big_card_image} ${isTurnEnding ? style.add_off_stage_left : null}`} src={selectedCard.card.art_url} alt="Big Card" />
                     </div>
                     : null }
-
-                    <div className={style.position_cardlist}>
-                        <CardPack remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
-                    </div>
                     
                     <div onClick={handleSubmitTurn} className={`${style.finalize_turn_button} ${Object.keys(selectedCard).length === 0 ? style.turn_unfinishable : null}`}>Finalize<br />Turn</div>
                     

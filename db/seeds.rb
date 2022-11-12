@@ -83,7 +83,7 @@ gabe_avatar = gabe.avatar.attach(io: File.open(File.join(Rails.root,'/app/assets
 # FOLLOWINGS
 Follow.create(follower_id: elliot.id, following_id: gabe.id)
 
-puts 'Creating Collections 🗂🗂🗂'
+puts 'Creating Collections 🗂 🗂 🗂'
 yumBase = elliot.collections.create(
     name: 'Planetariyum Base',
     description: 'First Set on the platform. Over 500 sounds crafted over 5+ years with an emphasis on powerful drums. 
@@ -98,6 +98,7 @@ yumBase = elliot.collections.create(
 )
 yumBase_art_blob = yumBase.collection_art.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/collection_arts/Planetariyum_Base_art.png')), filename: 'Planetariyum_Base_art.png')
 yumBase_card_back_blob = yumBase.card_back.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/card_back.jpg')), filename: 'card_back.jpg')
+yumBase_arena_art_blob = yumBase.arena_art.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/base_arena_bkg.png')), filename: 'base_arena_bkg.png')
 
 coll1 = elliot.collections.create(name: 'Test Collection 1')
 coll1_art_blob = coll1.collection_art.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/collection_arts/Test_Collection_Art_1.png')), filename: 'Test_Collection_Art_1.png')

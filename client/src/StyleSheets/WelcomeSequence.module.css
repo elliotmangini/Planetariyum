@@ -2,6 +2,7 @@
     position: relative;
     width: 40vh;
     height: 40vh;
+    max-width: 100%;
     margin: auto;
 }
 
@@ -30,7 +31,7 @@
     width: 10vh;
     height: 10vh;
     margin: auto;
-    margin-top: 3rem;
+    margin-top: 1.5rem;
 }
 
 .avatar_title_bubble {
@@ -39,9 +40,17 @@
     border-radius: 50%;
 }
 
+.text_body_container {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
 .moods_container {
     width: 80%;
+    max-width: 40rem;
     margin: auto;
+    margin-bottom: 2rem;
     display: grid;
     /* border: 5px solid rgb(0, 255, 38); */
     grid-template-columns: 20% 20% 20% 20% 20%;
@@ -52,17 +61,32 @@
     /* border: 5px solid rgb(0, 255, 38); */
     position: relative;
     display: grid;
-    width: 90%;
+    width: 100%;
     /* height: 15vh; */
     margin: auto;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
     overflow: hidden;
-    font-size: 1.25vw;
+    font-size: 1.5vh;
+    transition: transform .6s ease-in-out;
 }
 
 .mood_thumb {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.mood_container:hover {
+    transform: scale(1.2);
+}
+
+.add_slow_fade {
+    animation: slow_fade 3s ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slow_fade {
+    100% { opacity: 0% }
+    0% { opacity: 100% }
 }

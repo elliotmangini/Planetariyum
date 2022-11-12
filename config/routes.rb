@@ -24,7 +24,6 @@ Rails.application.routes.draw do
 
   #NFTS
   post "/nfts/:local_url/:staged_players", to: "nfts#start_game"
-
   patch "/nfts/claim/:id/:owner_id", to: "nfts#claim_nft"
 
 
