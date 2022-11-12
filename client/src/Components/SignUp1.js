@@ -42,7 +42,7 @@ export default function SignUp1 ({ user, setUser, setSequence }) {
 
     return (
         <>
-            <div className="pop-up-container">
+            <div id="lazy-first-signup-page" className="pop-up-container">
                 <div className="pop-up-title">Create Account</div>
                     <div className="form-container">
                         <form className="form" onSubmit={handleSubmit}>

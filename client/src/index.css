@@ -268,3 +268,16 @@ input {
   width: 0%;
   height: 0%;
 }
+
+#lazy-first-signup-page {
+  opacity: 0%;
+  animation: fade_in .75s;
+  animation-delay: .5s;
+  animation-fill-mode: forwards;
+
+}
+
+@keyframes fade_in {
+  0% { opacity: 0% }
+  100% { opacity: 100% }
+}

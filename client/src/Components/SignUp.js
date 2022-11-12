@@ -9,14 +9,14 @@ import SignUp3 from "./SignUp3";
 
 export default function SignUp ({ user, setUser, isLogout }) {
   const [sequence , setSequence ] = useState(0);
-  console.log({ sequence })
-  console.log("user" + user)
+  // console.log({ sequence })
+  // console.log("user" + user)
   // console.log("url save" + user.avatar_url)
 
 
   // refresh helper
   useEffect(() => {
-    console.log("useEffect firing")
+    // console.log("useEffect firing")
     if (user) {
       if (!user.avatar_url) {
         setSequence(2);
