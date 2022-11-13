@@ -29,7 +29,6 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     const [ stagedPlayers , setStagedPlayers ] = useState(["2,3,4"]);
     const [ isGameLoaded , setIsGameLoaded ] = useState(false);
     const [ selectedCard , setSelectedCard ] = useState({});
-    const [ remainingTurns , setRemainingTurns ] = useState();
     const [ isTurnEnding , setIsTurnEnding ] = useState(false);
     const [ claimedCards , setClaimedCards ] = useState([]);
     const [ allCardsClaimed , setAllCardsClaimed ] = useState(false);
@@ -49,7 +48,6 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
         stagedPlayers,
         isGameLoaded,
         selectedCard,
-        remainingTurns,
         isTurnEnding,
         claimedCards,
         allCardsClaimed,
@@ -141,8 +139,8 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     // useEffect(() => {
     //     if (currentGame) {
     //         function leftInPack () {
-    //             let modulus = remainingTurns % 5;
-    //             if (remainingTurns === 0) {
+    //             let modulus = currentGame.deck_size % 5;
+    //             if (currentGame.deck_size === 0) {
     //                 // GAME IS OVER
     //             } else if (modulus === 0) {
     //                 return 5;
@@ -153,7 +151,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     //         const remainingCards = currentGame.nfts.filter((nft) => {
     //             return ( nft.owner === null)
     //         })
-    //         bigCardPrerenders = remainingCards.slice(0, leftInPack()).map((n) => {
+    //         bigCardPrerenders = currentGame.deck_size.slice(0, leftInPack()).map((n) => {
     //             // console.log(n);
     //             return (
     //                 <div className='prerender-off-screen'>
