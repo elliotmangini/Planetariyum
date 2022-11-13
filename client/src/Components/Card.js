@@ -34,8 +34,9 @@ export default function Card ({ isDeckStack, nft, selectedCard, isTurnEnding, la
     // }, [isDeckStack]);
 
     useEffect(() => {
-        console.log(`CARD COMPONENT: ${nft.card.name} ID: ${nft.card.id}`);
-        console.log(renderCount.current);
+        // TWO RENDERS ON A PLAY IS NORMAL CAUSE WE PLAY AND THEN CLEAR THE PLAY ACTION SO THAT WE CAN PLAY MULTIPLE TIMES
+        // console.log(`CARD COMPONENT: ${nft.card.name} ID: ${nft.card.id}`);
+        // console.log(renderCount.current);
         renderCount.current = renderCount.current + 1
     })
 
@@ -44,14 +45,15 @@ export default function Card ({ isDeckStack, nft, selectedCard, isTurnEnding, la
     function handleClick () {
         setAudioAction("play");
         // console.log("click to play");
+
+        // SLIGHTLY CONFUSED WHY WE NEED TO WAIT 1MS TO GET IT TO PLAY BUT I KNEW WHY AT ONE POINT
         const timer = setTimeout(() => {
             if (!(selectedCard.id === nft.id)) {
-                // console.log(duration);
                 handleSelect(nft)
             }
             // THIS ALLOWS MULTIPLE PLAYS WETHER WE NEED TO SET A HIGHER LEVEL STATE OR NOT
             setAudioAction("");
-        }, 300
+        }, 1
         );
         return () => clearTimeout(timer);
     }
@@ -68,6 +70,12 @@ export default function Card ({ isDeckStack, nft, selectedCard, isTurnEnding, la
 
     return (
         <>  
+                {/* THIS DEFFFFFINITELY HELPED, THE IMAGE IS CROPPED TO A TRANSPARENT PORTION 10PX WIDE AND SEEMS LIKE IT MUST BE ONNN SCREEN TO HELP */}
+                <div className='prerender-off-screen'>
+                    <img src={nft.card.art_url} alt="prerender" />
+                </div>
+                
+
                 <div className={`${style.flip_card}`}>
                     <div className={
                         `${style.flip_card_inner} 

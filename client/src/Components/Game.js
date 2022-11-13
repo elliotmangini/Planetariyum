@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import Lobby from './Lobby';
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import CardPack from './CardPack';
 import CardBinder from './CardBinder';
@@ -22,6 +22,7 @@ import GlowIndicator from './GlowIndicator';
 
 
 export default function Game ({ setCurrentGame , currentGame, user }) {
+    
     // const [ spinReset , setSpinReset ] = useState(false);
     const { gameType , gameURL } = useParams();
     const [ isStart , setIsStart ] = useState(false);
@@ -32,6 +33,13 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     const [ isTurnEnding , setIsTurnEnding ] = useState(false);
     const [ claimedCards , setClaimedCards ] = useState([]);
     const [ allCardsClaimed , setAllCardsClaimed ] = useState(false);
+
+    // const renderCount = useRef(1);
+    // useEffect(() => {
+    //     console.log("Game Component render count: " + renderCount.current);
+    //     renderCount.current = renderCount.current + 1
+    // })
+    
     console.log("!!!!!!!!!!! GAME COMPONENT !!!!!!!!!!!");
     console.log({
         // user,
@@ -131,6 +139,35 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     }
 
 
+    // RENDER BIG CARD POSSIBILITIES OFF SCREEN (DOESNT HELP SO FAR)
+    // let bigCardPrerenders = [];
+    // useEffect(() => {
+    //     if (currentGame) {
+    //         function leftInPack () {
+    //             let modulus = remainingTurns % 5;
+    //             if (remainingTurns === 0) {
+    //                 // GAME IS OVER
+    //             } else if (modulus === 0) {
+    //                 return 5;
+    //             } else {
+    //                 return modulus;
+    //             }
+    //         }
+    //         const remainingCards = currentGame.nfts.filter((nft) => {
+    //             return ( nft.owner === null)
+    //         })
+    //         bigCardPrerenders = remainingCards.slice(0, leftInPack()).map((n) => {
+    //             // console.log(n);
+    //             return (
+    //                 <div className='prerender-off-screen'>
+    //                     <img src={n.card.art_url} alt="Avatar" />
+    //                 </div>
+    //             )
+    //         })
+    //     }
+    // },[currentGame])
+
+
 
     return (
         <div className={style.give_game_fullscreen}>
@@ -152,6 +189,9 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                         <div>{currentGame.deck_size - claimedCards.length} pulls left</div>
                         <div>{currentGame.players.length * Math.floor(((currentGame.deck_size - claimedCards.length - 1) / 5))} unopened pack(s) left</div>
                     </div>
+                    
+                    {/* DECKSTACK */}
+                    <DeckStack claimedCards={claimedCards} user={user} remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
 
                     {/* LOWER UI */}
                     <div className={style.playercamp_positioning_container}>
@@ -190,12 +230,6 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                         </div>
                     </div>
 
-                    {/* DECKSTACK */}
-                    {/* <div className={`${style.deckstack_positioning} ${style.slide_up} ${ isDeckStack ? style.deckstack_maximize : style. deckstack_minimize}`}>
-                        <div onClick={() => setIsDeckStack(false)} className={`${style.deckstack_hide_button} ${ isDeckStack ? style.deckstack_hide_button_float_up : style.deckstack_hide_button_float_down}`}></div> */}
-                        <DeckStack claimedCards={claimedCards} user={user} remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
-                        {/* { !isDeckStack ? <div onClick={() => setIsDeckStack(true)} className={style.deckstack_show_hitbox}></div> : null }
-                    </div> */}
                     
                     {/* PACKS */}
                     <div className={style.position_cardlist}>
@@ -209,6 +243,13 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                     </div>
                     : null }
 
+                    {/* NOT HELPING */}
+                    {/* {bigCardPrerenders} */}
+
+                    
+
+
+                    {/* TESTING THE CAMP TIMER HIGHLIGHTING */}
                     {/* <div className={style.playercamp_positioning_container}>
                         <div className={style.playercamp_image_container}>
                             <img id={style.camp_counter1} src={campCounter1}/>
