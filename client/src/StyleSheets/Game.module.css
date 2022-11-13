@@ -38,6 +38,7 @@
     height: 100%;
     position: relative;
     /* background-color: white; */
+    /* pointer-events: none; */
 }
 
 .position_cardlist {
@@ -455,6 +456,72 @@
     box-shadow: 0 20px 100px 30px black, 0 5px 20px 5px black;
 }
 
+/* AVATAR FRAME */
+#turn_counter_positioning_container {
+    position: absolute;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+
+    /* border: 3px solid red; */
+}
+
+#turn_counter_image_container {
+    position: relative;
+    width: 180px;
+    margin: auto;
+    height: 100%;
+    right: -266px;
+    /* border: 3px solid rgb(0, 255, 38); */
+}
+
+#turn_counter_image {
+    position: absolute;
+    width: 100%;
+    bottom: -56px;
+    pointer-events: auto;
+    /* border: 3px solid rgb(0, 255, 238); */
+}
+
+#turn_clickable {
+    position: absolute;
+    margin: auto;
+    width: 100%;
+    bottom: -56px;
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
+    /* background-color: white; */
+    pointer-events: auto;
+}
+
+.add_spin {
+    animation: spin 4s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes spin {
+    0% {}
+    15% {transform: rotate(96deg)}
+    100% {}
+}
+
+.turn_glow {
+    animation: turn_glow  4s infinite alternate ease-out;
+}
+
+@keyframes turn_glow {
+    0% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: 0 0 3px #fff, 0 0 10px rgb(248, 255, 119), 0 0 20px #fff, 0 0 40px #cab70b,
+        0 0 70px #0ba9ca, 0 0 80px #0ba9ca;
+    }
+}
+
+
+
 .deckstack_positioning {
     /* border: 2px solid rgb(255, 0, 238); */
     position: absolute;
@@ -468,4 +535,15 @@
 
     /* MUST STAY THE SAME */
     width: 236px;
+}
+
+
+
+
+.settings_box {
+    position: absolute;
+    right: 0%;
+    height: 5%;
+    width: 22%;
+    background-color: rgb(49, 57, 65);
 }

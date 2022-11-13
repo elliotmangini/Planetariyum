@@ -11,6 +11,9 @@ import style from '../StyleSheets/Game.module.css'
 
 import playerCamp from '../Assets/gamepieces/gamepiece_playercamp.png'
 import AvatarFrame from '../Assets/gamepieces/avatar_frame.png'
+import TurnCounter from '../Assets/gamepieces/turn_counter.png'
+import GlowIndicator from './GlowIndicator';
+
 
 
 
@@ -95,16 +98,19 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                 : null }
 
                 { currentGame.nfts.length > 0 ?
-                <div className={style.game_container}>
+                <div onClick={() => console.log("clicking game container")} className={style.game_container}>
 
                     {/* <div className={style.binder_container}>
                         <CardBinder user={user} remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
                     </div> */}
 
+                    <div className={style.settings_box}>
+
+                    </div>
 
                     <div id={style.playercamp_positioning_container}>
                         <div id={style.playercamp_image_container}>
-                            {/* SHADOWS */}
+                            {/* SHADOW */}
                             <div id={style.playercamp_shadow}></div>
 
                             {/* AVATAR */}
@@ -116,7 +122,20 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                                 </div>
                             </div>
 
-                            {/* SHADOWS */}
+                            {/* TURN COUNTER */}
+                            {/* <div onClick={handleSubmitTurn} className={`${style.finalize_turn_button} ${Object.keys(selectedCard).length === 0 ? style.turn_unfinishable : null}`}>Finalize<br />Turn</div> */}
+                            <div id={style.turn_counter_positioning_container}>
+                                <div id={style.turn_counter_image_container}>
+                                    {/* <div id={style.playercamp_shadow}></div> */}
+                                    <img id={style.avatar_image} src={user.avatar_url}/>
+                                    <img id={style.turn_counter_image} className={ isTurnEnding ? style.add_spin : null} src={TurnCounter}/>
+                                    <div id={style.turn_clickable} onClick={handleSubmitTurn} className={Object.keys(selectedCard).length > 0 ? style.turn_glow : null}>
+                                        { selectedCard && !isTurnEnding ? <GlowIndicator /> : null}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* SHADOW */}
                             <div id={style.playercamp_shadow}></div>
                             
                             {/* CAMP */}
@@ -124,23 +143,25 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                         </div>
                     </div>
 
-
+                    {/* DECKSTACK */}
+                    <div className={style.deckstack_positioning}>
+                        <div></div>
+                        <DeckStack user={user} remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
+                    </div>
+                    
+                    {/* PACKS */}
                     <div className={style.position_cardlist}>
                         <CardPack remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
                     </div>
                     
+                    {/* BIG CARD */}
                     { Object.keys(selectedCard).length > 0 ?
                     <div className={style.big_card_container}>
                         <img className={`${style.big_card_image} ${isTurnEnding ? style.add_off_stage_left : null}`} src={selectedCard.card.art_url} alt="Big Card" />
                     </div>
                     : null }
                     
-                    <div onClick={handleSubmitTurn} className={`${style.finalize_turn_button} ${Object.keys(selectedCard).length === 0 ? style.turn_unfinishable : null}`}>Finalize<br />Turn</div>
                     
-
-                    <div className={style.deckstack_positioning}>
-                        <DeckStack user={user} remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
-                    </div>
                 </div>
                 : null }
             </>
