@@ -42,16 +42,17 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     
     console.log("!!!!!!!!!!! GAME COMPONENT !!!!!!!!!!!");
     console.log({
-        // user,
-        // gameType,
-        // isStart,
-        // stagedPlayers,
-        // isGameLoaded,
-        // selectedCard,
-        // remainingTurns,
-        // isTurnEnding,
-        // claimedCards,
-        // allCardsClaimed,
+        user,
+        currentGame,
+        gameType,
+        isStart,
+        stagedPlayers,
+        isGameLoaded,
+        selectedCard,
+        remainingTurns,
+        isTurnEnding,
+        claimedCards,
+        allCardsClaimed,
     })
     
     // GET GAME SPECIFICALLY WHEN WE RELOAD PAGE
@@ -62,9 +63,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
             .then(data => {
                 setCurrentGame(data);
                 setIsGameLoaded(true);
-                setRemainingTurns(data.deck_size);
                 findPulls(data.nfts);
-                setRemainingTurns(data.deck_size)
                 console.log("Getting game after refresh... or on initial load");
             })
         }
@@ -79,7 +78,6 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
             .then(resp => resp.json())
             .then(data => {
             setCurrentGame(data);
-            setRemainingTurns(data.deck_size)
             setIsStart(true);
         })
     }
@@ -125,7 +123,6 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                         if ( !allCardsClaimed ) {
                             setSelectedCard({});
                             setCurrentGame(data);
-                            setRemainingTurns(data.deck_size);
                             findPulls(data.nfts);
                             setIsTurnEnding(false);
                         }
@@ -191,7 +188,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                     </div>
                     
                     {/* DECKSTACK */}
-                    <DeckStack claimedCards={claimedCards} user={user} remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
+                    <DeckStack claimedCards={claimedCards} user={user} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
 
                     {/* LOWER UI */}
                     <div className={style.playercamp_positioning_container}>
@@ -233,7 +230,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                     
                     {/* PACKS */}
                     <div className={style.position_cardlist}>
-                        <CardPack remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
+                        <CardPack isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
                     </div>
                     
                     {/* BIG CARD */}
