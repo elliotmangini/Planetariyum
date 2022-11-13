@@ -48,49 +48,44 @@ export default function App() {
         { !currentGame ? <div className={dimUI} id="header_container"> <Header /> </div> : null }
 
         <div id="nav_main_and_dash_container">
-          
+
           { !currentGame ?
           <div className={dimUI} id="nav_and_left_dash_container">
             <NavBar path={path} setPath={setPath} user={user} />
-
-            { user ?
-            <DashLeft user={user} />
-            :
-            <DashLeftUserless /> }
+            { user ? <DashLeft user={user} /> : <DashLeftUserless /> }
           </div>
-        : null }
+          : null }
 
-        <div id="main_content">
-          <Routes>
-            <Route path="/play/:gameType/:gameURL" element={
-              <Game user={user} setCurrentGame={setCurrentGame} currentGame={currentGame}/>
-            } />
+          <div id="main_content">
+            <Routes>
+              <Route path="/play/:gameType/:gameURL" element={<Game user={user} setCurrentGame={setCurrentGame} currentGame={currentGame}/>} />
 
-            <Route path="/" element={<Home />} />
-              <Route path="/Browse" element={<Browse />} />
-              {/* <Route path="/Themes" element={<Themes />} /> */}
-              <Route path="/Resources" element={<Resources />} />
-              <Route path="/Forums" element={<Forums />} />
+              <Route path="/" element={<Home />} />
+                <Route path="/Browse" element={<Browse />} />
+                {/* <Route path="/Themes" element={<Themes />} /> */}
+                <Route path="/Resources" element={<Resources />} />
+                <Route path="/Forums" element={<Forums />} />
 
-            <Route path="/Sphere" element={<Planetariyum />} />
-              <Route path="/Feed" element={<SocialFeed />} />
+              <Route path="/Sphere" element={<Planetariyum />} />
+                <Route path="/Feed" element={<SocialFeed />} />
 
 
-            <Route path="/Arena" element={<Arena setCurrentGame={setCurrentGame} user={user} />} />
-            <Route path="/Mint" element={<Mint />} />
+              <Route path="/Arena" element={<Arena setCurrentGame={setCurrentGame} user={user} />} />
+              <Route path="/Mint" element={<Mint />} />
 
-            {/* USER PROFILES */}
-            <Route path="u/:u" element={<Profile user={user} />} />
+              {/* USER PROFILES */}
+              <Route path="u/:u" element={<Profile user={user} />} />
 
-            {/* THINGS THAT GET A WHOLE PAGE */}
-            <Route path="sets/:c" element={<Collection />} />
+              {/* THINGS THAT GET A WHOLE PAGE */}
+              <Route path="sets/:c" element={<Collection />} />
 
-            {/* ACCOUNT CREATION */}
-            <Route path="/signup" element={<SignUp setCurrentGame={setCurrentGame} dimUI={dimUI} setDimUI={setDimUI} user={user} setUser={setUser} />} />
-            <Route path="/login" element={<Login user={user} setUser={setUser} />} />
-            <Route path="/logout" element={<Logout user={user} setUser={setUser} />} />
-          </Routes>
-        </div>
+              {/* ACCOUNT CREATION */}
+              <Route path="/signup" element={<SignUp setCurrentGame={setCurrentGame} dimUI={dimUI} setDimUI={setDimUI} user={user} setUser={setUser} />} />
+              <Route path="/login" element={<Login user={user} setUser={setUser} />} />
+              <Route path="/logout" element={<Logout user={user} setUser={setUser} />} />
+            </Routes>
+          </div>
+
         { !currentGame ?
         <div className={dimUI}>
           { user ?
@@ -100,6 +95,7 @@ export default function App() {
           }
         </div>
         : null }
+
       </div>
 
 

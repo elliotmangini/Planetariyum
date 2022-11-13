@@ -9,6 +9,7 @@ import DeckStack from './DeckStack';
 
 import style from '../StyleSheets/Game.module.css'
 
+import avatarPlaceholder from '../Assets/placeholders/Avatar_Placeholder.png';
 import playerCamp from '../Assets/gamepieces/gamepiece_playercamp.png'
 import campCounter1 from '../Assets/gamepieces/playercamp_counter_step1.png'
 import AvatarFrame from '../Assets/gamepieces/avatar_frame.png'
@@ -21,24 +22,30 @@ import GlowIndicator from './GlowIndicator';
 
 
 export default function Game ({ setCurrentGame , currentGame, user }) {
+    // const [ spinReset , setSpinReset ] = useState(false);
     const { gameType , gameURL } = useParams();
     const [ isStart , setIsStart ] = useState(false);
-    const [ turnChange , setTurnChange ] = useState(false);
     const [ stagedPlayers , setStagedPlayers ] = useState(["2,3,4"]);
     const [ isGameLoaded , setIsGameLoaded ] = useState(false);
-    const [ cardsInGame , setCardsInGame ] = useState(null);
     const [ selectedCard , setSelectedCard ] = useState({});
     const [ remainingTurns , setRemainingTurns ] = useState();
     const [ isTurnEnding , setIsTurnEnding ] = useState(false);
-    const [ spinReset , setSpinReset ] = useState(false);
     const [ claimedCards , setClaimedCards ] = useState([]);
-    // console.log({ gameType , gameURL })
-
-    // CALCULATE REMAINING TURNS
-    function calculateRemainingTurns () {
-        // deck size minus all nfts that already have an owner
-    }
-
+    const [ allCardsClaimed , setAllCardsClaimed ] = useState(false);
+    console.log("!!!!!!!!!!! GAME COMPONENT !!!!!!!!!!!");
+    console.log({
+        // user,
+        // gameType,
+        // isStart,
+        // stagedPlayers,
+        // isGameLoaded,
+        // selectedCard,
+        // remainingTurns,
+        // isTurnEnding,
+        // claimedCards,
+        // allCardsClaimed,
+    })
+    
     // GET GAME SPECIFICALLY WHEN WE RELOAD PAGE
     useEffect(() => {
         if (user) {
@@ -50,29 +57,13 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                 setRemainingTurns(data.deck_size);
                 findPulls(data.nfts);
                 setRemainingTurns(data.deck_size)
-                console.log("Getting game after refresh...");
+                console.log("Getting game after refresh... or on initial load");
             })
         }
     }, [user])
     
-    // useEffect(() => {
-        function findPulls (nftArray) {
-            setClaimedCards(nftArray.filter((nft) => {
-                console.log(user.id);
-                
-                // THIS IF KEEPS FROM READING AN UNDEFINED VALUE
-                if ( nft.owner !== null && user ) {
-                    console.log(nft);
-                return ( nft.owner.id === user.id )
-                }
-            }))
-        }
-    // }, [])
-    
-    // GET GAME WHEN GAME STARTS
+    // CREATES NFTS AND SETS GAME IN MOTION
     function startGame () {
-
-
         fetch(`/nfts/${gameURL}/${stagedPlayers}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -84,6 +75,27 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
             setIsStart(true);
         })
     }
+    
+    // FIND CARDS THE PLAYER NEED IN DECKSTACK AND FOR LOGIC
+    function findPulls (nftArray) {
+        setClaimedCards(nftArray.filter((nft) => {
+            // console.log(user.id);
+            // THIS IF KEEPS FROM READING AN UNDEFINED VALUE
+            if ( nft.owner !== null && user ) {
+                // console.log(nft);
+            return ( nft.owner.id === user.id )
+            }
+        }))
+    }
+
+    // CHECK IF THE GAME IS OVER ONCE WE KNOW WHAT CARDS ARE CLAIMED
+    useEffect(() => {
+        if ( currentGame ) {
+            if ( claimedCards.length >= currentGame.deck_size) {
+                setAllCardsClaimed(true);
+            }
+        }
+    }, [claimedCards]);
 
     // function failSpin () {
     //     console.log(" in failspin setting true")
@@ -93,7 +105,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     function handleSubmitTurn () {
         // failSpin();
 
-        if (Object.keys(selectedCard).length !== 0 && user) {
+        if ((Object.keys(selectedCard).length !== 0 && user)) {
             setIsTurnEnding(true);
             fetch(`/nfts/claim/${selectedCard.id}/${user.id}`, {
                 method: "PATCH",
@@ -102,11 +114,13 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                 .then(resp => resp.json())
                 .then(data => {
                     const timer = setTimeout(() => {
-                        setSelectedCard({});
-                        setCurrentGame(data);
-                        setRemainingTurns(data.deck_size);
-                        findPulls(data.nfts);
-                        setIsTurnEnding(false);
+                        if ( !allCardsClaimed ) {
+                            setSelectedCard({});
+                            setCurrentGame(data);
+                            setRemainingTurns(data.deck_size);
+                            findPulls(data.nfts);
+                            setIsTurnEnding(false);
+                        }
                       }, 3700
                     );
                     return () => clearTimeout(timer);
@@ -149,7 +163,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                             <div id={style.avatar_frame_positioning_container}>
                                 <div id={style.avatar_frame_image_container}>
                                     {/* <div id={style.playercamp_shadow}></div> */}
-                                    <img id={style.avatar_image} src={user.avatar_url}/>
+                                    <img id={style.avatar_image} src={user.avatar_url ? user.avatar_url : avatarPlaceholder}/>
                                     <img id={style.avatar_frame_image} src={AvatarFrame}/>
                                 </div>
                             </div>
@@ -160,7 +174,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                                 <div id={style.turn_counter_image_container}>
                                     {/* <div id={style.playercamp_shadow}></div> */}
                                     {/* FAKING SYMETRICAL SHADOW BY REUSING AVATAR UNDER TURN COUNTER */}
-                                    <img id={style.avatar_image} src={user.avatar_url}/>
+                                    <img id={style.avatar_image} src={avatarPlaceholder}/>
                                     <img id={style.turn_counter_image} className={ isTurnEnding ? style.add_spin : null } src={TurnCounter}/>
                                     <div id={style.turn_clickable} onClick={handleSubmitTurn} className={Object.keys(selectedCard).length > 0 ? style.turn_glow : null}>
                                         { selectedCard && !isTurnEnding ? <GlowIndicator /> : null}
@@ -177,10 +191,11 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                     </div>
 
                     {/* DECKSTACK */}
-                    <div className={style.deckstack_positioning}>
-                        <div></div>
+                    {/* <div className={`${style.deckstack_positioning} ${style.slide_up} ${ isDeckStack ? style.deckstack_maximize : style. deckstack_minimize}`}>
+                        <div onClick={() => setIsDeckStack(false)} className={`${style.deckstack_hide_button} ${ isDeckStack ? style.deckstack_hide_button_float_up : style.deckstack_hide_button_float_down}`}></div> */}
                         <DeckStack claimedCards={claimedCards} user={user} remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
-                    </div>
+                        {/* { !isDeckStack ? <div onClick={() => setIsDeckStack(true)} className={style.deckstack_show_hitbox}></div> : null }
+                    </div> */}
                     
                     {/* PACKS */}
                     <div className={style.position_cardlist}>
@@ -203,6 +218,10 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                     {/* GAME POPUPS */}
                     {(currentGame.deck_size - claimedCards.length) === 5 ?
                     <div className="dev-text">LAST PACK BEING OPENED</div>
+                    : null}
+
+                    {allCardsClaimed ?
+                    <div className="dev-text">ALL CARDS HAVE BEEN CLAIMED</div>
                     : null}
 
                     

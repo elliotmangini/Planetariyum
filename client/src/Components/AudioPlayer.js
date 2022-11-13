@@ -3,6 +3,11 @@
 
 
 export default function AudioPlayer ({ setDuration , sound , action , clearAction }) {
+    // console.log({
+    //     sound,
+    //     action,
+    //     clearAction,
+    // })
 
     const audio = new Audio(sound)
 
@@ -31,10 +36,10 @@ export default function AudioPlayer ({ setDuration , sound , action , clearActio
     audio.onloadedmetadata = () => {
         // setDuration(audio.duration);
 
-        // THIS IS IMPORTANT OTHERWISE SAMPIES ONLY PLAY TWICE
-        if (clearAction) {
-            clearAction("");
-        }
+        // THIS IS IMPORTANT OTHERWISE SAMPIES ONLY PLAY TWICE (I think i found a better solution)
+        // if (clearAction) {
+            // clearAction("");
+        // }
         
         // console.log(audio.duration);
         functionSelector(action);

@@ -457,7 +457,7 @@
     width: 150px;
     height: 150px;
     left: 15px;
-    bottom: -45px;
+    bottom: -43px;
     border-radius: 50%;
     /* border: 3px solid rgb(0, 255, 238); */
 
@@ -538,26 +538,6 @@
         0 0 70px #0ba9ca, 0 0 80px #0ba9ca;
     }
 }
-
-
-
-.deckstack_positioning {
-    /* border: 2px solid rgb(255, 0, 238); */
-    position: absolute;
-    left: 3%;
-    bottom: 0%;
-    height: 42%;
-    /* height: fit-content; */
-    /* width: 22%; */
-    border: 12px solid rgb(49, 26, 26);
-    border-radius: 1rem;
-
-    /* MUST STAY THE SAME */
-    width: 260px;
-}
-
-
-
 
 .settings_box {
     position: absolute;

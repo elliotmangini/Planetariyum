@@ -34,7 +34,7 @@ export default function AvatarUpload ({ setSequence, user, setUser }) {
     }, [selectedFile])
 
     function goTo3 () {
-        console.log("trying to set to 3")
+        // console.log("trying to set to 3")
         setSequence(3)
     }
 

@@ -1,14 +1,43 @@
 import style from '../StyleSheets/Game.module.css'
 // import { useState } from 'react';
 import AudioPlayer from './AudioPlayer';
-import {useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
 
 
-export default function Card ({ nft, selectedCard, isTurnEnding, lastSelected, handleSelect }) {
+export default function Card ({ isDeckStack, nft, selectedCard, isTurnEnding, lastSelected, handleSelect }) {
     const [ audioAction , setAudioAction ] = useState("");
     const [ duration , setDuration ] = useState(100000);
     const [ isManualFlip , setIsManualFlip ] = useState(false);
-    // console.log(nft)
+    // const [ wasJustSetDown , setWasJustSetDown ] = useState(false);
+    const renderCount = useRef(1);
+    // console.log(`CARD COMPONENT: ${nft.card.name} ID: ${nft.card.id}`);
+    // console.log("States:")
+    // console.log({
+    //     audioAction,
+    //     duration,
+    //     isManualFlip,
+    // });
+    // console.log("Props:")
+    // console.log({
+    //     nft,
+    //     selectedCard,
+    //     isTurnEnding,
+    //     lastSelected,
+    // });
+
+    // useEffect(() => {
+    //     if (!selectedCard.id && !isTurnEnding) {
+    //         setWasJustSetDown(true);
+    //     } else {
+    //         setWasJustSetDown(false);
+    //     }
+    // }, [isDeckStack]);
+
+    useEffect(() => {
+        console.log(`CARD COMPONENT: ${nft.card.name} ID: ${nft.card.id}`);
+        console.log(renderCount.current);
+        renderCount.current = renderCount.current + 1
+    })
 
     
     // console.log(duration);
@@ -20,6 +49,8 @@ export default function Card ({ nft, selectedCard, isTurnEnding, lastSelected, h
                 // console.log(duration);
                 handleSelect(nft)
             }
+            // THIS ALLOWS MULTIPLE PLAYS WETHER WE NEED TO SET A HIGHER LEVEL STATE OR NOT
+            setAudioAction("");
         }, 300
         );
         return () => clearTimeout(timer);
@@ -38,9 +69,17 @@ export default function Card ({ nft, selectedCard, isTurnEnding, lastSelected, h
     return (
         <>  
                 <div className={`${style.flip_card}`}>
-                    <div className={`${style.flip_card_inner} ${(!selectedCard.id && !isTurnEnding) || isManualFlip ? style.add_flip_reveal : style.no_flip} ${isTurnEnding ? style.add_flip_facedown : null}`}>
+                    <div className={
+                        `${style.flip_card_inner} 
+                        ${((!selectedCard.id && !isTurnEnding) || isManualFlip) && renderCount.current === 1 ? style.add_flip_reveal : style.no_flip} 
+                        ${isTurnEnding ? style.add_flip_facedown : null}`}>
                         <div className={`${style.flip_card_front}`}>
-                            <img onClick={!isTurnEnding ? () => handleClick() : null} className={`${style.image_sizing_selectable} ${selectedCard.id === nft.id ? style.selected_unhoverable : style.unselected_hoverable} ${lastSelected.id === nft.id && !isTurnEnding ? style.set_down : null } ${selectedCard.id === nft.id && isTurnEnding ? style.set_selected_down : null}`} src={nft.card.art_url} alt="Avatar" />
+                            <img onClick={!isTurnEnding ? () => handleClick() : null} className={
+                                `${style.image_sizing_selectable} 
+                                ${selectedCard.id === nft.id ? style.selected_unhoverable : style.unselected_hoverable} 
+                                ${(lastSelected.id === nft.id) && !isTurnEnding ? style.set_down : null } 
+                                ${selectedCard.id === nft.id && isTurnEnding ? style.set_selected_down : null}`} 
+                                src={nft.card.art_url} alt="Avatar" />
                         </div>
                         <div className={`${style.flip_card_back}`}>
                             <img onClick={forceflip} className={`${style.image_sizing_selectable}`} src={nft.card.collection_card_back_url} alt="Avatar" />

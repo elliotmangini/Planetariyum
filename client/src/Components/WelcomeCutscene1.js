@@ -26,7 +26,7 @@ export default function WelcomeCutscene1 ({ setSceneNumber }) {
 
     useEffect(() => {
         const timeout = setTimeout(() => {
-            console.log("firing message...");
+            console.log(`firing message... ${messageNumber + 1}`);
             if (messageNumber <= totalMessages) {
                 setMessageNumber(messageNumber + 1);
                 setMessageTrigger(!messageTrigger);
