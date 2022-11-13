@@ -6,7 +6,7 @@ import DeckStackItem from './DeckStackItem';
 
 
 
-export default function DeckStack ({ user, selectedCard, isTurnEnding, setSelectedCard, currentGame, remainingTurns }) {
+export default function DeckStack ({ claimedCards , user, selectedCard, isTurnEnding, setSelectedCard, currentGame, remainingTurns }) {
     const [ lastSelected , setLastSelected ] = useState({});
 
     // console.log(leftInPack())
@@ -19,13 +19,15 @@ export default function DeckStack ({ user, selectedCard, isTurnEnding, setSelect
 
 
 
-    const claimedCards = currentGame.nfts.filter((nft) => {
-        // console.log(nft);
-        // console.log(user.id);
-        if ( nft.owner !== null ) {
-        return ( nft.owner.id === user.id )
-        }
-    })
+    // const claimedCards = currentGame.nfts.filter((nft) => {
+    //     // console.log(nft);
+    //     // console.log(user.id);
+
+    //     // THIS IF KEEPS FROM READING AN UNDEFINED VALUE
+    //     if ( nft.owner !== null ) {
+    //     return ( nft.owner.id === user.id )
+    //     }
+    // })
 
     // const filteredCollections = collections.filter((collection) => {
     //     return (

@@ -55,8 +55,8 @@
   border-radius: 50%;
   border: 10px var(--core-border) solid;
   animation: flicker 0.2s infinite;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
   margin-top: 40px;
 
 }
@@ -73,6 +73,9 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 40px;
+
+  /* ANIMATE THIS */
+  transform: translateX(200px);
 }
 
 .big_core {

@@ -7,20 +7,28 @@ import {useState} from 'react';
 export default function Card ({ nft, selectedCard, isTurnEnding, lastSelected, handleSelect }) {
     const [ audioAction , setAudioAction ] = useState("");
     const [ duration , setDuration ] = useState(100000);
+    const [ isManualFlip , setIsManualFlip ] = useState(false);
     // console.log(nft)
 
     
     // console.log(duration);
     function handleClick () {
         setAudioAction("play");
+        // console.log("click to play");
         const timer = setTimeout(() => {
             if (!(selectedCard.id === nft.id)) {
                 // console.log(duration);
                 handleSelect(nft)
             }
-        }, 100
+        }, 300
         );
         return () => clearTimeout(timer);
+    }
+
+    // THIS DOESNT WORK BUT DOESNT BREAK EITHER
+    function forceflip () {
+        console.log("checking");
+        setIsManualFlip(true);
     }
 
     // console.log(audioAction)
@@ -30,12 +38,12 @@ export default function Card ({ nft, selectedCard, isTurnEnding, lastSelected, h
     return (
         <>  
                 <div className={`${style.flip_card}`}>
-                    <div className={`${style.flip_card_inner} ${!selectedCard.id && !isTurnEnding ? style.add_flip_reveal : style.no_flip} ${isTurnEnding ? style.add_flip_facedown : null}`}>
+                    <div className={`${style.flip_card_inner} ${(!selectedCard.id && !isTurnEnding) || isManualFlip ? style.add_flip_reveal : style.no_flip} ${isTurnEnding ? style.add_flip_facedown : null}`}>
                         <div className={`${style.flip_card_front}`}>
-                            <img onClick={() => handleClick()} className={`${style.image_sizing_selectable} ${selectedCard.id === nft.id ? style.selected_unhoverable : style.unselected_hoverable} ${lastSelected.id === nft.id && !isTurnEnding ? style.set_down : null } ${selectedCard.id === nft.id && isTurnEnding ? style.set_selected_down : null}`} src={nft.card.art_url} alt="Avatar" />
+                            <img onClick={!isTurnEnding ? () => handleClick() : null} className={`${style.image_sizing_selectable} ${selectedCard.id === nft.id ? style.selected_unhoverable : style.unselected_hoverable} ${lastSelected.id === nft.id && !isTurnEnding ? style.set_down : null } ${selectedCard.id === nft.id && isTurnEnding ? style.set_selected_down : null}`} src={nft.card.art_url} alt="Avatar" />
                         </div>
                         <div className={`${style.flip_card_back}`}>
-                            <img className={`${style.image_sizing_selectable}`} src={nft.card.collection_card_back_url} alt="Avatar" />
+                            <img onClick={forceflip} className={`${style.image_sizing_selectable}`} src={nft.card.collection_card_back_url} alt="Avatar" />
                         </div>
                     </div>
                 </div>

@@ -38,7 +38,6 @@
     height: 100%;
     position: relative;
     /* background-color: white; */
-    /* pointer-events: none; */
 }
 
 .position_cardlist {
@@ -147,7 +146,7 @@
 
 .add_flip_reveal {
     animation: flip_reveal .7s ease-in;
-    animation-delay: 2s;
+    animation-delay: 1.7s;
     animation-fill-mode: forwards;
 }
 
@@ -158,7 +157,7 @@
 @keyframes flip_reveal {
     0% {
         transform: rotateY(0deg);
-        /* filter: blur(10px); */
+        /* filter: blur(0px); */
         /* transform: translateY(-50%); */
         /* opacity: 0%; */
 
@@ -382,14 +381,14 @@
     100% { filter: blur(0px) }
 }
 
-#playercamp_positioning_container {
+.playercamp_positioning_container {
     position: absolute;
     pointer-events: none;
     width: 100%;
     height: 100%;
 }
 
-#playercamp_image_container {
+.playercamp_image_container {
     position: relative;
     width: 390px;
     margin: auto;
@@ -413,8 +412,17 @@
 #playercamp_image {
     position: absolute;
     width: 100%;
+    left: 0%;
+    bottom: -97px;   
+}
+
+#camp_counter1 {
+    position: absolute;
+    width: 100%;
+    left: 0%;
     bottom: -97px;
-    
+    filter: brightness(2);
+    filter: drop-shadow(3px 3px 4px yellow);
 }
 
 /* AVATAR FRAME */

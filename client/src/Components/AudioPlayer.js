@@ -30,7 +30,12 @@ export default function AudioPlayer ({ setDuration , sound , action , clearActio
 
     audio.onloadedmetadata = () => {
         // setDuration(audio.duration);
-        // clearAction("");
+
+        // THIS IS IMPORTANT OTHERWISE SAMPIES ONLY PLAY TWICE
+        if (clearAction) {
+            clearAction("");
+        }
+        
         // console.log(audio.duration);
         functionSelector(action);
     }
