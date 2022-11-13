@@ -4,11 +4,13 @@ import { useState, useEffect } from 'react'
 
 import CardPack from './CardPack';
 import CardBinder from './CardBinder';
+import DeckStack from './DeckStack';
 
 
 import style from '../StyleSheets/Game.module.css'
 
 import playerCamp from '../Assets/gamepieces/gamepiece_playercamp.png'
+import AvatarFrame from '../Assets/gamepieces/avatar_frame.png'
 
 
 
@@ -95,12 +97,29 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                 { currentGame.nfts.length > 0 ?
                 <div className={style.game_container}>
 
-                    <div className={style.binder_container}>
+                    {/* <div className={style.binder_container}>
                         <CardBinder user={user} remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
-                    </div>
+                    </div> */}
+
 
                     <div id={style.playercamp_positioning_container}>
                         <div id={style.playercamp_image_container}>
+                            {/* SHADOWS */}
+                            <div id={style.playercamp_shadow}></div>
+
+                            {/* AVATAR */}
+                            <div id={style.avatar_frame_positioning_container}>
+                                <div id={style.avatar_frame_image_container}>
+                                    {/* <div id={style.playercamp_shadow}></div> */}
+                                    <img id={style.avatar_image} src={user.avatar_url}/>
+                                    <img id={style.avatar_frame_image} src={AvatarFrame}/>
+                                </div>
+                            </div>
+
+                            {/* SHADOWS */}
+                            <div id={style.playercamp_shadow}></div>
+                            
+                            {/* CAMP */}
                             <img id={style.playercamp_image} src={playerCamp}/>
                         </div>
                     </div>
@@ -118,6 +137,10 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                     
                     <div onClick={handleSubmitTurn} className={`${style.finalize_turn_button} ${Object.keys(selectedCard).length === 0 ? style.turn_unfinishable : null}`}>Finalize<br />Turn</div>
                     
+
+                    <div className={style.deckstack_positioning}>
+                        <DeckStack user={user} remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
+                    </div>
                 </div>
                 : null }
             </>

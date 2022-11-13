@@ -1,12 +1,12 @@
-import BinderCard from './CardBinderItem';
 import { v4 as uuid } from 'uuid';
-import style from '../StyleSheets/Game.module.css'
+import style from '../StyleSheets/DeckStack.module.css'
 import { useState } from 'react';
 
+import DeckStackItem from './DeckStackItem';
 
 
 
-export default function CardBinder ({ user, selectedCard, isTurnEnding, setSelectedCard, currentGame, remainingTurns }) {
+export default function DeckStack ({ user, selectedCard, isTurnEnding, setSelectedCard, currentGame, remainingTurns }) {
     const [ lastSelected , setLastSelected ] = useState({});
 
     // console.log(leftInPack())
@@ -39,15 +39,19 @@ export default function CardBinder ({ user, selectedCard, isTurnEnding, setSelec
     const cardsToRender = claimedCards.map((n) => {
         // console.log(n);
         return (
-            <BinderCard nft={n} isTurnEnding={isTurnEnding} lastSelected={lastSelected} handleSelect={handleSelect} selectedCard={selectedCard} key={uuid()} />
+            <DeckStackItem nft={n} isTurnEnding={isTurnEnding} lastSelected={lastSelected} handleSelect={handleSelect} selectedCard={selectedCard} key={uuid()} />
         )
     })
 
     return (
         <>
-            <div className={`${style.binder_cards_container}`}>
-                {cardsToRender}
-            </div>
+            {/* <div className={style.fix_width}> */}
+                <div className={`${style.fix_scroll_and_position}`}>
+                    <div className={`${style.deckstack_container}`}>
+                        {cardsToRender.reverse()}
+                    </div>
+                </div>
+            {/* </div> */}
         </>
     )
 }
