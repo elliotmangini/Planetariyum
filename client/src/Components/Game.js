@@ -29,6 +29,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     const [ selectedCard , setSelectedCard ] = useState({});
     const [ remainingTurns , setRemainingTurns ] = useState();
     const [ isTurnEnding , setIsTurnEnding ] = useState(false);
+    const [ spinReset , setSpinReset ] = useState(false);
     // console.log({ gameType , gameURL })
 
     // CALCULATE REMAINING TURNS
@@ -62,7 +63,13 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
         })
     }
 
+    // function failSpin () {
+    //     console.log(" in failspin setting true")
+    //     setSpinReset(true);
+    // }
+
     function handleSubmitTurn () {
+        // failSpin();
 
         if (Object.keys(selectedCard).length !== 0 && user) {
             setIsTurnEnding(true);
@@ -100,14 +107,10 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                 { currentGame.nfts.length > 0 ?
                 <div onClick={() => console.log("clicking game container")} className={style.game_container}>
 
-                    {/* <div className={style.binder_container}>
-                        <CardBinder user={user} remainingTurns={remainingTurns} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
-                    </div> */}
+                    {/* SETTINGS */}
+                    <div className={style.settings_box}></div>
 
-                    <div className={style.settings_box}>
-
-                    </div>
-
+                    {/* PLAYER CAMP */}
                     <div id={style.playercamp_positioning_container}>
                         <div id={style.playercamp_image_container}>
                             {/* SHADOW */}
@@ -128,7 +131,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                                 <div id={style.turn_counter_image_container}>
                                     {/* <div id={style.playercamp_shadow}></div> */}
                                     <img id={style.avatar_image} src={user.avatar_url}/>
-                                    <img id={style.turn_counter_image} className={ isTurnEnding ? style.add_spin : null} src={TurnCounter}/>
+                                    <img id={style.turn_counter_image} className={ isTurnEnding ? style.add_spin : null } src={TurnCounter}/>
                                     <div id={style.turn_clickable} onClick={handleSubmitTurn} className={Object.keys(selectedCard).length > 0 ? style.turn_glow : null}>
                                         { selectedCard && !isTurnEnding ? <GlowIndicator /> : null}
                                     </div>

@@ -45,13 +45,11 @@ export default function DeckStack ({ user, selectedCard, isTurnEnding, setSelect
 
     return (
         <>
-            {/* <div className={style.fix_width}> */}
                 <div className={`${style.fix_scroll_and_position}`}>
                     <div className={`${style.deckstack_container}`}>
                         {cardsToRender.reverse()}
                     </div>
                 </div>
-            {/* </div> */}
         </>
     )
 }
