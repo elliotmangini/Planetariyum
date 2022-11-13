@@ -46,7 +46,7 @@ body {
   --text-primary: rgb(236, 231, 231);
   --text-secondary: grey;
 
-  background-color: var(--background);
+  background-color: rgb(3, 3, 3);
   color: var(--text-primary);
 }
 
@@ -62,9 +62,12 @@ body {
   --text-primary: rgb(236, 231, 231);
   --text-secondary: grey;
   --accent-color: #9b5486;
+  --host-color: #fff949;
   --text-link: lightblue;
   
   background-color: var(--background);
+  background-color: rgb(3, 3, 3);
+
   color: var(--text-primary);
 }
 
@@ -309,4 +312,77 @@ input:focus {
 .opacity_100 {
   transition: opacity 3s ease-in-out;
   opacity: 100%;
+}
+
+
+
+/* MORE UTILITIES */
+
+
+.center-horizontal {
+  width: fit-content;
+  margin: auto;
+  /* border: 1px solid red; */
+}
+
+.center-vertical {
+  position: absolute;
+  /* border: 1px solid greenyellow; */
+  width: 100%;
+  top: 50%;
+}
+
+.code-text {
+  color: rgb(0, 255, 38);
+  font-family: monospace;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  font-size: 2rem;
+  text-align: center;
+}
+
+.code-text span {
+  border-right: .05em solid;
+}
+
+.retrigger1 {
+  animation: caret1 .6s steps(1) infinite;
+}
+
+.retrigger2 {
+  animation: caret2 .6s steps(1) infinite;
+}
+
+@keyframes caret1 {
+  49% {
+    border-color: transparent;
+  }
+}
+
+
+@keyframes caret2 {
+  51% {
+    border-color: transparent;
+  }
+}
+
+.bobbing {
+  animation: bobbing 2.5s infinite;
+}
+
+@keyframes bobbing {
+  0% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(5px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }

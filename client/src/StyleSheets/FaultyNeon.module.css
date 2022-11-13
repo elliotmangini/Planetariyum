@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway");
 
+
 :root {
   --glow-color: rgb(247, 0, 255);
 }
@@ -10,7 +11,7 @@
   box-sizing: border-box;
 }
 
-html,
+/* html,
 body {
   height: 100%;
   width: 100%;
@@ -23,9 +24,9 @@ body {
   justify-content: center;
   align-items: center;
   background: black;
-}
+} */
 
-.glowing-btn {
+.glowing_btn {
   position: relative;
   color: var(--glow-color);
   cursor: pointer;
@@ -38,6 +39,7 @@ body {
   font-size: 2em;
   font-weight: 900;
   letter-spacing: 1em;
+  transition: border-color 3s;
 
   -webkit-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
     0px 0px 0.5em 0px var(--glow-color);
@@ -48,7 +50,7 @@ body {
   animation: border-flicker 2s linear infinite;
 }
 
-.glowing-txt {
+.glowing_txt {
   float: left;
   margin-right: -0.8em;
   -webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
@@ -59,12 +61,16 @@ body {
   animation: text-flicker 3s linear infinite;
 }
 
-.faulty-letter {
+.glowing_txt:hover {
+  animation: none;
+}
+
+.faulty_letter {
   opacity: 0.5;
   animation: faulty-flicker 2s linear infinite;
 }
 
-.glowing-btn::before {
+.glowing_btn::before {
   content: "";
   position: absolute;
   top: 0;
@@ -78,7 +84,7 @@ body {
   pointer-events: none;
 }
 
-.glowing-btn::after {
+.glowing_btn::after {
   content: "";
   position: absolute;
   top: 0;
@@ -92,29 +98,67 @@ body {
   transition: opacity 100ms linear;
 }
 
-.glowing-btn:hover {
+.glowing_btn:hover {
   color: rgba(0, 0, 0, 0.8);
   text-shadow: none;
   animation: none;
+  border-color: white;
 }
 
-.glowing-btn:hover .glowing-txt {
+.glowing_btn:hover, .faulty_letter {
   animation: none;
+  opacity: 1;
 }
 
-.glowing-btn:hover .faulty-letter {
+.glowing_btn:hover .glowing-txt {
+  animation: none;
+  /* animation: get_bright 3.5s ease-in-out;
+  animation-delay: .3s;
+  animation-fill-mode: forwards; */
+  animation: none;
+
+  border-color: white;
+
+}
+
+.glowing_btn:hover .faulty-letter {
   animation: none;
   text-shadow: none;
   opacity: 1;
+  border-color: white;
+
 }
 
-.glowing-btn:hover:before {
+.glowing_btn:hover:before {
   filter: blur(1.5em);
   opacity: 1;
+  animation: get_bright 3.5s ease-in-out;
+  /* animation-delay: .3s; */
+  animation-fill-mode: forwards;
+  border-color: white;
+
 }
 
-.glowing-btn:hover:after {
-  opacity: 1;
+.glowing_btn:hover:after {
+  opacity: .6;
+  animation: get_bright 3.5s ease-in-out;
+  /* animation-delay: .3s; */
+  animation-fill-mode: forwards;
+  border-color: white;
+  animation: none;
+
+}
+
+@keyframes get_bright {
+  0% {
+    opacity: .4;
+    /* border: 0.15em solid var(--glow-color); */
+  }
+  100% {
+    opacity: 1;
+    /* border: 0.15em solid var(--glow-color); */
+    background-color: white;
+  }
 }
 
 @keyframes faulty-flicker {
@@ -216,7 +260,7 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
-  .glowing-btn{
+  .glowing_btn{
     font-size: 1em;
   }
 }

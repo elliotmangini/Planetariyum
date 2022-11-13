@@ -4,6 +4,7 @@
     height: 40vh;
     max-width: 100%;
     margin: auto;
+    background-color: black;
 }
 
 .avatar_cropped_out_portion {

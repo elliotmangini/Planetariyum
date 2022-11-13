@@ -1,6 +1,10 @@
 import style from '../StyleSheets/WelcomeCutscene.module.css';
 import { useState, useEffect } from 'react';
 
+import AudioPlayer from './AudioPlayer';
+
+import WelcomeTheme from '../Assets/audio/welcome_cutscene/welcome_theme.wav'
+
 import WelcomeCutscene1 from './WelcomeCutscene1';
 import WelcomeCutscene2 from './WelcomeCutscene2';
 import WelcomeCutscene3 from './WelcomeCutscene3';
@@ -19,7 +23,7 @@ export default function WelcomeCutscene () {
     function findScene () {
         switch(sceneNumber) {
             case 1:
-                return ( <WelcomeCutscene1 /> )
+                return ( <WelcomeCutscene1 setSceneNumber={setSceneNumber}/> )
             case 2:
                 return ( <WelcomeCutscene2 /> )
             case 3:
@@ -42,8 +46,12 @@ export default function WelcomeCutscene () {
 
 
     return (
-        <div id={style.give_absolute_fullscreen}>
-            {scene}
-        </div>
+        <>
+            <div id={style.give_absolute_fullscreen}>
+                {scene}
+            </div>
+            <AudioPlayer action={"play"} sound={WelcomeTheme} />
+            
+        </>
     )
 }

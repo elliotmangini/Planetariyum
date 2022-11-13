@@ -37,6 +37,7 @@ export default function App() {
   const [theme, setTheme] = useState('dark');
   const [ currentGame , setCurrentGame ] = useState(null);
   const [ dimUI , setDimUI] = useState(null);
+  const [ isLogout , setIsLogout ] = useState(false);
 
   // auto-login
   useEffect(() => { fetch("/me").then((r) => { if (r.ok) { r.json().then((user) => setUser(user))}})}, []);
@@ -75,7 +76,7 @@ export default function App() {
               <Route path="/Feed" element={<SocialFeed />} />
 
 
-            <Route path="/Arena" element={<Arena setCurrentGame={setCurrentGame} />} />
+            <Route path="/Arena" element={<Arena setCurrentGame={setCurrentGame} user={user} />} />
             <Route path="/Mint" element={<Mint />} />
 
             {/* USER PROFILES */}
@@ -93,9 +94,9 @@ export default function App() {
         { !currentGame ?
         <div className={dimUI}>
           { user ?
-          <DashRight setUser={setUser} user={user} setPath={setPath} />
+          <DashRight isLogout={isLogout} setIsLogout={setIsLogout} setUser={setUser} user={user} setPath={setPath} />
           :
-          <DashRightUserless />
+          <DashRightUserless isLogout={isLogout} setIsLogout={setIsLogout} />
           }
         </div>
         : null }

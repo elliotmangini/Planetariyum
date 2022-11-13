@@ -9,14 +9,14 @@ import { Navigate } from 'react-router-dom';
 
 
 
-export default function DashRight ({ user, setUser, setPath }) {
+export default function DashRight ({ isLogout, setIsLogout, user, setUser, setPath }) {
     const [ isQuickSettings, setIsQuickSettings ] = useState(false);
-    const [ isLogout , setIsLogout ] = useState(false);
 
     function handleLogout() {
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
-                setIsLogout(true);
+                console.log("click")
+                // setIsLogout(true);
                 setUser(null);
             }
         });

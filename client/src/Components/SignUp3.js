@@ -32,10 +32,10 @@ export default function SignUp3 ({ setCurrentGame, dimUI, setDimUI, setSequence,
     function handleCollectionRecommendation () {
         setDimUI("opacity_0")
         setIsWelcomeEnding(true);
-        setStartCutscene(true);
         setTimeout(() => {
+            setStartCutscene(true);
             // createGame();
-        }, 10000)
+        }, 4000)
     }
     
     // const forceCollection = 1

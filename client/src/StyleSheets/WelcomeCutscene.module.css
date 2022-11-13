@@ -4,4 +4,30 @@
     height: 100vh;
     left: 0%;
     top: 0%;
+    /* border: 2px solid red; */
+}
+
+.fade_in {
+    animation: fade 2s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.fade_out {
+    animation: fade_out 2s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade {
+    0% { opacity: 0% }
+    100% { opacity: 100% }
+}
+
+@keyframes fade_out {
+    0% { opacity: 100% }
+    100% { opacity: 0% }
+}
+
+
+.ether_text_position {
+    margin-top: 20rem;
 }

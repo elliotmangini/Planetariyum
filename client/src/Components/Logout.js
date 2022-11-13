@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom';
 import { useState } from 'react';
 
 
-
+// I DONT THINK THIS IS BEING USED ANYWHERE
 
 export default function Logout ({ user, setUser }) {
     const [ isLogout , setIsLogout ] = useState(false);
@@ -10,8 +10,9 @@ export default function Logout ({ user, setUser }) {
     function handleLogout() {
       fetch("/logout", { method: "DELETE" }).then((r) => {
         if (r.ok) {
-            setUser(null);
+            console.log("yoyo");
             setIsLogout(true);
+            setUser(null);
         }
       });
     }

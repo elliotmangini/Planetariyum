@@ -8,7 +8,7 @@ import CollectionThumb from './CollectionThumb';
 
 
 
-export default function Arena ({ setCurrentGame }) {
+export default function Arena ({ setCurrentGame, user }) {
     const [ isPopUp , setIsPopUp ] = useState(false);
     const [ query , setQuery ] = useState("")
     const [ collections , setCollections ] = useState([]);
@@ -71,9 +71,13 @@ export default function Arena ({ setCurrentGame }) {
         )
     })
 
+    console.log(gameURL + user )
+
     return (
         <>
-        { redirect ? <Navigate to={`/play/${gameType}/${gameURL.replace(/\s/g, "")}`} /> : null}
+        { redirect && user ? <Navigate to={`/play/${gameType}/${gameURL.replace(/\s/g, "")}`} /> : null}
+        { redirect == "signup" ? <Navigate to="/signup" /> : null}
+
             <div className={style.main_and_pop_up}>
                 <div className={`${style.main_content} ${isPopUp ? style.blur : null}`}>
                     <div className={style.game_details_panel}>
@@ -110,7 +114,7 @@ export default function Arena ({ setCurrentGame }) {
                             </form>
 
                         </div>
-                        <div onClick={gameURL ? createGame : null} className={style.create_button}>Create Draft</div>
+                        <div onClick={gameURL && user ? createGame : () => setRedirect("signup")} className={style.create_button}>Create Draft</div>
                     </div>
 
                     {/* <button onClick={() => setIsPopUp(!isPopUp)}>Select Set</button> */}
