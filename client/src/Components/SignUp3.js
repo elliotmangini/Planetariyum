@@ -21,7 +21,6 @@ import WelcomeCutscene from './WelcomeCutscenes';
 
 export default function SignUp3 ({ setCurrentGame, dimUI, setDimUI, setSequence, user, setUser }) {
     const [ isWelcomeEnding , setIsWelcomeEnding ] = useState(false);
-    const [ isRedirect , setIsRedirect ] = useState(false);
     const [ startCutscene , setStartCutscene] = useState(false);
 
     useEffect(() => {
@@ -34,30 +33,7 @@ export default function SignUp3 ({ setCurrentGame, dimUI, setDimUI, setSequence,
         setIsWelcomeEnding(true);
         setTimeout(() => {
             setStartCutscene(true);
-            // createGame();
         }, 4000)
-    }
-    
-    // const forceCollection = 1
-    function createGame () {
-        const gameObj = {
-            collection_id: 1,
-            deadline: "03 Feb 2023 04:05:06 +0000",
-            local_url: `welcome_${user.username}`,
-            game_type: "draft",
-            deck_size: 50,
-        }
-        fetch("/games", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(gameObj),
-        })
-        .then(resp => resp.json())
-        .then(() => {
-            setIsRedirect(true);
-        })
     }
 
     return (
@@ -106,10 +82,8 @@ export default function SignUp3 ({ setCurrentGame, dimUI, setDimUI, setSequence,
 
 
             { startCutscene ?
-                <WelcomeCutscene />
+                <WelcomeCutscene user={user} />
             : null}
-
-            { isRedirect ? <Navigate to={`/play/draft/welcome_${user.username}`} /> : null}
         </>
     )
 }

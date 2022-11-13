@@ -39,31 +39,35 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
         // deck size minus all nfts that already have an owner
     }
 
-    // GET GAME WHEN WE RELOAD PAGE
+    // GET GAME SPECIFICALLY WHEN WE RELOAD PAGE
     useEffect(() => {
         if (user) {
             fetch(`/games/${gameURL}`)
             .then(resp => resp.json())
             .then(data => {
                 setCurrentGame(data);
-                findPulls(data.nfts)
                 setIsGameLoaded(true);
+                setRemainingTurns(data.deck_size);
+                findPulls(data.nfts);
                 setRemainingTurns(data.deck_size)
+                console.log("Getting game after refresh...");
             })
         }
     }, [user])
     
-    function findPulls (nftArray) {
-        setClaimedCards(nftArray.filter((nft) => {
-            // console.log(user.id);
-            
-            // THIS IF KEEPS FROM READING AN UNDEFINED VALUE
-            if ( nft.owner !== null && user ) {
-                console.log(nft);
-            return ( nft.owner.id === user.id )
-            }
-        }))
-    }
+    // useEffect(() => {
+        function findPulls (nftArray) {
+            setClaimedCards(nftArray.filter((nft) => {
+                console.log(user.id);
+                
+                // THIS IF KEEPS FROM READING AN UNDEFINED VALUE
+                if ( nft.owner !== null && user ) {
+                    console.log(nft);
+                return ( nft.owner.id === user.id )
+                }
+            }))
+        }
+    // }, [])
     
     // GET GAME WHEN GAME STARTS
     function startGame () {
@@ -101,6 +105,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                         setSelectedCard({});
                         setCurrentGame(data);
                         setRemainingTurns(data.deck_size);
+                        findPulls(data.nfts);
                         setIsTurnEnding(false);
                       }, 3700
                     );

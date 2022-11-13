@@ -1,5 +1,7 @@
 import style from '../StyleSheets/WelcomeCutscene.module.css';
 import { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+
 
 import AudioPlayer from './AudioPlayer';
 
@@ -16,8 +18,33 @@ import WelcomeCutscene5 from './WelcomeCutscene5';
 
 
 
-export default function WelcomeCutscene () {
+export default function WelcomeCutscene ({ user }) {
     const [ sceneNumber , setSceneNumber ] = useState(1);
+    const [ isRedirect , setIsRedirect ] = useState(false);
+
+
+
+        // const forceCollection = 1
+        function createGame () {
+            const gameObj = {
+                collection_id: 1,
+                deadline: "03 Feb 2023 04:05:06 +0000",
+                local_url: `welcome_${user.username}`,
+                game_type: "draft",
+                deck_size: 20,
+            }
+            fetch("/games", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(gameObj),
+            })
+            .then(resp => resp.json())
+            .then(() => {
+                setIsRedirect(true);
+            })
+        }
 
 
     function findScene () {
@@ -32,6 +59,9 @@ export default function WelcomeCutscene () {
                 return ( <WelcomeCutscene4 /> )
             case 5:
                 return ( <WelcomeCutscene5 /> )
+
+            case 99:
+                return createGame();
                  
             default:
                 return ( <></> )
@@ -47,6 +77,8 @@ export default function WelcomeCutscene () {
 
     return (
         <>
+            { isRedirect ? <Navigate to={`/play/draft/welcome_${user.username}`} /> : null}
+
             <div id={style.give_absolute_fullscreen}>
                 {scene}
             </div>

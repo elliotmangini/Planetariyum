@@ -32,6 +32,7 @@ export default function WelcomeCutscene1 ({ setSceneNumber }) {
                 setMessageTrigger(!messageTrigger);
             } else {
                 setStartEnd(false);
+                setSceneNumber(99);
             }
         }, 7800);
         return () => {
@@ -66,7 +67,23 @@ export default function WelcomeCutscene1 ({ setSceneNumber }) {
                 <div className='code-text center-vertical'>
                     <div className={style.ether_text_position}>
                         { messageNumber === 3 ? <TypewriterText speed={500} 
-                        body={"Oh shit, someone is here..."}
+                        body={"Oh shit, someone is here."}
+                        /> : null }
+                    </div>
+                </div>
+
+                <div className='code-text center-vertical'>
+                    <div className={style.ether_text_position}>
+                        { messageNumber === 4 ? <TypewriterText speed={500} 
+                        body={"Oh--       By the way I'm Sophie! Nice to  meet you :)"}
+                        /> : null }
+                    </div>
+                </div>
+
+                <div className='code-text center-vertical'>
+                    <div className={style.ether_text_position}>
+                        { messageNumber === 5 ? <TypewriterText speed={500} 
+                        body={"Anyway, let's show you around!!"}
                         /> : null }
                     </div>
                 </div>
