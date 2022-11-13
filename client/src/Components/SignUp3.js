@@ -13,6 +13,8 @@ import Organic from '../Assets/vibes/organic.png';
 import Prismatic from '../Assets/vibes/prismatic3.png';
 import Spooky from '../Assets/vibes/spooky.png';
 
+import WelcomeCutscene from './WelcomeCutscenes';
+
 
 
 
@@ -20,6 +22,7 @@ import Spooky from '../Assets/vibes/spooky.png';
 export default function SignUp3 ({ setCurrentGame, dimUI, setDimUI, setSequence, user, setUser }) {
     const [ isWelcomeEnding , setIsWelcomeEnding ] = useState(false);
     const [ isRedirect , setIsRedirect ] = useState(false);
+    const [ startCutscene , setStartCutscene] = useState(false);
 
     useEffect(() => {
         setDimUI("opacity_25");
@@ -29,8 +32,9 @@ export default function SignUp3 ({ setCurrentGame, dimUI, setDimUI, setSequence,
     function handleCollectionRecommendation () {
         setDimUI("opacity_0")
         setIsWelcomeEnding(true);
+        setStartCutscene(true);
         setTimeout(() => {
-            createGame();
+            // createGame();
         }, 10000)
     }
     
@@ -101,6 +105,9 @@ export default function SignUp3 ({ setCurrentGame, dimUI, setDimUI, setSequence,
             </div>
 
 
+            { startCutscene ?
+                <WelcomeCutscene />
+            : null}
 
             { isRedirect ? <Navigate to={`/play/draft/welcome_${user.username}`} /> : null}
         </>
