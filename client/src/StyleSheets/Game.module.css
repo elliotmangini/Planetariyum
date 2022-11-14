@@ -25,7 +25,8 @@
     width: 100%;
     text-align: center;
     background-color: rgb(25, 7, 7);
-    transition: opacity 1s;
+    transition: opacity 2s;
+    transition-delay: 1s;
     pointer-events: none;
 }
 
@@ -245,6 +246,10 @@
     scale: 1.25;
 }
 
+.unselected_unhoverable {
+    scale: 1;
+}
+
 .selected_unhoverable {
     scale: 1.25;
     animation: slow_pulse 1.3s infinite alternate ease-out;
@@ -299,9 +304,9 @@
     background-color: rgb(41, 56, 56);
 }
 
-.finalize_turn_button:hover {
+/* .finalize_turn_button:hover {
     filter: brightness(1.25)
-}
+} */
 
 .binder_container {
     /* background: red; */

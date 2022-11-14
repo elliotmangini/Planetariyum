@@ -25,8 +25,8 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     
     // const [ spinReset , setSpinReset ] = useState(false);
     const { gameType , gameURL } = useParams();
-    const [ isStart , setIsStart ] = useState(false);
-    const [ stagedPlayers , setStagedPlayers ] = useState(["2,3,4"]);
+    // const [ isStart , setIsStart ] = useState(false);
+    const [ stagedPlayers , setStagedPlayers ] = useState(["1,2"]);
     const [ isGameLoaded , setIsGameLoaded ] = useState(false);
     const [ selectedCard , setSelectedCard ] = useState({});
     const [ isTurnEnding , setIsTurnEnding ] = useState(false);
@@ -44,7 +44,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
         user,
         currentGame,
         gameType,
-        isStart,
+        // isStart,
         stagedPlayers,
         isGameLoaded,
         selectedCard,
@@ -76,7 +76,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
             .then(resp => resp.json())
             .then(data => {
             setCurrentGame(data);
-            setIsStart(true);
+            // setIsStart(true);
         })
     }
     
@@ -182,7 +182,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                     {/* unclaimed nfts/unpulled cards count */}
                     {/* currentGame.deck_size * currentGame.players.length */}
                         <div>{currentGame.deck_size - claimedCards.length} pulls left</div>
-                        <div>{currentGame.players.length * Math.floor(((currentGame.deck_size - claimedCards.length - 1) / 5))} unopened pack(s) left</div>
+                        <div>{claimedCards.length === currentGame.deck_size ? 0 : currentGame.players.length * Math.floor(((currentGame.deck_size - claimedCards.length - 1) / 5))} unopened pack(s) left</div>
                     </div>
                     
                     {/* DECKSTACK */}

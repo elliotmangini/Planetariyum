@@ -84,7 +84,20 @@ export default function Card ({ isDeckStack, nft, selectedCard, isTurnEnding, la
                         <div className={`${style.flip_card_front}`}>
                             <img onClick={!isTurnEnding ? () => handleClick() : null} className={
                                 `${style.image_sizing_selectable} 
-                                ${selectedCard.id === nft.id ? style.selected_unhoverable : style.unselected_hoverable} 
+
+                                // THE PROBLEM HERE IS WHEN BOTH ARE FALSE IT RETURNS TRUE
+                                // IS THIS CARD SELECTED? |
+                                // WE NEED FALSE FALSE TO RETURN something unhoverable
+                                // ${(selectedCard.id === nft.id) && !isTurnEnding ? style.selected_unhoverable : style.unselected_hoverable} 
+
+                                // HOLY FUCK IT WORKS
+                                ${!isTurnEnding ? 
+                                    ((selectedCard.id === nft.id) ? style.selected_unhoverable : style.unselected_hoverable)
+                                    : ((selectedCard.id === nft.id) ? style.selected_unhoverable : style.unselected_unhoverable)
+                                } 
+                                
+                                // ${(selectedCard.id === nft.id) && isTurnEnding ? style.selected_unhoverable : null} 
+
                                 ${(lastSelected.id === nft.id) && !isTurnEnding ? style.set_down : null } 
                                 ${selectedCard.id === nft.id && isTurnEnding ? style.set_selected_down : null}`} 
                                 src={nft.card.art_url} alt="Avatar" />
