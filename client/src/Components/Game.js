@@ -21,7 +21,7 @@ import GlowIndicator from './GlowIndicator';
 
 
 
-export default function Game ({ setCurrentGame , currentGame, user }) {
+export default function Game ({ setCurrentGame , currentGame, user, cable }) {
     
     // const [ spinReset , setSpinReset ] = useState(false);
     const { gameType , gameURL } = useParams();
@@ -52,6 +52,17 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
         claimedCards,
         allCardsClaimed,
     })
+
+    function sendMessage(message) {
+      fetch(`messages/${user.id}/${currentGame.room.id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        })
+        .then(resp => resp.json())
+        .then(data => {
+    })
+
+    }
     
     // GET GAME SPECIFICALLY WHEN WE RELOAD PAGE
     useEffect(() => {

@@ -11,7 +11,7 @@ import SocialFeed from './Components/SocialFeed';
 
 import Home from './Components/Home';
 import Browse from './Components/Browse';
-import Themes from './Components/Themes';
+// import Themes from './Components/Themes';
 import Resources from './Components/Resources';
 import Forums from './Components/Forums';
 
@@ -31,7 +31,7 @@ import DashLeftUserless from './Components/DashLeftUserless';
 // ITEM GETS A WHOLE PAGE
 import Collection from './Components/Collection';
 
-export default function App() {
+export default function App({ cable }) {
   const [user, setUser] = useState(null);
   const [ path , setPath ] = useState("")
   const [theme, setTheme] = useState('dark');
@@ -58,7 +58,7 @@ export default function App() {
 
           <div id="main_content">
             <Routes>
-              <Route path="/play/:gameType/:gameURL" element={<Game user={user} setCurrentGame={setCurrentGame} currentGame={currentGame}/>} />
+              <Route path="/play/:gameType/:gameURL" element={<Game cable={cable} user={user} setCurrentGame={setCurrentGame} currentGame={currentGame}/>} />
 
               <Route path="/" element={<Home />} />
                 <Route path="/Browse" element={<Browse />} />

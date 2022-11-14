@@ -71,8 +71,6 @@ export default function Arena ({ setCurrentGame, user }) {
         )
     })
 
-    console.log(gameURL + user )
-
     return (
         <>
         { redirect && user ? <Navigate to={`/play/${gameType}/${gameURL.replace(/\s/g, "")}`} /> : null}
