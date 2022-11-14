@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :messages
+  resources :rooms
+  # ActionCable Magic
+  mount ActionCable.server => '/cable'
+  
   # resources :nfts
   resources :playings
   resources :vods

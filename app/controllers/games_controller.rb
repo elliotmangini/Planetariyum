@@ -25,7 +25,7 @@ class GamesController < ApplicationController
     puts "creating game"
     puts params
     @game = Game.create!(game_params)
-    render json: @game, status: :created
+    render json: @game, include: ['players', 'collection', 'nfts', 'nfts.owner', 'nfts.holder', 'nfts.card'], status: :created
   end
 
   # PATCH/PUT /games/1

@@ -10,12 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_08_210325) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_14_055647) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -34,14 +37,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_210325) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "cards", force: :cascade do |t|
-    t.integer "author_id", null: false
-    t.integer "collection_id", null: false
+    t.bigint "author_id", null: false
+    t.bigint "collection_id", null: false
     t.string "name"
     t.string "asset_kind"
     t.string "file_name"
@@ -59,7 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_210325) do
     t.string "embed_url"
     t.string "local_url"
     t.string "featured_content"
-    t.integer "creator_id", null: false
+    t.bigint "creator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["creator_id"], name: "index_collections_on_creator_id"
@@ -77,20 +80,31 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_210325) do
     t.string "game_type"
     t.string "local_url"
     t.integer "deck_size"
-    t.integer "collection_id", null: false
+    t.bigint "collection_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["collection_id"], name: "index_games_on_collection_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "body"
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "nfts", force: :cascade do |t|
     t.string "edition"
     t.string "scan_digest"
     t.string "address"
-    t.integer "card_id", null: false
-    t.integer "game_id"
-    t.integer "owner_id"
-    t.integer "holder_id"
+    t.integer "stock"
+    t.bigint "card_id", null: false
+    t.bigint "game_id"
+    t.bigint "owner_id"
+    t.bigint "holder_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_nfts_on_card_id"
@@ -100,8 +114,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_210325) do
   end
 
   create_table "playings", force: :cascade do |t|
-    t.integer "game_id", null: false
-    t.integer "player_id", null: false
+    t.integer "turn_order"
+    t.bigint "game_id", null: false
+    t.bigint "player_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_playings_on_game_id"
@@ -118,11 +133,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_210325) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.string "roomable_type", null: false
+    t.bigint "roomable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["roomable_type", "roomable_id"], name: "index_rooms_on_roomable"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "display_name"
     t.string "email"
     t.string "bio"
+    t.string "source"
+    t.integer "credits"
+    t.integer "phone"
+    t.datetime "last_login"
     t.string "site_theme"
     t.string "custom_theme"
     t.string "default_timezone", default: "GMT"
@@ -133,8 +160,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_210325) do
   end
 
   create_table "vods", force: :cascade do |t|
-    t.integer "streamer_id", null: false
-    t.integer "game_id", null: false
+    t.bigint "streamer_id", null: false
+    t.bigint "game_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_vods_on_game_id"
@@ -147,6 +174,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_210325) do
   add_foreign_key "cards", "users", column: "author_id"
   add_foreign_key "collections", "users", column: "creator_id"
   add_foreign_key "games", "collections"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "nfts", "cards"
   add_foreign_key "nfts", "games"
   add_foreign_key "nfts", "users", column: "holder_id"

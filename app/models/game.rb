@@ -4,4 +4,5 @@ class Game < ApplicationRecord
     has_many :nfts
     has_many :playings
     has_many :players, through: :playings
+    has_one :room, as: :roomable
 end
