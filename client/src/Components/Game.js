@@ -228,7 +228,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                     
                     {/* PACKS */}
                     <div className={style.position_cardlist}>
-                        <CardPack isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
+                        <CardPack claimedCards={claimedCards} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
                     </div>
                     
                     {/* BIG CARD */}

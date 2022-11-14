@@ -6,11 +6,11 @@ import { useState } from 'react';
 
 
 
-export default function CardPack ({ isDeckStack, selectedCard, isTurnEnding, setSelectedCard, currentGame }) {
+export default function CardPack ({ claimedCards , isDeckStack, selectedCard, isTurnEnding, setSelectedCard, currentGame }) {
     const [ lastSelected , setLastSelected ] = useState({});
 
     function leftInPack () {
-        let modulus = currentGame.deck_size % 5;
+        let modulus = ((currentGame.deck_size - claimedCards.length) % 5);
         if (currentGame.deck_size === 0) {
             // GAME IS OVER
         } else if (modulus === 0) {
