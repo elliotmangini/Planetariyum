@@ -17,6 +17,8 @@ export default function Arena ({ setCurrentGame, user }) {
     const [ gameURL , setGameURL ] = useState("");
     const [ redirect , setRedirect ] = useState(null);
     const [ popSequence , setPopSequence ] = useState(0);
+    const [errors, setErrors] = useState([]);
+
 
     // POPUP SEQUENCE HANDLERS
     function handleSetCollection () {
@@ -45,9 +47,15 @@ export default function Arena ({ setCurrentGame, user }) {
             },
             body: JSON.stringify(gameObj),
         })
-        .then(resp => resp.json())
-        .then(data => setCurrentGame(data))
-        setRedirect([gameType, gameURL.replace(/\s/g, "")]);
+        .then(resp => {
+            if (resp.ok) {
+                resp.json()
+                .then(data => setCurrentGame(data))
+                setRedirect([gameType, gameURL.replace(/\s/g, "")]);
+            } else {
+                resp.json().then((err) => setErrors(err.errors));
+            }
+        })
     }
 
 

@@ -23,14 +23,14 @@ class NftsController < ApplicationController
 
     # GET BACK INFORMATION ABOUT WHAT CARDS ARE IN WHAT PACKS
 
-    render json: game, include: ['players', 'collection', 'nfts', 'nfts.owner', 'nfts.holder', 'nfts.card'],  status: :created
+    render json: game, include: ['room', 'players', 'collection', 'nfts', 'nfts.owner', 'nfts.holder', 'nfts.card'],  status: :created
   end
 
   def claim_nft
     # byebug
     @nft.update_attribute(:owner_id, params[:owner_id])
     # @game.update_attribute(:deck_size, @game.nfts.find_by(:owner_id === null).count)
-    render json: @game, include: ['players', 'collection', 'nfts', 'nfts.owner', 'nfts.holder', 'nfts.card'],  status: :accepted
+    render json: @game, include: ['room', 'players', 'collection', 'nfts', 'nfts.owner', 'nfts.holder', 'nfts.card'],  status: :accepted
   end
 
   private

@@ -4,13 +4,14 @@ module ApplicationCable
 
     def connect
       self.current_user = find_verified_user
+      # puts "testing"
     end
 
     private
 
     def find_verified_user
       # ['_session_id'] is optional, only use it if you are using has_secure_password in your user model
-      user = User.find(cookies.encrypted['_session_id']['user_id'])
+      user = User.find_by(cookies.encrypted['user_id'])
 
       return user unless user.nil?
 

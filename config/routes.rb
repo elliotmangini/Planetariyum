@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  resources :messages
-  resources :rooms
+  
   # ActionCable Magic
   mount ActionCable.server => '/cable'
   
@@ -13,7 +12,9 @@ Rails.application.routes.draw do
   resources :collections, :except => [:show]
   resources :cards
   resources :nfts
-
+  # resources :messages
+  # resources :rooms
+  
   # resources :users
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
@@ -30,6 +31,9 @@ Rails.application.routes.draw do
   #NFTS
   post "/nfts/:local_url/:staged_players", to: "nfts#start_game"
   patch "/nfts/claim/:id/:owner_id", to: "nfts#claim_nft"
+
+  #MESSAGES
+  post "/messages/:user_id/:room_id/", to: "messages#create"
 
 
 end

@@ -1,5 +1,7 @@
 class Game < ApplicationRecord
 
+    validates_uniqueness_of :local_url, :case_sensitive => false
+
     belongs_to :collection
     has_many :nfts
     has_many :playings

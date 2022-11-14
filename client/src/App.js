@@ -42,6 +42,13 @@ export default function App({ cable }) {
   // auto-login
   useEffect(() => { fetch("/me").then((r) => { if (r.ok) { r.json().then((user) => setUser(user))}})}, []);
 
+  // cable.subscriptions.create({ channel: "RoomChannel", room_id: 7 },
+  // {
+  // connected: () => console.log("thing connected!"),
+  // disconnected: () => console.log("thing disconnected!"),
+  // received: (updatedRoom) => console.log(updatedRoom)
+  // })
+
   return (
     <div id="theme_container" className={user ? user.site_theme : theme}>
 
@@ -58,7 +65,10 @@ export default function App({ cable }) {
 
           <div id="main_content">
             <Routes>
+
+              { user ?
               <Route path="/play/:gameType/:gameURL" element={<Game cable={cable} user={user} setCurrentGame={setCurrentGame} currentGame={currentGame}/>} />
+              : null }
 
               <Route path="/" element={<Home />} />
                 <Route path="/Browse" element={<Browse />} />

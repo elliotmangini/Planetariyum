@@ -60,9 +60,14 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
         })
         .then(resp => resp.json())
         .then(data => {
-    })
+    })}
 
-    }
+    cable.subscriptions.create({ channel: "RoomsChannel", room_url: gameURL },
+    {
+    connected: () => console.log("room connected!"),
+    disconnected: () => console.log("room disconnected!"),
+    received: (updatedRoom) => console.log(updatedRoom)
+    })
     
     // GET GAME SPECIFICALLY WHEN WE RELOAD PAGE
     useEffect(() => {
@@ -73,7 +78,8 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
                 setCurrentGame(data);
                 setIsGameLoaded(true);
                 findPulls(data.nfts);
-                console.log("Getting game after refresh... or on initial load");
+                // console.log("Getting game after refresh... or on initial load");
+                // console.log(data);
             })
         }
     }, [user])

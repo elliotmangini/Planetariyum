@@ -17,7 +17,7 @@ class GamesController < ApplicationController
     puts "getting live game"
     puts params
     game = Game.find_by(local_url: params[:local_url])
-    render json: game, include: ['players', 'collection', 'nfts', 'nfts.owner', 'nfts.holder', 'nfts.card']
+    render json: game, include: ['room', 'players', 'collection', 'nfts', 'nfts.owner', 'nfts.holder', 'nfts.card']
   end
 
   # POST /games
@@ -25,7 +25,8 @@ class GamesController < ApplicationController
     puts "creating game"
     puts params
     @game = Game.create!(game_params)
-    render json: @game, include: ['players', 'collection', 'nfts', 'nfts.owner', 'nfts.holder', 'nfts.card'], status: :created
+    @game.create_room()
+    render json: @game, include: ['room', 'players', 'collection', 'nfts', 'nfts.owner', 'nfts.holder', 'nfts.card'], status: :created
   end
 
   # PATCH/PUT /games/1

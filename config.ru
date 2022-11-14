@@ -2,5 +2,7 @@
 
 require_relative "config/environment"
 
+# run ActionCable.server
 run Rails.application
 Rails.application.load_server
+
