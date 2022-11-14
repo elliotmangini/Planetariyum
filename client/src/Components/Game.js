@@ -227,9 +227,11 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
 
                     
                     {/* PACKS */}
+                    {!allCardsClaimed ?
                     <div className={style.position_cardlist}>
                         <CardPack claimedCards={claimedCards} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
                     </div>
+                    : null }
                     
                     {/* BIG CARD */}
                     { Object.keys(selectedCard).length > 0 ?
