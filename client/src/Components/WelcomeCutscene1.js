@@ -13,7 +13,7 @@ export default function WelcomeCutscene1 ({ setSceneNumber }) {
     const [ messageTrigger , setMessageTrigger ] = useState(false);
     const [ startEnd , setStartEnd ] = useState(true);
 
-    const totalMessages = 3;
+    const totalMessages = 6;
 
 
     useEffect (() => {
@@ -27,7 +27,7 @@ export default function WelcomeCutscene1 ({ setSceneNumber }) {
     useEffect(() => {
         const timeout = setTimeout(() => {
             console.log(`firing message... ${messageNumber + 1}`);
-            if (messageNumber <= totalMessages) {
+            if (messageNumber < totalMessages) {
                 setMessageNumber(messageNumber + 1);
                 setMessageTrigger(!messageTrigger);
             } else {
@@ -59,7 +59,7 @@ export default function WelcomeCutscene1 ({ setSceneNumber }) {
                 <div className='code-text center-vertical'>
                     <div className={style.ether_text_position}>
                         { messageNumber === 2 ? <TypewriterText speed={300} 
-                        body={"I know we have something around here..."}
+                        body={"I know we have something around here you'd like..."}
                         /> : null }
                     </div>
                 </div>
@@ -75,7 +75,7 @@ export default function WelcomeCutscene1 ({ setSceneNumber }) {
                 <div className='code-text center-vertical'>
                     <div className={style.ether_text_position}>
                         { messageNumber === 4 ? <TypewriterText speed={500} 
-                        body={"Oh--       By the way I'm Sophie! Nice to  meet you :)"}
+                        body={"Anyway, let's show you around!!"}
                         /> : null }
                     </div>
                 </div>
@@ -83,7 +83,15 @@ export default function WelcomeCutscene1 ({ setSceneNumber }) {
                 <div className='code-text center-vertical'>
                     <div className={style.ether_text_position}>
                         { messageNumber === 5 ? <TypewriterText speed={500} 
-                        body={"Anyway, let's show you around!!"}
+                        body={"Welcome to Planetariyum let's get you booted up!"}
+                        /> : null }
+                    </div>
+                </div>
+
+                <div className='code-text center-vertical'>
+                    <div className={style.ether_text_position}>
+                        { messageNumber === 6 ? <TypewriterText speed={500} 
+                        body={"Oh--       By the way I'm Sophie! Nice to  meet you :)"}
                         /> : null }
                     </div>
                 </div>
