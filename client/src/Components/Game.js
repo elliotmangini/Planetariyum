@@ -35,6 +35,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     const { gameType , gameURL } = useParams();
     const [ selectedCard , setSelectedCard ] = useState({});
     const [ isMyTurn , setisMyTurn ] = useState(true);
+    const fetchIntervalRef = useRef();
     const [ isTurnEnding , setIsTurnEnding ] = useState(false);
 
     // STATE LOGGING
@@ -189,12 +190,13 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                     console.log("setting isMyTurn to true");
                     setisMyTurn(true);
                 } else {
-                    setisMyTurn(false);
+                    // setisMyTurn(false);
+                    callTimeout();
                 }
             })
         }
     }
-
+    
     function handleSubmitTurn () {
         
         if ((Object.keys(selectedCard).length !== 0 && user)) {
@@ -207,45 +209,43 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
             .then(resp => resp.json())
             .then(data => {
                 const timer = setTimeout(() => {
-                        setSelectedCard({}); // CLEAR SELECTED CARD AFFFFFTER ANIMATION OFF SCREEN
-                        // setIsTurnEnding(false);
-                        setCurrentGame(data);
-                      }, 3700
-                    );
-                    return () => clearTimeout(timer);
-                })
+                    setSelectedCard({}); // CLEAR SELECTED CARD AFFFFFTER ANIMATION OFF SCREEN
+                    // setIsTurnEnding(false);
+                    setCurrentGame(data);
+                }, 3700
+                );
+                return () => clearTimeout(timer);
+            })
         } else {
             // HANDLE THIS "ERROR"
         }
     }
-
-
+    
+    let repeat;
+    
+    function callTimeout () {
+        if (!isMyTurn) {
+            repeat = setTimeout(() => {
+                console.log("inside setInterval");
+                console.log({isMyTurn})
+                fetchGame()
+            }, 10000);
+        } else {
+            console.log("continuous fetches not needed because it is my turn")
+            // setisMyTurn(true);
+            setIsTurnEnding(false);
+            console.log("running clearInterval (it is the very next line")
+            clearTimeout(repeat);
+        }
+    }
+    
     // CONTINUOUSLY FETCH IF ITS NOT MY TURN
     console.log({isMyTurn})
     useEffect(() => {
-            let repeat;
-            if (!isMyTurn) {
-                repeat = setInterval(() => {
-                    console.log({isMyTurn})
-                    fetchGame()
-                    
-                    // if (!isMyTurn) {
-                    //     console.log("need to keep fetching");
-                    //     fetchGame()
-                    // } else {
-                    //     console.log("can stop fetching");
-                    //     setIsTurnEnding(false);
-                    //     // setisMyTurn(false);
-                    //     clearInterval(repeat);
-
-                    // }
-                }, 15000);
-            } else {
-                console.log("continuous fetches not needed because it is my turn")
-                // setisMyTurn(true);
-                setIsTurnEnding(false);
-                clearInterval(repeat);
-            }
+            console.log("isMyTurn has changed and is triggering useEffect containing setInterval")
+            console.log("inside isMyTurn useEffect")
+            console.log({isMyTurn})
+            callTimeout();
     }, [isMyTurn])
 
 
