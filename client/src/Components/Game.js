@@ -34,22 +34,23 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     // })
     const { gameType , gameURL } = useParams();
     const [ selectedCard , setSelectedCard ] = useState({});
-    const [ isTurnEnding , setIsTurnEnding ] = useState(false);
+    const [ isMyTurn , setisMyTurn ] = useState(true);
+    const [ isTurnEnding , setisTurnEnding ] = useState(false);
 
     // STATE LOGGING
     // console.log("!!!!!!!!!!! GAME COMPONENT !!!!!!!!!!!");
-    function reportStates () {
-        if (currentGame) {
-            console.log("Actual States:")
-            console.log({
-                user,
-                currentGame,
-                selectedCard,
-                isTurnEnding,
-            })
-        }
-    }
-    reportStates();
+    // function reportStates () {
+    //     if (currentGame) {
+    //         console.log("Actual States:")
+    //         console.log({
+    //             user,
+    //             currentGame,
+    //             selectedCard,
+    //             isMyTurn,
+    //         })
+    //     }
+    // }
+    // reportStates();
 
     // "LINEAR" STATES
     let playerCount;
@@ -81,15 +82,15 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
             playerCount = currentGame.players.length // ALWAYS CORRECT
             tablePosition = currentGame.players.findIndex(p => (p.id === user.id)) //ALWAYS CORRECT
             if (tablePosition === -1) {
-                console.log("YOU ARE NOT IN THIS GAME MATE")
+                // console.log("YOU ARE NOT IN THIS GAME MATE")
             } else {
+                // console.log("mapping over and sorting cards...");
                 sortCards();
-                console.log("mapping over and sorting cards...");
                 myTurnsRemaining = totalTurns - claimedCards.length;
                 myTurnIndex = totalTurns - myTurnsRemaining; //starts at 0, changes the moment we pull, determines what pack is rendered
-                console.log({myTurnIndex})
+                // console.log({myTurnIndex})
         
-                console.log({myTurnsRemaining});
+                // console.log({myTurnsRemaining});
                 
                 let activeCards = 5 * playerCount;
                 
@@ -102,14 +103,17 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     
                 cardsInPack = currentGame.nfts.slice(indexOfPackHeld, indexOfPackHeld + 5);
         
-                console.log("Pseudo-States:")
-                console.log({indexOfPackHeld});
-                console.log({claimedCards , remainingCards, opponentsCards, playerCount, tablePosition, totalCards, totalTurns, myTurnsRemaining, myTurnIndex, cardsInPack});
+                // console.log("Pseudo-States:")
+                // console.log({indexOfPackHeld});
+                // console.log({claimedCards , remainingCards, opponentsCards, playerCount, tablePosition, totalCards, totalTurns, myTurnsRemaining, myTurnIndex, cardsInPack});
             }
         }
     }
 
     function sortCards () {
+        remainingCards = [];
+        claimedCards = [];
+        opponentsCards = [];
         currentGame.nfts.map((nft) => {
             if (nft.owner === null) {
                 remainingCards = [...remainingCards, nft]; // NOT 100% VERIFIABLE
@@ -140,22 +144,39 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     }
     // GET GAME SPECIFICALLY WHEN WE RELOAD PAGE
     useEffect(() => {fetchGame()}, [user])
+
     function fetchGame () {
         if (user) {
             fetch(`/games/${gameURL}`)
             .then(resp => resp.json())
             .then(data => {
                 setCurrentGame(data);
-                testReadiness();
+                remainingCards = [];
+                claimedCards = [];
+                opponentsCards = [];
+                data.nfts.map((nft) => {
+                    if (nft.owner === null) {
+                        remainingCards = [...remainingCards, nft]; // NOT 100% VERIFIABLE
+                    } else if (nft.owner.id === user.id ) {
+                        claimedCards = [...claimedCards, nft]; // ALWAYS CORRECT
+                    } else {
+                        opponentsCards = [...opponentsCards, nft]; // NOT 100% VERIFIABLE
+                    }
+                });
+                if (remainingCards.length === (totalCards - (myTurnIndex * playerCount))) {
+                    console.log("condition met: ready to start new round")
+                    setisMyTurn(true)
+                }
             })
+            .then(() => sortCards());
         }
     }
 
     function handleSubmitTurn () {
         
         if ((Object.keys(selectedCard).length !== 0 && user)) {
-            console.log("handleSubmitTurn just fired with a selectedCard")
-            setIsTurnEnding(true);
+            setisTurnEnding(true);
+            // console.log("handleSubmitTurn just fired with a selectedCard")
             fetch(`/nfts/claim/${selectedCard.id}/${user.id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
@@ -163,7 +184,10 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                 .then(resp => resp.json())
                 .then(data => {
                     const timer = setTimeout(() => {
+                        setisMyTurn(false);
                         setSelectedCard({});
+                        setisTurnEnding(false);
+
                         if ( remainingCards.length > 0 ) {
                             setCurrentGame(data);
                         }
@@ -172,49 +196,44 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                     );
                     return () => clearTimeout(timer);
                 })
-                .then(() => {
-                    fetchOnLoop();
-                })
         } else {
             // HANDLE THIS "ERROR"
         }
     }
 
-    function testReadiness () {
-        if (remainingCards.length === (totalCards - myTurnIndex * playerCount)) {
-            if (isTurnEnding === true) {
-                setIsTurnEnding(false);
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // function testReadiness () {
+    //     if (remainingCards.length === (totalCards - myTurnIndex * playerCount)) {
+    //         if (isMyTurn === true) {
+    //             setisMyTurn(false);
+    //         }
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
     // console.log(testReadiness());
 
-    function fetchOnLoop () {
-        const repeat = setTimeout(() => {
-            console.log("ping");
-            fetchGame()
-            currentGame.nfts.map((nft) => {
-                if (nft.owner === null) {
-                    remainingCards = [...remainingCards, nft]; // NOT 100% VERIFIABLE
-                } else if (nft.owner.id === user.id ) {
-                    claimedCards = [...claimedCards, nft]; // ALWAYS CORRECT
-                } else {
-                    opponentsCards = [...opponentsCards, nft]; // NOT 100% VERIFIABLE
-                }
-            });
-            console.log({remainingCards , totalCards , myTurnIndex , playerCount})
-            if (remainingCards.length === (totalCards - (myTurnIndex * playerCount))) {
-                console.log("condition met")
-                clearTimeout(repeat);
-            } else {
-                console.log("condition not met")
-                fetchOnLoop();
-            }
-        }, 8000);
-    }
+    useEffect(() => {
+            let repeat;
+            // if (!isMyTurn) {
+                repeat = setInterval(() => {
+                    console.log({isMyTurn})
+                    
+                    if (!isMyTurn) {
+                        console.log("need to keep fetching");
+                        fetchGame()
+                    } else {
+                        console.log("can stop fetching");
+                        setisMyTurn(true);
+                        clearInterval(repeat);
+
+                    }
+                }, 15000);
+            // } else {
+            //     console.log("trying to stop cycle")
+            //     clearInterval(repeat);
+            // }
+    }, [isMyTurn])
 
 
 
@@ -240,7 +259,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                     </div>
                     
                     {/* DECKSTACK */}
-                    <DeckStack claimedCards={claimedCards} user={user} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
+                    <DeckStack claimedCards={claimedCards} user={user} isMyTurn={isMyTurn} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
 
                     {/* LOWER UI */}
                     <div className={style.playercamp_positioning_container}>
@@ -266,7 +285,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                                     <img id={style.avatar_image} src={avatarPlaceholder}/>
                                     <img id={style.turn_counter_image} className={`${isTurnEnding ? style.add_spin : null }`} src={TurnCounter}/>
                                     <div id={style.turn_clickable} onClick={handleSubmitTurn} className={Object.keys(selectedCard).length > 0 ? style.turn_glow : null}>
-                                        { selectedCard && !isTurnEnding ? <GlowIndicator /> : null}
+                                        { selectedCard && !isMyTurn ? <GlowIndicator /> : null}
                                     </div>
                                 </div>
                             </div>
