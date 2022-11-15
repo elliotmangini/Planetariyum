@@ -50,25 +50,32 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
         selectedCard,
         isTurnEnding,
     })
-    
 
     // "LINEAR" STATES
+    let playersCount;
+    let tablePosition;
     let totalCards;
     let totalTurns;
-    let turnsRemaining;
-    let turnNumber;
-    let packs = [];
+
     let remainingCards = [];
     let claimedCards = [];
     let opponentsCards = [];
+
+    let turnsRemaining;
+    let turnNumber;
+
+    let cardsInPack;
     // LINEAR TIME PACK ORGANIZATION
     if (currentGame) {
         if (currentGame.nfts) {
+            playersCount = currentGame.players.length
+            tablePosition = currentGame.players.findIndex(p => p.id === user.id) + 1
             totalCards = currentGame.nfts.length;
-            totalTurns = totalCards / currentGame.players.length
+            totalTurns = totalCards / playersCount
             
             currentGame.nfts.map((nft) => {
-                console.log(nft.id);
+                // confirm the order is consistent
+                // console.log(nft.id);
                 
                 if (nft.owner === null) {
                     remainingCards = [...remainingCards, nft];
@@ -79,12 +86,18 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
                 }
             });
         }
+        turnsRemaining = remainingCards.length / playersCount;
+        turnNumber = totalTurns - turnsRemaining;
 
-        turnsRemaining = totalTurns - remainingCards
+        cardsInPack = currentGame.nfts.slice(0, 5)
+
+        // theres 2 ways to do this
+        // take a variable sized slice of the remaining cards
+        // take a calculated slice of the total cards
     }
 
     // LINEAR TIME LOG
-    console.log({claimedCards , remainingCards, opponentsCards, totalCards, totalTurns, turnNumber});
+    console.log({claimedCards , remainingCards, opponentsCards, playersCount, tablePosition, totalCards, totalTurns, turnsRemaining, turnNumber, cardsInPack});
     
     // GET GAME SPECIFICALLY WHEN WE RELOAD PAGE
     useEffect(() => {fetchGame()}, [user])
@@ -228,7 +241,7 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
                     {/* PACKS */}
                     {remainingCards.length > 0 ?
                     <div className={style.position_cardlist}>
-                        <CardPack claimedCards={claimedCards} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
+                        <CardPack cardsInPack={remainingCards} remainingCards={remainingCards} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
                     </div>
                     : null }
                     

@@ -6,44 +6,21 @@ import { useState } from 'react';
 
 
 
-export default function CardPack ({ claimedCards , isDeckStack, selectedCard, isTurnEnding, setSelectedCard, currentGame }) {
+export default function CardPack ({ remainingCards, isDeckStack, selectedCard, isTurnEnding, setSelectedCard, currentGame, cardsInPack }) {
     const [ lastSelected , setLastSelected ] = useState({});
 
-    function leftInPack () {
-        let modulus = ((currentGame.deck_size - claimedCards.length) % 5);
-        if (currentGame.deck_size === 0) {
-            // GAME IS OVER
-        } else if (modulus === 0) {
-            return 5;
-        } else {
-            return modulus;
-        }
-    }
 
-    function handleSelect (nft) {
-        setLastSelected(selectedCard);
-        setSelectedCard(nft);
-    }
-
-    const remainingCards = currentGame.nfts.filter((nft) => {
-        return ( nft.owner === null)
-    })
-
-    // const filteredCollections = collections.filter((collection) => {
-    //     return (
-    //         collection.name.toLowerCase().includes(query.toLowerCase()) || 
-    //         collection.creator.display_name.toLowerCase().includes(query.toLowerCase())
-    //     )
-        
-    // })
-
-
-    const cardsToRender = remainingCards.slice(0, leftInPack()).map((n) => {
+    const cardsToRender = cardsInPack.slice(0, (remainingCards.length % 5) === 0 ? 5 : (remainingCards.length % 5)).map((n) => {
         // console.log(n);
         return (
             <Card isDeckStack={isDeckStack} nft={n} isTurnEnding={isTurnEnding} lastSelected={lastSelected} handleSelect={handleSelect} selectedCard={selectedCard} key={uuid()} />
         )
     })
+
+    function handleSelect (nft) {
+        setLastSelected(selectedCard);
+        setSelectedCard(nft);
+    }
 
     return (
         <>
