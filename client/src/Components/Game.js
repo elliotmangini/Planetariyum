@@ -35,7 +35,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     const { gameType , gameURL } = useParams();
     const [ selectedCard , setSelectedCard ] = useState({});
     const [ isMyTurn , setisMyTurn ] = useState(true);
-    const [ isTurnEnding , setisTurnEnding ] = useState(false);
+    const [ isTurnEnding , setIsTurnEnding ] = useState(false);
 
     // STATE LOGGING
     // console.log("!!!!!!!!!!! GAME COMPONENT !!!!!!!!!!!");
@@ -88,9 +88,6 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                 sortCards();
                 myTurnsRemaining = totalTurns - claimedCards.length;
                 myTurnIndex = totalTurns - myTurnsRemaining; //starts at 0, changes the moment we pull, determines what pack is rendered
-                // console.log({myTurnIndex})
-        
-                // console.log({myTurnsRemaining});
                 
                 let activeCards = 5 * playerCount;
                 
@@ -163,35 +160,56 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                         opponentsCards = [...opponentsCards, nft]; // NOT 100% VERIFIABLE
                     }
                 });
+                totalCards = data.nfts.length; // ALWAYS CORRECT
+                totalPacks = totalCards / 5; // ALWAYS CORRECT
+                totalTurns = data.deck_size // ALWAYS CORRECT
+                playerCount = data.players.length // ALWAYS CORRECT
+                tablePosition = data.players.findIndex(p => (p.id === user.id)) //ALWAYS CORRECT
+                myTurnsRemaining = totalTurns - claimedCards.length;
+                myTurnIndex = totalTurns - myTurnsRemaining; //starts at 0, changes the moment we pull, determines what pack is rendered
+                let activeCards = 5 * playerCount;
+                let rotationOutput = (((myTurnIndex + tablePosition) * 5) % (activeCards));
+                let packOpensAsIndex = (Math.floor(myTurnIndex / 5));
+                indexOfPackHeld = rotationOutput + (packOpensAsIndex * playerCount * 5); //  | 0-4: 0, 5-9: everyone opens a new pack, etc
+                openedPacks = packOpensAsIndex + 1 * playerCount;
+                unopenedPacks = totalPacks - openedPacks;
+    
+                cardsInPack = data.nfts.slice(indexOfPackHeld, indexOfPackHeld + 5);
+        
+                // console.log("Pseudo-States:")
+                // console.log({indexOfPackHeld});
+                // console.log({claimedCards , remainingCards, opponentsCards, playerCount, tablePosition, totalCards, totalTurns, myTurnsRemaining, myTurnIndex, cardsInPack});
+                // console.log(remainingCards , claimedCards, opponentsCards) // THIS IS WORKING
+                console.log({myTurnIndex})
+                console.log({totalCards})
+                console.log("when there are " + (totalCards - (myTurnIndex * playerCount)) + " cards remaining we can start next round")
+                console.log("there are " + (remainingCards.length) + " remaining/unclaimed.")
+                console.log("readiness-detecting reports that ready: " + (remainingCards.length === (totalCards - (myTurnIndex * playerCount))))
                 if (remainingCards.length === (totalCards - (myTurnIndex * playerCount))) {
-                    console.log("condition met: ready to start new round")
-                    setisMyTurn(true)
+                    console.log("setting isMyTurn to true");
+                    setisMyTurn(true);
+                } else {
+                    setisMyTurn(false);
                 }
             })
-            .then(() => sortCards());
         }
     }
 
     function handleSubmitTurn () {
         
         if ((Object.keys(selectedCard).length !== 0 && user)) {
-            setisTurnEnding(true);
-            // console.log("handleSubmitTurn just fired with a selectedCard")
+            setIsTurnEnding(true); // THIS TRIGGERS ANIMATIONS
+            setisMyTurn(false); // START CONTINUOUS FETCHING
             fetch(`/nfts/claim/${selectedCard.id}/${user.id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
-                })
-                .then(resp => resp.json())
-                .then(data => {
-                    const timer = setTimeout(() => {
-                        setisMyTurn(false);
-                        setSelectedCard({});
-                        setisTurnEnding(false);
-
-                        if ( remainingCards.length > 0 ) {
-                            setCurrentGame(data);
-                        }
-                        // leave enough time for animation at least
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                const timer = setTimeout(() => {
+                        setSelectedCard({}); // CLEAR SELECTED CARD AFFFFFTER ANIMATION OFF SCREEN
+                        // setIsTurnEnding(false);
+                        setCurrentGame(data);
                       }, 3700
                     );
                     return () => clearTimeout(timer);
@@ -201,38 +219,33 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
         }
     }
 
-    // function testReadiness () {
-    //     if (remainingCards.length === (totalCards - myTurnIndex * playerCount)) {
-    //         if (isMyTurn === true) {
-    //             setisMyTurn(false);
-    //         }
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-    // console.log(testReadiness());
 
+    // CONTINUOUSLY FETCH IF ITS NOT MY TURN
+    console.log({isMyTurn})
     useEffect(() => {
             let repeat;
-            // if (!isMyTurn) {
+            if (!isMyTurn) {
                 repeat = setInterval(() => {
                     console.log({isMyTurn})
+                    fetchGame()
                     
-                    if (!isMyTurn) {
-                        console.log("need to keep fetching");
-                        fetchGame()
-                    } else {
-                        console.log("can stop fetching");
-                        setisMyTurn(true);
-                        clearInterval(repeat);
+                    // if (!isMyTurn) {
+                    //     console.log("need to keep fetching");
+                    //     fetchGame()
+                    // } else {
+                    //     console.log("can stop fetching");
+                    //     setIsTurnEnding(false);
+                    //     // setisMyTurn(false);
+                    //     clearInterval(repeat);
 
-                    }
+                    // }
                 }, 15000);
-            // } else {
-            //     console.log("trying to stop cycle")
-            //     clearInterval(repeat);
-            // }
+            } else {
+                console.log("continuous fetches not needed because it is my turn")
+                // setisMyTurn(true);
+                setIsTurnEnding(false);
+                clearInterval(repeat);
+            }
     }, [isMyTurn])
 
 
