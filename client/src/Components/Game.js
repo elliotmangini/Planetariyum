@@ -21,94 +21,123 @@ import GlowIndicator from './GlowIndicator';
 
 
 
-export default function Game ({ setCurrentGame , currentGame, user, cable }) {
+export default function Game ({ setCurrentGame , currentGame, user }) {
     // const renderCount = useRef(1);
     // useEffect(() => {
     //         console.log("Game Component render count: " + renderCount.current);
     //         renderCount.current = renderCount.current + 1
     // })
-    
-    // const [ spinReset , setSpinReset ] = useState(false);
-    // const [ isStart , setIsStart ] = useState(false);
+    const started = useRef(false);
+    // useEffect(() => {
+    //     console.log("Game Component render count: " + started.current);
+    //     started.current = started.current + 1
+    // })
     const { gameType , gameURL } = useParams();
-    const [ stagedPlayers , setStagedPlayers ] = useState(["1,2"]);
-    const [ isGameLoaded , setIsGameLoaded ] = useState(false);
     const [ selectedCard , setSelectedCard ] = useState({});
     const [ isTurnEnding , setIsTurnEnding ] = useState(false);
-    
-    // THIS CAN BE REFACTORED INTO LINEAR TIME
-    // const [ claimedCards , setClaimedCards ] = useState([]);
 
     // STATE LOGGING
     // console.log("!!!!!!!!!!! GAME COMPONENT !!!!!!!!!!!");
-    // console.log({
-    //     user,
-    //     currentGame,
-    //     gameType,
-    //     stagedPlayers,
-    //     isGameLoaded,
-    //     selectedCard,
-    //     isTurnEnding,
-    // })
+    function reportStates () {
+        if (currentGame) {
+            console.log("Actual States:")
+            console.log({
+                user,
+                currentGame,
+                selectedCard,
+                isTurnEnding,
+            })
+        }
+    }
+    reportStates();
 
     // "LINEAR" STATES
-    let playersCount;
-    let tablePosition;
+    let playerCount;
     let totalCards;
+    let totalPacks;
     let totalTurns;
+
+    let tablePosition;
+
 
     let remainingCards = [];
     let claimedCards = [];
     let opponentsCards = [];
 
-    let turnsRemaining;
-    let turnNumber;
-
+    let myTurnIndex;
+    let unopenedPacks;
+    let openedPacks;
     let cardsInPack;
+
+    let myTurnsRemaining;
+    let indexOfPackHeld;
+
     // LINEAR TIME PACK ORGANIZATION
     if (currentGame) {
-        if (currentGame.nfts) {
-            playersCount = currentGame.players.length
-            tablePosition = currentGame.players.findIndex(p => p.id === user.id)
-            totalCards = currentGame.nfts.length;
-            totalTurns = totalCards / playersCount
-            
-            currentGame.nfts.map((nft) => {
-                // confirm the order is consistent
-                // console.log(nft.id);
+        if (currentGame.players.length > 0) {
+            totalCards = currentGame.nfts.length; // ALWAYS CORRECT
+            totalPacks = totalCards / 5; // ALWAYS CORRECT
+            totalTurns = currentGame.deck_size // ALWAYS CORRECT
+            playerCount = currentGame.players.length // ALWAYS CORRECT
+            tablePosition = currentGame.players.findIndex(p => (p.id === user.id)) //ALWAYS CORRECT
+            if (tablePosition === -1) {
+                console.log("YOU ARE NOT IN THIS GAME MATE")
+            } else {
+                sortCards();
+                console.log("mapping over and sorting cards...");
+                myTurnsRemaining = totalTurns - claimedCards.length;
+                myTurnIndex = totalTurns - myTurnsRemaining; //starts at 0, changes the moment we pull, determines what pack is rendered
+                console.log({myTurnIndex})
+        
+                console.log({myTurnsRemaining});
                 
-                if (nft.owner === null) {
-                    remainingCards = [...remainingCards, nft];
-                } else if (nft.owner.id === user.id ) {
-                    claimedCards = [...claimedCards, nft];
-                } else {
-                    opponentsCards = [...opponentsCards, nft];
-                }
-            });
+                let activeCards = 5 * playerCount;
+                
+                let rotationOutput = (((myTurnIndex + tablePosition) * 5) % (activeCards));
+                let packOpensAsIndex = (Math.floor(myTurnIndex / 5));
+                indexOfPackHeld = rotationOutput + (packOpensAsIndex * playerCount * 5); //  | 0-4: 0, 5-9: everyone opens a new pack, etc
+                
+                openedPacks = packOpensAsIndex + 1 * playerCount;
+                unopenedPacks = totalPacks - openedPacks;
+    
+                cardsInPack = currentGame.nfts.slice(indexOfPackHeld, indexOfPackHeld + 5);
+        
+                console.log("Pseudo-States:")
+                console.log({indexOfPackHeld});
+                console.log({claimedCards , remainingCards, opponentsCards, playerCount, tablePosition, totalCards, totalTurns, myTurnsRemaining, myTurnIndex, cardsInPack});
+            }
         }
-        turnsRemaining = remainingCards.length / playersCount;
-        turnNumber = totalTurns - turnsRemaining;
-
-
-        let cardsInPlay = 5 * playersCount;
-
-        function findPack () {
-            let result;
-            let rotationOutput = (((turnNumber + tablePosition) * 5) % (cardsInPlay))
-            let incrementation = (Math.floor(turnNumber / 5));
-            result = rotationOutput + (incrementation * playersCount * 5);
-            
-            cardsInPack = currentGame.nfts.slice(result, result + 5);
-            return [result, (result + 5)];
-        }
-
-        console.log(findPack());
-
     }
 
-    // LINEAR TIME LOG
-    console.log({claimedCards , remainingCards, opponentsCards, playersCount, tablePosition, totalCards, totalTurns, turnsRemaining, turnNumber, cardsInPack});
+    function sortCards () {
+        currentGame.nfts.map((nft) => {
+            if (nft.owner === null) {
+                remainingCards = [...remainingCards, nft]; // NOT 100% VERIFIABLE
+            } else if (nft.owner.id === user.id ) {
+                claimedCards = [...claimedCards, nft]; // ALWAYS CORRECT
+            } else {
+                opponentsCards = [...opponentsCards, nft]; // NOT 100% VERIFIABLE
+            }
+        });
+    }
     
+    
+    // CREATES NFTS AND SETS GAME IN MOTION
+    function startGame () {
+        if (!started.current) {
+            started.current = true;
+            fetch(`/nfts/${gameURL}/${"1,2"}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                })
+                .then(resp => resp.json())
+                .then(data => {
+                setCurrentGame(data);
+            })
+        } else {
+            console.log("already playing");
+        }
+    }
     // GET GAME SPECIFICALLY WHEN WE RELOAD PAGE
     useEffect(() => {fetchGame()}, [user])
     function fetchGame () {
@@ -116,37 +145,16 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
             fetch(`/games/${gameURL}`)
             .then(resp => resp.json())
             .then(data => {
-
                 setCurrentGame(data);
-                setIsGameLoaded(true);
-                // console.log("Getting game after refresh... or on initial load");
-                // console.log(data);
+                testReadiness();
             })
         }
     }
-    
-    // CREATES NFTS AND SETS GAME IN MOTION
-    function startGame () {
-        fetch(`/nfts/${gameURL}/${stagedPlayers}`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            })
-            .then(resp => resp.json())
-            .then(data => {
-            setCurrentGame(data);
-            // setIsStart(true);
-        })
-    }
-
-    // function failSpin () {
-    //     console.log(" in failspin setting true")
-    //     setSpinReset(true);
-    // }
 
     function handleSubmitTurn () {
-        // failSpin();
-
+        
         if ((Object.keys(selectedCard).length !== 0 && user)) {
+            console.log("handleSubmitTurn just fired with a selectedCard")
             setIsTurnEnding(true);
             fetch(`/nfts/claim/${selectedCard.id}/${user.id}`, {
                 method: "PATCH",
@@ -155,32 +163,57 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
                 .then(resp => resp.json())
                 .then(data => {
                     const timer = setTimeout(() => {
+                        setSelectedCard({});
                         if ( remainingCards.length > 0 ) {
-                            setSelectedCard({});
                             setCurrentGame(data);
-                            // setIsTurnEnding(false);
                         }
+                        // leave enough time for animation at least
                       }, 3700
                     );
                     return () => clearTimeout(timer);
                 })
                 .then(() => {
-                    fetchUntilTurn();
+                    fetchOnLoop();
                 })
         } else {
-            // HANDLE THIS ERROR
+            // HANDLE THIS "ERROR"
         }
     }
 
-    function fetchUntilTurn () {
-        const waitingForPlayers = setTimeout(() => {
-            fetchGame();
-            // THIS IS WHERE WE NEED TO FIGURE OUT IF THE TURN IS OVER
-            if (false) {
-                fetchUntilTurn();
+    function testReadiness () {
+        if (remainingCards.length === (totalCards - myTurnIndex * playerCount)) {
+            if (isTurnEnding === true) {
+                setIsTurnEnding(false);
             }
-        }, 10000);
-        return () => clearTimeout(waitingForPlayers);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    // console.log(testReadiness());
+
+    function fetchOnLoop () {
+        const repeat = setTimeout(() => {
+            console.log("ping");
+            fetchGame()
+            currentGame.nfts.map((nft) => {
+                if (nft.owner === null) {
+                    remainingCards = [...remainingCards, nft]; // NOT 100% VERIFIABLE
+                } else if (nft.owner.id === user.id ) {
+                    claimedCards = [...claimedCards, nft]; // ALWAYS CORRECT
+                } else {
+                    opponentsCards = [...opponentsCards, nft]; // NOT 100% VERIFIABLE
+                }
+            });
+            console.log({remainingCards , totalCards , myTurnIndex , playerCount})
+            if (remainingCards.length === (totalCards - (myTurnIndex * playerCount))) {
+                console.log("condition met")
+                clearTimeout(repeat);
+            } else {
+                console.log("condition not met")
+                fetchOnLoop();
+            }
+        }, 8000);
     }
 
 
@@ -188,7 +221,7 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
     return (
         <div className={style.give_game_fullscreen}>
             <img className={style.arena_background} src={currentGame ? currentGame.collection.arena_art_url : null}></img>
-            { isGameLoaded && user ?
+            { currentGame && user ?
             <>
                 { currentGame.nfts.length === 0 ?
                     <Lobby startGame={startGame}/>
@@ -203,7 +236,7 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
                     {/* unclaimed nfts/unpulled cards count */}
                     {/* currentGame.deck_size * currentGame.players.length */}
                         <div>{currentGame.deck_size - claimedCards.length} pulls left</div>
-                        <div>{claimedCards.length === currentGame.deck_size ? 0 : currentGame.players.length * Math.floor(((currentGame.deck_size - claimedCards.length - 1) / 5))} unopened pack(s) left</div>
+                        <div>{unopenedPacks} unopened pack(s) left</div>
                     </div>
                     
                     {/* DECKSTACK */}
@@ -289,7 +322,7 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
             </>
             : null }
 
-            <div className={`${style.loading_screen} ${isGameLoaded ? style.transition_fade : null}`}>Loading . . .</div>
+            <div className={`${style.loading_screen} ${currentGame ? style.transition_fade : null}`}>Loading . . .</div>
         </div>
     )
 }
@@ -356,7 +389,7 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
 // cool algo problem
 
 // // "LINEAR" STATES
-// let playersCount;
+// let playerCount;
 // let tablePosition;
 // let totalCards;
 // let totalTurns;
@@ -365,17 +398,17 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
 // let claimedCards = [];
 // let opponentsCards = [];
 
-// let turnsRemaining;
+// let myTurnsRemaining;
 // let turnNumber;
 
 // let cardsInPack;
 // // LINEAR TIME PACK ORGANIZATION
 // if (currentGame) {
 //     if (currentGame.nfts) {
-//         playersCount = currentGame.players.length
+//         playerCount = currentGame.players.length
 //         tablePosition = currentGame.players.findIndex(p => p.id === user.id)
 //         totalCards = currentGame.nfts.length;
-//         totalTurns = totalCards / playersCount
+//         totalTurns = totalCards / playerCount
         
 //         currentGame.nfts.map((nft) => {
 //             // confirm the order is consistent
@@ -390,40 +423,40 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
 //             }
 //         });
 //     }
-//     turnsRemaining = remainingCards.length / playersCount;
-//     turnNumber = totalTurns - turnsRemaining;
+//     myTurnsRemaining = remainingCards.length / playerCount;
+//     turnNumber = totalTurns - myTurnsRemaining;
 
-//     let indexStart = turnNumber * playersCount // 1 => (0,5), 2 => (10, 15)
+//     let indexStart = turnNumber * playerCount // 1 => (0,5), 2 => (10, 15)
 
 
-//     let cardsInPlay = 5 * playersCount;
+//     let activeCards = 5 * playerCount;
 //     // so from 15 how do we get function that produces 0, 5, and 10, we want to set up 0 => 0 , 1 => 5, 2 => 10 , 3 => 0 , 4 => 5, 5 => 10
 
-//     // + 5 unless output is greater than (playersCount - 1) * 5
+//     // + 5 unless output is greater than (playerCount - 1) * 5
 
 //     // turn 5 player 0 => 25
 
 //     // function simplified1 (turnNumber) {
-//     //     return (((turnNumber + tablePosition) * 5) % (5 * playersCount))
+//     //     return (((turnNumber + tablePosition) * 5) % (5 * playerCount))
 //     // }
 
 //     // this gives us (0,5,10), (5,10,0), (10,0,5) => ???
 
 //     // function simplified2 (turnNumber) {
-//     //     return (((turnNumber + tablePosition) * 5) % (5 * playersCount))
+//     //     return (((turnNumber + tablePosition) * 5) % (5 * playerCount))
 //     //     // we just need to add 5 times the number of players, and do it once ever number of players turns
 //     // }
 
 //     function simplified2 (turnNumber) {
 //         let result;
-//         let rotationOutput = (((turnNumber + tablePosition) * 5) % (5 * playersCount))
-//         let incrementation = (Math.floor(turnNumber / playersCount) + 1);
+//         let rotationOutput = (((turnNumber + tablePosition) * 5) % (5 * playerCount))
+//         let incrementation = (Math.floor(turnNumber / playerCount) + 1);
 //         result = rotationOutput * incrementation;
 //         return result;
 //     }
 
 //     cardsInPack = currentGame.nfts.slice(0, 5)
-//     // playersCount, turn, tablePosition <= variables that need accounting for
+//     // playerCount, turn, tablePosition <= variables that need accounting for
 //     // if its a multiple of 15 (players * 5) then it should return 0
 
 
