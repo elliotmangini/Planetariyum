@@ -32,37 +32,50 @@ export default function Arena ({ setCurrentGame, user }) {
     }
 
 
-    function createGame () {
-        const gameObj = {
-            collection_id: selectedCollection.id,
-            deadline: "03 Feb 2023 04:05:06 +0000",
-            local_url: gameURL.replace(/\s/g, ""),
-            game_type: gameType,
-            deck_size: 50,
+    function handleEnterKey(e) {
+        if (e.key === 'Enter') {
+            createGame();
         }
-        fetch("/games", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(gameObj),
-        })
-        .then(resp => {
-            if (resp.ok) {
-                resp.json()
-                .then(data => setCurrentGame(data))
-                setRedirect([gameType, gameURL.replace(/\s/g, "")]);
-            } else {
-                resp.json().then((err) => setErrors(err.errors));
+    }
+
+    function createGame () {
+        if (gameURL) {
+            const gameObj = {
+                collection_id: selectedCollection.id,
+                deadline: "03 Feb 2023 04:05:06 +0000",
+                local_url: gameURL.replace(/\s/g, ""),
+                game_type: gameType,
+                deck_size: 50,
             }
-        })
+            fetch("/games", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(gameObj),
+            })
+            .then(resp => {
+                if (resp.ok) {
+                    resp.json()
+                    .then(data => setCurrentGame(data))
+                    setRedirect([gameType, gameURL.replace(/\s/g, "")]);
+                } else {
+                    resp.json().then((err) => setErrors(err.errors));
+                }
+            })
+        } else {
+            // ERRORS
+        }
     }
 
 
     useEffect(() => {
         fetch('/collections')
         .then(resp => resp.json())
-        .then(data => setCollections(data));
+        .then(data => {
+            setCollections(data);
+            setSelectedCollection(data[0]);
+        });
     },[]);
 
     
@@ -110,11 +123,12 @@ export default function Arena ({ setCurrentGame, user }) {
                             </div>
                         </div>
                         <div className={style.custom_settings_box}>
-                            <form>
+                            <form onSubmit={(e) => e.preventDefault()}>
                                 <input
                                 type="text"
                                 placeholder="Custom URL"
                                 value={gameURL}
+                                onKeyPress={(e) => handleEnterKey(e)}
                                 onChange={(e) => setGameURL(e.target.value)}
                                 />
                             </form>

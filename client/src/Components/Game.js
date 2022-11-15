@@ -22,67 +22,86 @@ import GlowIndicator from './GlowIndicator';
 
 
 export default function Game ({ setCurrentGame , currentGame, user, cable }) {
+    const renderCount = useRef(1);
+    useEffect(() => {
+            console.log("Game Component render count: " + renderCount.current);
+            renderCount.current = renderCount.current + 1
+    })
     
     // const [ spinReset , setSpinReset ] = useState(false);
-    const { gameType , gameURL } = useParams();
     // const [ isStart , setIsStart ] = useState(false);
+    const { gameType , gameURL } = useParams();
     const [ stagedPlayers , setStagedPlayers ] = useState(["1,2"]);
     const [ isGameLoaded , setIsGameLoaded ] = useState(false);
     const [ selectedCard , setSelectedCard ] = useState({});
     const [ isTurnEnding , setIsTurnEnding ] = useState(false);
-    const [ claimedCards , setClaimedCards ] = useState([]);
-    const [ allCardsClaimed , setAllCardsClaimed ] = useState(false);
-
-    // const renderCount = useRef(1);
-    // useEffect(() => {
-    //     console.log("Game Component render count: " + renderCount.current);
-    //     renderCount.current = renderCount.current + 1
-    // })
     
+    // THIS CAN BE REFACTORED INTO LINEAR TIME
+    // const [ claimedCards , setClaimedCards ] = useState([]);
+
+    // STATE LOGGING
     console.log("!!!!!!!!!!! GAME COMPONENT !!!!!!!!!!!");
     console.log({
         user,
         currentGame,
         gameType,
-        // isStart,
         stagedPlayers,
         isGameLoaded,
         selectedCard,
         isTurnEnding,
-        claimedCards,
-        allCardsClaimed,
-    })
-
-    function sendMessage(message) {
-      fetch(`messages/${user.id}/${currentGame.room.id}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        })
-        .then(resp => resp.json())
-        .then(data => {
-    })}
-
-    cable.subscriptions.create({ channel: "RoomsChannel", room_url: gameURL },
-    {
-    connected: () => console.log("room connected!"),
-    disconnected: () => console.log("room disconnected!"),
-    received: (updatedRoom) => console.log(updatedRoom)
     })
     
+
+    // "LINEAR" STATES
+    let totalCards;
+    let totalTurns;
+    let turnsRemaining;
+    let turnNumber;
+    let packs = [];
+    let remainingCards = [];
+    let claimedCards = [];
+    let opponentsCards = [];
+    // LINEAR TIME PACK ORGANIZATION
+    if (currentGame) {
+        if (currentGame.nfts) {
+            totalCards = currentGame.nfts.length;
+            totalTurns = totalCards / currentGame.players.length
+            
+            currentGame.nfts.map((nft) => {
+                console.log(nft.id);
+                
+                if (nft.owner === null) {
+                    remainingCards = [...remainingCards, nft];
+                } else if (nft.owner.id === user.id ) {
+                    claimedCards = [...claimedCards, nft];
+                } else {
+                    opponentsCards = [...opponentsCards, nft];
+                }
+            });
+        }
+
+        turnsRemaining = totalTurns - remainingCards
+    }
+
+    // LINEAR TIME LOG
+    console.log({claimedCards , remainingCards, opponentsCards, totalCards, totalTurns, turnNumber});
+    
     // GET GAME SPECIFICALLY WHEN WE RELOAD PAGE
-    useEffect(() => {
+    useEffect(() => {fetchGame()}, [user])
+    function fetchGame () {
         if (user) {
             fetch(`/games/${gameURL}`)
             .then(resp => resp.json())
             .then(data => {
+
                 setCurrentGame(data);
                 setIsGameLoaded(true);
-                findPulls(data.nfts);
+                // findPulls(data.nfts);
                 // console.log("Getting game after refresh... or on initial load");
                 // console.log(data);
             })
         }
-    }, [user])
+    }
     
     // CREATES NFTS AND SETS GAME IN MOTION
     function startGame () {
@@ -96,27 +115,6 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
             // setIsStart(true);
         })
     }
-    
-    // FIND CARDS THE PLAYER NEED IN DECKSTACK AND FOR LOGIC
-    function findPulls (nftArray) {
-        setClaimedCards(nftArray.filter((nft) => {
-            // console.log(user.id);
-            // THIS IF KEEPS FROM READING AN UNDEFINED VALUE
-            if ( nft.owner !== null && user ) {
-                // console.log(nft);
-            return ( nft.owner.id === user.id )
-            }
-        }))
-    }
-
-    // CHECK IF THE GAME IS OVER ONCE WE KNOW WHAT CARDS ARE CLAIMED
-    useEffect(() => {
-        if ( currentGame ) {
-            if ( claimedCards.length >= currentGame.deck_size) {
-                setAllCardsClaimed(true);
-            }
-        }
-    }, [claimedCards]);
 
     // function failSpin () {
     //     console.log(" in failspin setting true")
@@ -135,49 +133,33 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
                 .then(resp => resp.json())
                 .then(data => {
                     const timer = setTimeout(() => {
-                        if ( !allCardsClaimed ) {
+                        if ( remainingCards.length > 0 ) {
                             setSelectedCard({});
                             setCurrentGame(data);
-                            findPulls(data.nfts);
-                            setIsTurnEnding(false);
+                            // setIsTurnEnding(false);
                         }
                       }, 3700
                     );
                     return () => clearTimeout(timer);
+                })
+                .then(() => {
+                    fetchUntilTurn();
                 })
         } else {
             // HANDLE THIS ERROR
         }
     }
 
-
-    // RENDER BIG CARD POSSIBILITIES OFF SCREEN (DOESNT HELP SO FAR)
-    // let bigCardPrerenders = [];
-    // useEffect(() => {
-    //     if (currentGame) {
-    //         function leftInPack () {
-    //             let modulus = currentGame.deck_size % 5;
-    //             if (currentGame.deck_size === 0) {
-    //                 // GAME IS OVER
-    //             } else if (modulus === 0) {
-    //                 return 5;
-    //             } else {
-    //                 return modulus;
-    //             }
-    //         }
-    //         const remainingCards = currentGame.nfts.filter((nft) => {
-    //             return ( nft.owner === null)
-    //         })
-    //         bigCardPrerenders = currentGame.deck_size.slice(0, leftInPack()).map((n) => {
-    //             // console.log(n);
-    //             return (
-    //                 <div className='prerender-off-screen'>
-    //                     <img src={n.card.art_url} alt="Avatar" />
-    //                 </div>
-    //             )
-    //         })
-    //     }
-    // },[currentGame])
+    function fetchUntilTurn () {
+        const waitingForPlayers = setTimeout(() => {
+            fetchGame();
+            // THIS IS WHERE WE NEED TO FIGURE OUT IF THE TURN IS OVER
+            if (false) {
+                fetchUntilTurn();
+            }
+        }, 10000);
+        return () => clearTimeout(waitingForPlayers);
+    }
 
 
 
@@ -227,7 +209,7 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
                                     {/* <div id={style.playercamp_shadow}></div> */}
                                     {/* FAKING SYMETRICAL SHADOW BY REUSING AVATAR UNDER TURN COUNTER */}
                                     <img id={style.avatar_image} src={avatarPlaceholder}/>
-                                    <img id={style.turn_counter_image} className={ isTurnEnding ? style.add_spin : null } src={TurnCounter}/>
+                                    <img id={style.turn_counter_image} className={`${isTurnEnding ? style.add_spin : null }`} src={TurnCounter}/>
                                     <div id={style.turn_clickable} onClick={handleSubmitTurn} className={Object.keys(selectedCard).length > 0 ? style.turn_glow : null}>
                                         { selectedCard && !isTurnEnding ? <GlowIndicator /> : null}
                                     </div>
@@ -244,7 +226,7 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
 
                     
                     {/* PACKS */}
-                    {!allCardsClaimed ?
+                    {remainingCards.length > 0 ?
                     <div className={style.position_cardlist}>
                         <CardPack claimedCards={claimedCards} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
                     </div>
@@ -275,7 +257,7 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
                     <div className="dev-text">LAST PACK BEING OPENED</div>
                     : null}
 
-                    {allCardsClaimed ?
+                    {remainingCards.length === 0 ?
                     <div className="dev-text">ALL CARDS HAVE BEEN CLAIMED</div>
                     : null}
 
@@ -289,3 +271,57 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
         </div>
     )
 }
+
+
+
+
+
+// RENDER BIG CARD POSSIBILITIES OFF SCREEN (DOESNT HELP SO FAR)
+// let bigCardPrerenders = [];
+// useEffect(() => {
+//     if (currentGame) {
+//         function leftInPack () {
+//             let modulus = currentGame.deck_size % 5;
+//             if (currentGame.deck_size === 0) {
+//                 // GAME IS OVER
+//             } else if (modulus === 0) {
+//                 return 5;
+//             } else {
+//                 return modulus;
+//             }
+//         }
+//         const remainingCards = currentGame.nfts.filter((nft) => {
+//             return ( nft.owner === null)
+//         })
+//         bigCardPrerenders = currentGame.deck_size.slice(0, leftInPack()).map((n) => {
+//             // console.log(n);
+//             return (
+//                 <div className='prerender-off-screen'>
+//                     <img src={n.card.art_url} alt="Avatar" />
+//                 </div>
+//             )
+//         })
+//     }
+// },[currentGame])
+
+
+
+// CABLE STUFF
+
+    
+    // function sendMessage(message) {
+    //   fetch(`messages/${user.id}/${currentGame.room.id}`, {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json" },
+        //     })
+        //     .then(resp => resp.json())
+    //     .then(data => {
+    // })}
+    
+    // console.log("HERE")
+    // cable.subscriptions.create({ channel: "RoomsChannel", room_url: gameURL },
+    // {
+    // connected: () => console.log("room connected!"),
+    // disconnected: () => console.log("room disconnected!"),
+    // received: (updatedRoom) => console.log(updatedRoom)
+    // })

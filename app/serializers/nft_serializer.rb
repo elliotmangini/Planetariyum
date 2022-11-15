@@ -1,4 +1,5 @@
 class NftSerializer < ActiveModel::Serializer
+
   attributes :id, :edition
 
   belongs_to :card

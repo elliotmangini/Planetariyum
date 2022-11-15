@@ -32,7 +32,14 @@ class NftsController < ApplicationController
     # @game.update_attribute(:deck_size, @game.nfts.find_by(:owner_id === null).count)
     render json: @game, include: ['room', 'players', 'collection', 'nfts', 'nfts.owner', 'nfts.holder', 'nfts.card'],  status: :accepted
   end
-
+  
+  # GET /nfts
+  def index
+    @nfts = Nft.all
+  
+    render json: @nfts
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_nft
@@ -50,12 +57,6 @@ class NftsController < ApplicationController
 end
 
 
-  # # GET /nfts
-  # def index
-  #   @nfts = Nft.all
-
-  #   render json: @nfts
-  # end
 
 
 

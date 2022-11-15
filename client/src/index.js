@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import ActionCable from "actioncable";
 
 const cableApp={}
-cableApp.cable=ActionCable.createConsumer("/cable")
+cableApp.cable=ActionCable.createConsumer("ws://localhost:3000/cable")
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

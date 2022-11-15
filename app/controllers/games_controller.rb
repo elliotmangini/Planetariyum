@@ -24,8 +24,8 @@ class GamesController < ApplicationController
   def create
     puts "creating game"
     puts params
-    @game = Game.create!(game_params)
-    @game.create_room()
+    game = Game.create!(game_params)
+    game.create_room()
     render json: @game, include: ['room', 'players', 'collection', 'nfts', 'nfts.owner', 'nfts.holder', 'nfts.card'], status: :created
   end
 

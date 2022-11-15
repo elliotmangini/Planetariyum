@@ -1,7 +1,7 @@
 class RoomsChannel < ApplicationCable::Channel
     def subscribed
       stop_all_streams
-      @game = Game.find_by(:local_url => params[:room_url])
+      @game = Game.find_by(local_url: params[:room_url])
       @room = Game.room
       stream_for @room
     end
