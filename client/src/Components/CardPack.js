@@ -6,11 +6,19 @@ import { useState } from 'react';
 
 
 
-export default function CardPack ({ remainingCards, isDeckStack, selectedCard, isTurnEnding, setSelectedCard, currentGame, cardsInPack }) {
+export default function CardPack ({ isDeckStack, selectedCard, isTurnEnding, setSelectedCard, currentGame, cardsInPack }) {
     const [ lastSelected , setLastSelected ] = useState({});
 
+    // console.log(cardsInPack);
 
-    const cardsToRender = cardsInPack.slice(0, (remainingCards.length % 5) === 0 ? 5 : (remainingCards.length % 5)).map((n) => {
+    const unclaimedCards = cardsInPack.filter(card => {
+        return (card.owner === null)
+    })
+
+    // console.log(unclaimedCards);
+
+
+    const cardsToRender = unclaimedCards.map((n) => {
         // console.log(n);
         return (
             <Card isDeckStack={isDeckStack} nft={n} isTurnEnding={isTurnEnding} lastSelected={lastSelected} handleSelect={handleSelect} selectedCard={selectedCard} key={uuid()} />

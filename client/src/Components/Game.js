@@ -22,11 +22,11 @@ import GlowIndicator from './GlowIndicator';
 
 
 export default function Game ({ setCurrentGame , currentGame, user, cable }) {
-    const renderCount = useRef(1);
-    useEffect(() => {
-            console.log("Game Component render count: " + renderCount.current);
-            renderCount.current = renderCount.current + 1
-    })
+    // const renderCount = useRef(1);
+    // useEffect(() => {
+    //         console.log("Game Component render count: " + renderCount.current);
+    //         renderCount.current = renderCount.current + 1
+    // })
     
     // const [ spinReset , setSpinReset ] = useState(false);
     // const [ isStart , setIsStart ] = useState(false);
@@ -40,16 +40,16 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
     // const [ claimedCards , setClaimedCards ] = useState([]);
 
     // STATE LOGGING
-    console.log("!!!!!!!!!!! GAME COMPONENT !!!!!!!!!!!");
-    console.log({
-        user,
-        currentGame,
-        gameType,
-        stagedPlayers,
-        isGameLoaded,
-        selectedCard,
-        isTurnEnding,
-    })
+    // console.log("!!!!!!!!!!! GAME COMPONENT !!!!!!!!!!!");
+    // console.log({
+    //     user,
+    //     currentGame,
+    //     gameType,
+    //     stagedPlayers,
+    //     isGameLoaded,
+    //     selectedCard,
+    //     isTurnEnding,
+    // })
 
     // "LINEAR" STATES
     let playersCount;
@@ -69,7 +69,7 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
     if (currentGame) {
         if (currentGame.nfts) {
             playersCount = currentGame.players.length
-            tablePosition = currentGame.players.findIndex(p => p.id === user.id) + 1
+            tablePosition = currentGame.players.findIndex(p => p.id === user.id)
             totalCards = currentGame.nfts.length;
             totalTurns = totalCards / playersCount
             
@@ -89,11 +89,21 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
         turnsRemaining = remainingCards.length / playersCount;
         turnNumber = totalTurns - turnsRemaining;
 
-        cardsInPack = currentGame.nfts.slice(0, 5)
 
-        // theres 2 ways to do this
-        // take a variable sized slice of the remaining cards
-        // take a calculated slice of the total cards
+        let cardsInPlay = 5 * playersCount;
+
+        function findPack () {
+            let result;
+            let rotationOutput = (((turnNumber + tablePosition) * 5) % (cardsInPlay))
+            let incrementation = (Math.floor(turnNumber / 5));
+            result = rotationOutput + (incrementation * playersCount * 5);
+            
+            cardsInPack = currentGame.nfts.slice(result, result + 5);
+            return [result, (result + 5)];
+        }
+
+        console.log(findPack());
+
     }
 
     // LINEAR TIME LOG
@@ -109,7 +119,6 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
 
                 setCurrentGame(data);
                 setIsGameLoaded(true);
-                // findPulls(data.nfts);
                 // console.log("Getting game after refresh... or on initial load");
                 // console.log(data);
             })
@@ -241,7 +250,7 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
                     {/* PACKS */}
                     {remainingCards.length > 0 ?
                     <div className={style.position_cardlist}>
-                        <CardPack cardsInPack={remainingCards} remainingCards={remainingCards} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
+                        <CardPack cardsInPack={cardsInPack} remainingCards={remainingCards} isTurnEnding={isTurnEnding} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
                     </div>
                     : null }
                     
@@ -338,3 +347,120 @@ export default function Game ({ setCurrentGame , currentGame, user, cable }) {
     // disconnected: () => console.log("room disconnected!"),
     // received: (updatedRoom) => console.log(updatedRoom)
     // })
+
+
+
+
+
+
+// cool algo problem
+
+// // "LINEAR" STATES
+// let playersCount;
+// let tablePosition;
+// let totalCards;
+// let totalTurns;
+
+// let remainingCards = [];
+// let claimedCards = [];
+// let opponentsCards = [];
+
+// let turnsRemaining;
+// let turnNumber;
+
+// let cardsInPack;
+// // LINEAR TIME PACK ORGANIZATION
+// if (currentGame) {
+//     if (currentGame.nfts) {
+//         playersCount = currentGame.players.length
+//         tablePosition = currentGame.players.findIndex(p => p.id === user.id)
+//         totalCards = currentGame.nfts.length;
+//         totalTurns = totalCards / playersCount
+        
+//         currentGame.nfts.map((nft) => {
+//             // confirm the order is consistent
+//             // console.log(nft.id);
+            
+//             if (nft.owner === null) {
+//                 remainingCards = [...remainingCards, nft];
+//             } else if (nft.owner.id === user.id ) {
+//                 claimedCards = [...claimedCards, nft];
+//             } else {
+//                 opponentsCards = [...opponentsCards, nft];
+//             }
+//         });
+//     }
+//     turnsRemaining = remainingCards.length / playersCount;
+//     turnNumber = totalTurns - turnsRemaining;
+
+//     let indexStart = turnNumber * playersCount // 1 => (0,5), 2 => (10, 15)
+
+
+//     let cardsInPlay = 5 * playersCount;
+//     // so from 15 how do we get function that produces 0, 5, and 10, we want to set up 0 => 0 , 1 => 5, 2 => 10 , 3 => 0 , 4 => 5, 5 => 10
+
+//     // + 5 unless output is greater than (playersCount - 1) * 5
+
+//     // turn 5 player 0 => 25
+
+//     // function simplified1 (turnNumber) {
+//     //     return (((turnNumber + tablePosition) * 5) % (5 * playersCount))
+//     // }
+
+//     // this gives us (0,5,10), (5,10,0), (10,0,5) => ???
+
+//     // function simplified2 (turnNumber) {
+//     //     return (((turnNumber + tablePosition) * 5) % (5 * playersCount))
+//     //     // we just need to add 5 times the number of players, and do it once ever number of players turns
+//     // }
+
+//     function simplified2 (turnNumber) {
+//         let result;
+//         let rotationOutput = (((turnNumber + tablePosition) * 5) % (5 * playersCount))
+//         let incrementation = (Math.floor(turnNumber / playersCount) + 1);
+//         result = rotationOutput * incrementation;
+//         return result;
+//     }
+
+//     cardsInPack = currentGame.nfts.slice(0, 5)
+//     // playersCount, turn, tablePosition <= variables that need accounting for
+//     // if its a multiple of 15 (players * 5) then it should return 0
+
+
+//     // turn one (0)
+//     // how slice works : index to include and start | first index NOT to include
+//     // player 1 => (0, 5)  player1 series => 0, 10, 5, 15, 25, 20...
+//     // player 2 => (5, 10) player2 series => 5, 0, 10, 20, 15, 25...
+//     // player 3 => (10, 15) player3 series => 10, 5, 0, 25, 20, 15...
+
+//     // we are "incrementing" by five, but around a circular pattern,
+//     // the circle has steps in it equal to the number of players,
+//     // the start position is determined by tablePosition,
+//     // the max value is determined by the number of players as well.
+//     //
+//     // turn two (1)
+//     // player 1 (0) => (10, 15)
+//     // player 2 (1)=> (0, 5)
+//     // player 3 (2)=> (5, 10)
+//     //
+//     // turn three (2)
+//     // player 1 (0) => (5, 10)
+//     // player 2 (1)=> (10, 15)
+//     // player 3 (2)=> (0, 5)
+
+//     // number of players has a distinct NEW effect here
+//     //
+//     // turn four (3)
+//     // player 1 (0) => (15, 20)
+//     // player 2 (1)=> (20, 25)
+//     // player 3 (2)=> (25, 30)
+//     //
+//     // turn five (4)
+//     // player 1 (0) => (25, 30)
+//     // player 2 (1)=> (15, 20)
+//     // player 3 (2)=> (20, 25)
+
+//     // theres 2 ways to do this
+//     // take a variable sized slice of the remaining cards
+//     // take a calculated slice of the total cards
+// }
