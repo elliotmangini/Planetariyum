@@ -229,7 +229,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                 console.log("inside setInterval");
                 console.log({isMyTurn})
                 fetchGame()
-            }, 10000);
+            }, 10000); // HOW LONG TO WAIT IN BETWEEN CHECKING FOR NEXT ROUND
         } else {
             console.log("continuous fetches not needed because it is my turn")
             // setisMyTurn(true);
