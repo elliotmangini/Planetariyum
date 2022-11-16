@@ -22,6 +22,8 @@ body {
 
   font-family: Arial;
 
+  font-size: 16px;
+
 }
 
 #root {
@@ -88,16 +90,25 @@ body {
 
 #nav_and_left_dash_container {
   width: auto;
-  min-width: 15%;
   height: 100%;
+  width: 20%;
   /* border: 3px solid rgb(0, 174, 255); */
   background: var(--background-secondary)
 }
 
+
+.site-right {
+  width: 20%;
+  background: var(--background-secondary);
+}
+
+
+/* SCROLLBAR HERE */
 #main_content {
   height: 100%;
   width: 100%;
   overflow: auto;
+  /* display: block; */
   /* border: 5px solid rgb(27, 74, 34); */
 }
 
@@ -411,4 +422,25 @@ input:focus {
 @keyframes threedeeshit {
   0% { transform: rotateY(0deg)}
   100% {transform: rotateY(60deg)}
+}
+
+.halfsecond-lazyload {
+  opacity: 0%;
+  animation: lazyload .5s;
+  animation-delay: .5s;
+  animation-fill-mode: forwards;
+
+}
+
+@keyframes lazyload {
+  0% {opacity: 0%}
+  100% {opacity: 100%}
+}
+
+.dev-box {
+  border: 2px solid red;
+}
+
+.display-block {
+  display: block;
 }

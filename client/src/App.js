@@ -97,12 +97,12 @@ export default function App({ cable }) {
           </div>
 
         { !currentGame ?
-        <div className={dimUI}>
-          { user ?
-          <DashRight isLogout={isLogout} setIsLogout={setIsLogout} setUser={setUser} user={user} setPath={setPath} />
-          :
-          <DashRightUserless isLogout={isLogout} setIsLogout={setIsLogout} />
-          }
+        <div className={`site-right ${dimUI}`}>
+            { user ?
+            <DashRight isLogout={isLogout} setIsLogout={setIsLogout} setUser={setUser} user={user} setPath={setPath} />
+            :
+            <DashRightUserless isLogout={isLogout} setIsLogout={setIsLogout} />
+            }
         </div>
         : null }
 

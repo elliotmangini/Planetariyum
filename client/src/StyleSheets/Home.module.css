@@ -1,6 +1,6 @@
 .grid_container {
     /* border: 3px solid rgb(163, 218, 243); */
-    display: flex;
+    /* display: flex; */
     justify-content: center;
 }
 
@@ -12,7 +12,7 @@
     display: grid;
     /* grid-template-columns: 30% 30% 40%; */
     /* gap: .2rem; */
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .grid_box {
@@ -46,4 +46,29 @@
     position: absolute;
     bottom: 5%;
     right: 5%;
+}
+
+.article_wrapper {
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+    background: rgb(37, 37, 90);
+    border-radius: 1rem;
+}
+
+.article_image_container {
+    width: 95%;
+    height: 200px;
+    margin: auto;
+    margin-top: 10px;
+    overflow-y: hidden;
+}
+
+.article_image {
+    margin-top: -40px;
+    width: 100%;
+}
+
+.article_wrapper h2 {
+    text-align: center;
 }

@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 
 import GridItem from './GridItem';
 
+import Robot1 from '../Assets/robots/robot6.png';
+
 
 
 export default function Home () {
@@ -26,9 +28,26 @@ export default function Home () {
 
 
     return (
-        <div className={style.grid_container}>
-            <div className={style.grid}>
-                {gridItems}
+        <div className='display-block'>
+            <div className={`${style.grid_container} halfsecond-lazyload`}>
+                <div className={style.grid}>
+                    {gridItems}
+                </div>
+            </div>
+            <div className={`dev-box ${style.article_wrapper} halfsecond-lazyload`}>
+                <div className={`${style.article_image_container}`}>
+                    <img className={`${style.article_image}`} src={Robot1} />
+                </div>
+
+                <div className={`dev-box ${style.article_wrapper}`}>
+                    <h2>Welcome</h2>
+                    <p style={{width: "90%", margin: "auto"}}>Welcome to our social network for artists! We are excited to have you here and hope that you will find our community to be a supportive and creative space. Our site is filled with features that will help you connect with other artists, showcase your work, and get inspired. Here are a few things you can do to get started:</p>
+                    <p style={{textAlign: "center"}}>-Explore the work of other artists in our community.</p>
+                    <p style={{textAlign: "center"}}>-Create a profile and start sharing your own art.</p>
+                    <p style={{textAlign: "center"}}>-Join conversations in our forums and groups.</p>
+                    <p style={{textAlign: "center"}}>-Check out our calendar of upcoming events.</p>
+                    <h3 style={{textAlign: "center"}}>We can't wait to see what you create!</h3>
+                </div>
             </div>
         </div>
     )

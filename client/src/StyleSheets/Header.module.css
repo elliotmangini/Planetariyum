@@ -3,5 +3,12 @@
 }
 
 h1 {
-    margin: 0;
+    margin: auto;
+}
+
+.sitelogo {
+    height: 90px;
+    position: absolute;
+    left: 0%;
+    top: 0%;
 }
