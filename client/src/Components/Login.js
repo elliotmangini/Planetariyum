@@ -44,6 +44,7 @@ export default function Login ({ user, setUser }) {
               <form className="form" onSubmit={handleSubmit}>
                   <div className="form-item-div">
                     <input
+                      spellCheck="false"
                       type="text"
                       id="username"
                       placeholder="Username"
@@ -53,6 +54,7 @@ export default function Login ({ user, setUser }) {
                   </div>
                   <div className="form-item-div">
                   <input
+                    spellCheck="false"
                     type="password"
                     id="password"
                     value={password}

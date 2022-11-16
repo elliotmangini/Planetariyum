@@ -1,0 +1,13 @@
+/* SHOW SCROLLBAR */
+/* ::-webkit-scrollbar {
+    display: block !important;
+    width: 7px;
+} */
+
+/* SITE WIDE SCROLLBAR SETTINGS FOR SOME REASON */
+/* ::-webkit-scrollbar-thumb {
+    display: block !important;
+    width: 10px;
+    border-radius: 1rem;
+    background-color: rgb(64, 64, 64);
+} */

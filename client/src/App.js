@@ -16,6 +16,7 @@ import Resources from './Components/Resources';
 import Forums from './Components/Forums';
 
 import Game from './Components/Game';
+import WelcomeGame from './Components/WelcomeGame';
 
 import Arena from './Components/Arena';
 import Mint from './Components/Mint';
@@ -48,7 +49,7 @@ export default function App({ cable }) {
   // disconnected: () => console.log("thing disconnected!"),
   // received: (updatedRoom) => console.log(updatedRoom)
   // })
-
+  
   return (
     <div id="theme_container" className={user ? user.site_theme : theme}>
 
@@ -67,7 +68,7 @@ export default function App({ cable }) {
             <Routes>
 
               { user ?
-              <Route path="/play/:gameType/:gameURL" element={<Game cable={cable} user={user} setCurrentGame={setCurrentGame} currentGame={currentGame}/>} />
+              <Route path="/play/:gameType/:gameURL" element={<WelcomeGame cable={cable} user={user} setCurrentGame={setCurrentGame} currentGame={currentGame}/>} />
               : null }
 
               <Route path="/" element={<Home />} />
@@ -97,12 +98,12 @@ export default function App({ cable }) {
           </div>
 
         { !currentGame ?
-        <div className={`site-right ${dimUI}`}>
+        <div className={`halfsecond-lazyload site-right ${dimUI}`}>
             { user ?
             <DashRight isLogout={isLogout} setIsLogout={setIsLogout} setUser={setUser} user={user} setPath={setPath} />
             :
             <DashRightUserless isLogout={isLogout} setIsLogout={setIsLogout} />
-            }
+          }
         </div>
         : null }
 

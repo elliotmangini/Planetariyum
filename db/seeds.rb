@@ -17,7 +17,7 @@ puts 'Creating Publications 🗞🗞🗞🗞🗞'
 story1 = Publication.create(title: "Welcome to Planetariyum",
 body: "",
 kind: "large", route: nil, runtime: 10000)
-story1_cover_blob = story1.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/grid_rectangle_1.png')), filename: 'grid_rectangle_1.png')
+story1_cover_blob = story1.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/robot6.png')), filename: 'grid_rectangle_1.png')
 
 story2 = Publication.create(title: "New Release: Planetariyum Base",
 body: "",

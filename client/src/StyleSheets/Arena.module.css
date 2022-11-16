@@ -7,13 +7,13 @@
 .main_content {
     width: 99.5%;
     height: 99%;
-    border: 3px solid rgb(255, 0, 238);
+    /* border: 3px solid rgb(255, 0, 238); */
 }
 
 .game_details_panel {
     position: relative;
     width: 85%;
-    height: 60%;
+    height: 63%;
     border: 1.7px solid rgb(177, 46, 225);
     border-radius: .5vw;
     background-color: rgb(47, 28, 65);
@@ -31,6 +31,7 @@
     margin-bottom: 3vh;
     margin-top: 5vh;
     border: 1.7px solid rgb(177, 46, 225);
+    border-radius: .5vw;
 
     text-align: center;
     font-size: 3vh;
@@ -45,30 +46,40 @@
     margin: auto;
     margin-bottom: 3vh;
     border: 1.7px solid rgb(177, 46, 225);
+    border-radius: .5vw;
 }
 
 .collection_slot {
-    position: absolute;
+    /* position: absolute;
     top: 10%;
-    left: 5%;
+    left: 5%; */
     /* border: 1.7px solid rgb(177, 46, 225); */
-}
-
-.thumb_container {
+    position: absolute;
+    width: 90%;
     margin: auto;
+    top: 5%;
+    left: 5%;
 }
 
-.thumb_text_container {
-    position: relative;
-    /* border: 1.7px solid rgb(177, 46, 225);
-    width: fit-content; */
+.selected_collection_container {
+    margin: auto;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    border: 1.7px solid transparent;
+    width: 100%;
 }
+
+/* .thumb_text_container {
+    position: relative;
+    border: 1.7px solid rgb(177, 46, 225);
+    width: fit-content;
+} */
 
 .cover_art {
     position: relative;
     /* bottom: 0%; */
-    width: 200px;
-    height: 60px;
+    width: 20vw;
+    height: 6vw;
     border-radius: 2em;
     transition: filter .5s;
     margin: 7px;
@@ -84,15 +95,19 @@
 }
 
 .collection_title {
-    position: absolute;
-    bottom: 20%;
-    left: 10%;
-    margin-top: 3rem;
-    width: 100%;
+    /* position: absolute; */
+    /* bottom: 20%; */
+    /* left: 10%; */
+    /* margin-top: 3rem; */
+    margin-top: auto;
+    margin-bottom: 8px;
+    width: fit-content;
     height: fit-content;
+    /* height: fit-content; */
     /* background-color: gray; */
-    margin-left: 17rem;
-    font-size: 2vh;
+    /* margin-left: 17rem; */
+    font-size: 2vw;
+    /* border: 1.7px solid rgb(177, 46, 225); */
 }
 
 .game_type_selector {
@@ -102,25 +117,34 @@
 }
 
 .custom_settings_box {
-    height: 20%;
+    text-align: center;
+    height: 15%;
     width: 65%;
     margin: auto;
     margin-bottom: 3vh;
     border: 1.7px solid rgb(177, 46, 225);
+    border-radius: .5vw;
+}
+
+input {
+    text-align: center;
 }
 
 .create_button {
     position: absolute;
     bottom: 5%;
     right: 5%;
-    background-color: green;
+    background-color: rgb(177, 46, 225);
     color: white;
-    width: 10vh;
+    width: 12vh;
     height: 3vh;
     border-radius: 1rem;
+    /* margin: .5rem; */
+    margin-top: .2rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px;
 }
 
 .pop_up {
@@ -166,20 +190,6 @@
 
 .blur {
     filter: blur(5px);
-}
-
-/* SHOW SCROLLBAR */
-::-webkit-scrollbar {
-    display: block !important;
-    width: 7px;
-}
-
-/* SITE WIDE SCROLLBAR SETTINGS FOR SOME REASON */
-::-webkit-scrollbar-thumb {
-    display: block !important;
-    width: 10px;
-    border-radius: 1rem;
-    background-color: rgb(64, 64, 64);
 }
 
 .hidden {

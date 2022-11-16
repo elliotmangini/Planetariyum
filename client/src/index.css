@@ -23,7 +23,7 @@ body {
   font-family: Arial;
 
   font-size: 16px;
-
+  box-sizing: border-box;
 }
 
 #root {
@@ -54,6 +54,7 @@ body {
 
 .dark {
   --background: rgb(28, 28, 28);
+  --text-input-background: rgb(45, 45, 45);
   --background-secondary: rgb(15, 15, 15);
   --header-background: rgb(49, 49, 49);
   --element-background: rgb(58, 58, 58);
@@ -66,11 +67,14 @@ body {
   --accent-color: #9b5486;
   --host-color: #fff949;
   --text-link: lightblue;
+  --text-glow-1: rgba(200, 200, 200, .5);
+  --text-glow-2: rgba(200, 200, 200, .5);
   
   background-color: var(--background);
   background-color: rgb(3, 3, 3);
 
   color: var(--text-primary);
+  box-sizing: border-box;
 }
 
 /* MAIN LAYOUT */
@@ -81,14 +85,34 @@ body {
   background: var(--background-secondary)
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+input, input:-webkit-autofill {
+  background-color: var(--text-input-background);
+  color: white;
+  border: none;
+  padding: .4rem;
+  font-size: .8rem;
+  /* text-align: bottom; */
+}
+
+input:focus::placeholder , input:-webkit-autofill {
+  color: transparent;
+}
+
 #nav_main_and_dash_container {
   display: flex;
   height: 90%;
   width: 100%;
+  /* z-index: 1; */
   /* border: 5px solid rgb(0, 255, 38); */
 }
 
 #nav_and_left_dash_container {
+  z-index: 1;
   width: auto;
   height: 100%;
   width: 20%;
@@ -443,4 +467,18 @@ input:focus {
 
 .display-block {
   display: block;
+}
+
+
+.glowing-text {
+  animation: glowing-text 1s ease-in-out infinite alternate;
+}
+
+@keyframes glowing-text {
+  from {
+    text-shadow: 0 0 5px var(--text-glow-1);
+  }
+  to {
+    text-shadow: 0 0 5px var(--text-glow-1);
+  }
 }

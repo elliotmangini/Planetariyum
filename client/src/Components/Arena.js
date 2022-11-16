@@ -97,7 +97,7 @@ export default function Arena ({ setCurrentGame, user }) {
         { redirect && user ? <Navigate to={`/play/${gameType}/${gameURL.replace(/\s/g, "")}`} /> : null}
         { redirect == "signup" ? <Navigate to="/signup" /> : null}
 
-            <div className={style.main_and_pop_up}>
+            <div className={`halfsecond-lazyload ${style.main_and_pop_up}`}>
                 <div className={`${style.main_content} ${isPopUp ? style.blur : null}`}>
                     <div className={style.game_details_panel}>
                         <div className={style.header_box}>
@@ -106,15 +106,15 @@ export default function Arena ({ setCurrentGame, user }) {
                         <div className={style.game_settings_box}>
 
                             <div onClick={handleEditCollection} className={style.collection_slot}>
-                                <div className={style.thumb_container}>
-                                    <div className={style.thumb_text_container}>
+                                <div className={style.selected_collection_container}>
+                                    {/* <div className={style.thumb_text_container}> */}
                                         <img className={style.cover_art} src={selectedCollection ? selectedCollection.cover_url : null}></img>
                                         <div className={style.collection_title}>
                                             {selectedCollection ? selectedCollection.creator.display_name : null}
                                             <br />
                                             {selectedCollection ? selectedCollection.name : "Choose A Set"}
                                         </div>
-                                    </div>
+                                    {/* </div> */}
                                 </div>
                             </div>
 
@@ -123,6 +123,7 @@ export default function Arena ({ setCurrentGame, user }) {
                             </div>
                         </div>
                         <div className={style.custom_settings_box}>
+                            <label>Custom URL</label>
                             <form onSubmit={(e) => e.preventDefault()}>
                                 <input
                                 type="text"

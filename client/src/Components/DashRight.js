@@ -25,7 +25,7 @@ export default function DashRight ({ isLogout, setIsLogout, user, setUser, setPa
     return (
         <>
             { isLogout ? <Navigate to="/" /> : null}
-            <div id={styleRightGeneric.dash_panel_container}>
+            <div id={`halfsecond-lazyload ${styleRightGeneric.dash_panel_container}`}>
 
                 <h1 id={styleRightGeneric.user_header}>
                     <div id={styleRightGeneric.spacer}></div>
