@@ -290,28 +290,26 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
 
     let wrapUpCards;
 
-    const [ lastSelected , setLastSelected ] = useState({});
-    const [ selectedCard2 , setSelectedCard2 ] = useState();
 
-    function handleSelect (nft) {
-        setLastSelected(selectedCard2);
-        setSelectedCard(nft);
-    }
 
     if (remainingCards.length === 0) {
         wrapUpCards = claimedCards.map((nft) => {
             return (
-                    <WrapupCard selectedCard={selectedCard2} handleSelect={handleSelect} key={nft.id} nft={nft}/>
+                    <WrapupCard key={nft.id} nft={nft}/>
             )
         })
     }
 
+    if (currentGame) {
+
+        console.log(currentGame.collection.arena_art_url)
+    }
 
 
     return (
         <>
         <div className={`${isWrappingUp ? style.end_blur : null } ${style.give_game_fullscreen}`}>
-            <img className={`${style.arena_background}`} src={currentGame ? currentGame.collection.arena_art_url : null}></img>
+            <img className={`${style.arena_background}`} src={currentGame ? null : null}></img>
             { currentGame && user ?
             <>
                 { currentGame.nfts.length === 0 ?

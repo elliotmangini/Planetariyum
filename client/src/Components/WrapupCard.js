@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 
 
-export default function WrapupCard ({ selectedCard2 , handleSelect, nft }) {
+export default function WrapupCard ({ nft }) {
   const [ audioAction , setAudioAction ] = useState("");
 
   function handleClick () {
