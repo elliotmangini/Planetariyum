@@ -13,12 +13,16 @@ export default function DeckStackItem ({ nft, selectedCard, isTurnEnding, lastSe
     // console.log(duration);
     function handleClick () {
         setAudioAction("play");
+        // console.log("click to play");
+
+        // SLIGHTLY CONFUSED WHY WE NEED TO WAIT 1MS TO GET IT TO PLAY BUT I KNEW WHY AT ONE POINT
         const timer = setTimeout(() => {
             if (!(selectedCard.id === nft.id)) {
-                // console.log(duration);
                 handleSelect(nft)
             }
-        }, 100
+            // THIS ALLOWS MULTIPLE PLAYS WETHER WE NEED TO SET A HIGHER LEVEL STATE OR NOT
+            setAudioAction("");
+        }, 1
         );
         return () => clearTimeout(timer);
     }
@@ -28,7 +32,7 @@ export default function DeckStackItem ({ nft, selectedCard, isTurnEnding, lastSe
         <> 
                 <div className={style.crop_container}>
                     <div></div>
-                    <img onClick={() => setAudioAction("play")} className={`${style.card_image_sliver}`} src={nft.card.art_url} alt="Avatar" />
+                    <img onClick={handleClick} className={`${style.card_image_sliver}`} src={nft.card.art_url} alt="Avatar" />
                 </div>
 
                 {audioAction ? <AudioPlayer setDuration={setDuration} action={audioAction} clearAction={setAudioAction}  sound={nft.card.asset_url} /> : null }

@@ -70,7 +70,9 @@
     left: -15%;
     transition: bottom .5s ease-in-out;
     height: 42%;
-    border: 10px solid red;
+    /* border: 10px solid red; */
+    background-color:#515151;
+    color: #bababa;
     border-radius: 1rem;
     margin: 3rem;
     width: 12%;

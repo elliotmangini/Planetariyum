@@ -49,7 +49,7 @@ export default function DeckStack ({ claimedCards , user, selectedCard, isTurnEn
     return (
         <>
             <div className={`${style.deckstack_positioning} ${style.slide_up} ${ isDeckStack ? style.deckstack_maximize : style. deckstack_minimize}`}>
-                <div onClick={() => setIsDeckStack(false)} className={`${style.deckstack_hide_button} ${ isDeckStack ? style.deckstack_hide_button_float_up : style.deckstack_hide_button_float_down}`}></div>
+                <div onClick={() => setIsDeckStack(false)} className={`${style.deckstack_hide_button} ${ isDeckStack ? style.deckstack_hide_button_float_up : style.deckstack_hide_button_float_down}`}>&nbsp;&nbsp;⌄</div>
                 <div className={`${style.fix_scroll_and_position}`}>
                     <div className={`${style.deckstack_container}`}>
                         {cardsToRender.reverse()}

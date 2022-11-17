@@ -63,7 +63,7 @@ The site will have a number of features, including a newsfeed, a messaging syste
 kind: "large", route: nil, runtime: 10000)
 story4_cover_blob = story4.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/robot2.png')), filename: 'robot2.png')
 
-story6 = Publication.create(title: "Reach Out (and Hire Me)",
+story6 = Publication.create(title: "Reach Out (pls hire)",
 body: "Founder and lead developer of Planetariyum, Elliot Mangini, is no stranger to the music industry and is excited to be rolling out his first full-featured web app.
 
 Hiring Mangini is a great idea for any company that wants to improve its online presence. His experience and knowledge in the field of social media and online marketing is second to none (okay, some), and he has a proven track record of success. Mangini is a true asset to any team, and his skills and abilities will undoubtedly help any project to reach new heights.",
@@ -165,6 +165,13 @@ card_hash = [
     {"KSW_Card_Art.png" => "Big_Sister_Impact_KSW_01.wav"},
     {"NASAInfo_Card_Art.png" => "Big_Sister_FX_NASAinfo_01.wav"},
     {"Diver_Card_Art.png" => "Big_Sister_FX_Diver_01.wav"},
+
+    {"DreamRhodes_Card_Art.png" => "Big_Sister_89bpm_Mel_DreamRhodes_01.wav"},
+    {"FAHKOFF_Card_Art.png" => "Big_Sister_Foghorn_FAHKOFF_01.wav"},
+    {"RibbonGirl_Card_Art.png" => "Big_Sister_Kick_Physical_RibbonGirl_01.wav"},
+    {"Rival_Card_Art.png" => "Big_Sister_808_Eb0_Rival_03.wav"},
+    {"Melo82_Card_Art.png" => "Big_Sister_82bpm_Mel_Abm_ClunkyPiano_01.wav"},
+
     ]
 
 100.times do |i|
