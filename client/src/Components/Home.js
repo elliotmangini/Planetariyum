@@ -6,6 +6,9 @@ import GridItem from './GridItem';
 
 import Publication  from './Publication';
 
+import HeaderLogo from '../Assets/logos/header_logo.png';
+
+
 
 
 export default function Home () {
@@ -44,6 +47,13 @@ export default function Home () {
 
 
     return (
+
+        <>
+        <div className="center-horizontal">
+            <img className={style.header_image} src={HeaderLogo}></img>
+        </div>
+        
+        
         <div className='display-block'>
             <div ref={ref} className={`${style.grid_container} halfsecond-lazyload`}>
                 <div className={style.grid}>
@@ -54,5 +64,6 @@ export default function Home () {
                 {articles} 
             </div>
         </div>
+        </>
     )
 }

@@ -11,9 +11,6 @@ export default function Header () {
     return (
         <div id={style.header_contents}>
             {/* <h1>Planetariyum</h1> */}
-            <div className="center-horizontal">
-                <img className={style.header_image} src={HeaderLogo}></img>
-            </div>
             {/* <img className={` ${style.sitelogo}`} src={SophieReactor}></img> */}
         </div>
     )

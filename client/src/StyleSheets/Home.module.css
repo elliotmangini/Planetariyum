@@ -1,3 +1,16 @@
+/* background image */
+
+.header_image {
+    pointer-events: none;
+    position: fixed;
+    left: 0vw;
+    top: 8%;
+    opacity: 70%;
+    width: 100vw;
+    /* z-index: -1; */
+}
+
+
 .grid_container {
     /* border: 3px solid rgb(163, 218, 243); */
     /* display: flex; */
@@ -42,26 +55,22 @@
     /* visibility: hidden; */
 }
 
-.fuck {
-    width: 17.5vw;
-    height: 10vw;
-    /* border: 2px solid green; */
-}
-
 .emptyscroll {
     position: relative;
     /* border: 2px solid green; */
     height: 10vw;
+    max-height: 12vh;
+
 }
 
 .publication_title {
     position: absolute;
     width: 80%;
-    bottom: 3%;
+    bottom: 5%;
     right: 3%;
     /* border: 1px solid blue; */
     text-align: right;
-    font-size: 2.5vmin;
+    font-size: 2.2vmin;
     z-index: 1;
     opacity: 0%;
     transition: opacity .3s;
@@ -115,7 +124,7 @@
 }
 
 .article_image {
-    margin-top: -3vw;
+    margin-top: -3.3vw;
     width: 100%;
     /* height: 200px; */
 }
