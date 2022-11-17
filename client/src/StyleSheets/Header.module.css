@@ -15,10 +15,10 @@ h1 {
 
 .header_image {
     pointer-events: none;
-    position: absolute;
-    left: -23vw;
+    position: fixed;
+    left: 0vw;
     top: 10%;
-    opacity: 50%;
-    width: 150vw;
-    /* z-index: -1; */
+    opacity: 60%;
+    width: 100vw;
+    z-index: -1;
 }

@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+import style from '../StyleSheets/Profile.module.css'; 
 
 
 export default function Profile () {
@@ -19,7 +20,7 @@ export default function Profile () {
     <>
       { user ?
         <>
-          <img width="100%" src={user.avatar_url}></img>
+          <img className={style.avatar_background} width="100%" src={user.avatar_url}></img>
         </>
       : null }
     </>

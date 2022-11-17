@@ -21,7 +21,8 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100px;
+    height: 10vw;
+    max-height: 12vh;
     /* position: relative; */
     /* border: 3px solid red; */
     overflow: hidden;
@@ -34,6 +35,7 @@
     min-height: 100%;
     max-width: 100%;
     min-height: 100%;
+    /* margin-bottom: 5rem; */
     
     /* height: 100%; */
     transition: filter .3s;
@@ -42,14 +44,14 @@
 
 .fuck {
     width: 17.5vw;
-    height: 100px;
+    height: 10vw;
     /* border: 2px solid green; */
 }
 
 .emptyscroll {
     position: relative;
     /* border: 2px solid green; */
-    height: 100px;
+    height: 10vw;
 }
 
 .publication_title {
@@ -83,7 +85,7 @@
     background: rgb(37, 37, 90);
     border-radius: 1rem;
     border: 2px solid rgb(120, 120, 120);
-    box-shadow: 0 45px 12px 30px rgba(0,0,0,0.50), 0 35px 19px 33px rgba(0,0,0,0.16);
+    box-shadow: 20px 5px 12px 10px rgba(0,0,0,0.30), 20px 35px 19px 33px rgba(0,0,0,0.16);
 
 }
 
@@ -165,15 +167,15 @@ span {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80%;
+    width: 10vw;
     height: 80%;
-    background: rgb(63, 88, 121);
+    background: rgb(27, 39, 53);
     /* right: 0%; */
     margin: 1rem;
     /* padding: 1rem; */
     border: 1px solid rgb(69, 69, 69);
     border-radius: .6rem;
-    font-size: 2vw;
+    font-size: 2vmin;
     /* height: 50%; */
     line-height: 50%;
     box-sizing: border-box;
