@@ -551,9 +551,10 @@
     right: 0%;
     height: 2.9vw;
     width: 22vw;
-    background-color: #515151;
+    background: linear-gradient(#515151, #3f3f3f);
     display: grid;
-    grid-template-columns: 43% 10%5% 10%5% 10% 5% 8% 2%;
+    grid-template-columns: 2% 42.5% 10%5% 10%5% 10% 5% 8% 2%;
+    border-radius: 0vw 0vw 0vw 1vw;
 }
 
 .number_indicators {
@@ -579,6 +580,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.dynamic_island img {
+    margin: auto;
+    max-width: 85%;
 }
 
 .settings_icon {

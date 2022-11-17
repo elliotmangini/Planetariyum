@@ -272,6 +272,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
 
                     {/* unclaimed nfts/unpulled cards count */}
                     {/* currentGame.deck_size * currentGame.players.length */}
+                        <div></div>
                         <div className={style.dynamic_island}>
                             <img src={waveform}></img>
                         </div>
