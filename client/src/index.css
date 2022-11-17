@@ -482,3 +482,7 @@ input:focus {
     text-shadow: 0 0 5px var(--text-glow-1);
   }
 }
+
+.absolute {
+  position: absolute;
+}
