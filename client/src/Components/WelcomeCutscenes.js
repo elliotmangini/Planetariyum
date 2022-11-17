@@ -52,6 +52,7 @@ export default function WelcomeCutscene ({ user }) {
     }
 
 
+
     function findScene () {
         switch(sceneNumber) {
             case 1:

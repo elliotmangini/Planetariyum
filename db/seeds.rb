@@ -77,29 +77,31 @@ puts 'Creating Users 👤'
 planetariyumwallet = User.create(
     username: 'planetariyumwallet',
     display_name: 'Wallet',
-    password: '123456verysecure',
+    password: '123123verysecure',
     bio: 'account holding nfts by default',
-    email: 'yungbigsister@gmail.com'
+    email: 'yungbigsister@gmail.com',
+    site_theme: 'dark',
 )
 wallet_avatar = planetariyumwallet.avatar.attach(io: File.open(File.join(Rails.root,'/app/assets/avatars/Octopus_God_pfp.png')), filename: 'Octopus_God_pfp.png')
 
 sophie = User.create(
     username: 'sophiemonster',
     display_name: 'Sophie ^_^',
-    password: '123456',
+    password: '123123',
     bio: 'your host!',
-    email: 'sophiemangini@gmail.com'
+    email: 'sophiemangini@gmail.com',
+    site_theme: 'dark',
 )
 wallet_avatar = planetariyumwallet.avatar.attach(io: File.open(File.join(Rails.root,'/app/assets/avatars/Sophie_pfp.png')), filename: 'Sophie_pfp.png')
 
 elliot = User.create(
     username: 'bigsister',
     display_name: 'Big Sister',
-    password: '123456',
+    password: '123123',
     bio: 'this is big sisters bio',
     email: 'elliot.mangini@gmail.com',
     twitch_username: 'biigsiister',
-    site_theme: 'dark'
+    site_theme: 'dark',
 )
 # ACTIVE STORAGE SEEDING EXAMPLE
 elliot_avatar = elliot.avatar.attach(io: File.open(File.join(Rails.root,'/app/assets/avatars/Octopus_God_pfp.png')), filename: 'Octopus_God_pfp.png')
@@ -107,10 +109,11 @@ elliot_avatar = elliot.avatar.attach(io: File.open(File.join(Rails.root,'/app/as
 gabe = User.create(
     username: 'sinecaster',
     display_name: 'Sine Caster',
-    password: '123456',
+    password: '123123',
     bio: 'this is gabes bio',
     email: 'sinecaster@gmail.com',
-    twitch_username: 'SineCasterMusic'
+    twitch_username: 'SineCasterMusic',
+    site_theme: 'dark',
 )
 gabe_avatar = gabe.avatar.attach(io: File.open(File.join(Rails.root,'/app/assets/avatars/gabepfp.png')), filename: 'gabepfp.png')
 

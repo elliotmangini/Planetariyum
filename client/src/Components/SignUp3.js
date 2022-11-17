@@ -42,7 +42,7 @@ export default function SignUp3 ({ setCurrentGame, dimUI, setDimUI, setSequence,
                 <div className={style.avatar_title_container}>
                     <img className={style.avatar_title_bubble} src={user.avatar_url ? user.avatar_url : avatarPlaceholder}></img>
                 </div>
-                <div className="pop-up-title"><span>{user.display_name} . . . Okay,<br />Wouldn't have been my first choice! but--</span></div>
+                <div className="pop-up-title"><span>{user.display_name}, huh? ...Okay,<br />Wouldn't have been my first choice! but--</span></div>
                 {/* <div>Have a Draft on us?</div> */}
                     {/* <div className={style.smol}>There'll be time to explore soon, but we'd like to show you the game and start your collection first.</div> */}
                     <div>We'd like to recommend a curated set...</div>

@@ -2,6 +2,9 @@
     position: absolute;
     height: 100%;
     width: 100%;
+    transition: filter 2s ease-in-out, opacity 2s ease-in-out;
+    /* transition: opacity 2s ease-in-out; */
+
 }
 
 .arena_background {
@@ -643,6 +646,10 @@
     width: 60%;
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20% ;
+    /* grid-template-columns: repeat( auto-fit, minmax(21vh, 1fr) ) */
+    /* grid-auto-rows: 200px;
+    grid-auto-columns: 200px; */
+
     /* transform: scale(.8); */
     /* overflow: scroll; */
 }
@@ -708,7 +715,6 @@
 
 
 .wrap_up_btn {
-    pointer-events: auto;
     margin-bottom: 2vw;
     width: 8vw;
     /* bottom: 12%; */
@@ -723,10 +729,83 @@
     justify-content: center;
     box-shadow: 4px 5px 12px 3px rgba(0,0,0,0.30), 10px 25px 19px 33px rgba(0,0,0,0.16);
     margin: auto;
+    pointer-events: auto;
 
 }
 
 .wrap_up_btn:hover {
     background: rgb(205, 143, 215);
     cursor: pointer;
+}
+
+
+.end_blur {
+    filter: blur(6px);
+    opacity: 75%;
+}
+
+.wrap_up_container {
+    text-align: center;
+    border: 1px solid var(--text-link);
+    border-radius: 1rem;
+    background-color: var(--popup-background);
+    width: 45%;
+    height: calc(fit-content * var(--g));
+    height: fit-content;
+    position: fixed;
+    margin-top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    /* overflow: scroll; */
+    animation: blur_in .2s ease-in-out;
+    animation-fill-mode: forwards;
+  }
+
+.expand_popup {
+    position: relative;
+    /* margin-top: -30vh; */
+    height: 55vh;
+    width: 40vw;
+    border: 2px solid red;
+    margin: auto;
+    margin-top: 3vw;
+    margin-bottom: 4vw;
+}
+
+.body_smaller {
+    width: 80%;
+    margin: auto;
+}
+
+.expand_popup h3 {
+    color: var(--accent-color);
+}
+
+.button_container {
+    position: absolute;
+    /* height: 70%; */
+    border: 2px solid red;
+    width: 100%;
+    bottom: 0%;
+
+}
+
+.move_grid_down {
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+}
+
+.for_the_love_of_god {
+    width: 100%;
+    border: 2px solid red;
+}
+
+.download_button_grid {
+    bottom: 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border: 2px solid red;
+    margin-top: auto;
+    width: 100%;
 }

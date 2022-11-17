@@ -26,7 +26,7 @@ class GamesController < ApplicationController
     puts params
     game = Game.create!(game_params)
     game.create_room()
-    render json: @game, include: ['players', 'collection', 'nfts', 'nfts.owner', 'nfts.holder', 'nfts.card'], status: :created
+    render json: game, include: ['players', 'collection', 'nfts', 'nfts.owner', 'nfts.holder', 'nfts.card'], status: :created
   end
 
   # POST /games

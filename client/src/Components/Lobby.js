@@ -1,5 +1,6 @@
 import style from '../StyleSheets/Lobby.module.css'
 
+import SophiePfp from '../Assets/placeholders/Sophie_pfp.png';
 
 
 
@@ -15,12 +16,12 @@ export default function Lobby ({ user , startGame, currentGame }) {
                     <div className={`${style.lobby_panel} center-horizontal`}>
 
                         <div className={style.title_wrapper}>
-                            <div>
+                            <div className={style.lobby_title}>
                                 {currentGame.collection.name}
                             </div>
                             <div>
-                                {currentGame.game_type},&nbsp;
-                                {currentGame.deck_size} pull
+                                {currentGame.game_type} Game -&nbsp;
+                                <span>{currentGame.deck_size}</span> pull.
                             </div>
                         </div>
 
@@ -44,7 +45,7 @@ export default function Lobby ({ user , startGame, currentGame }) {
                                     <div className={style.status_icon}>✅✅✅</div>
                                 </div>
                                 <div>
-                                    <img className={style.lobby_avatar} src={user.avatar_url}></img>
+                                    <img className={style.lobby_avatar} src={SophiePfp}></img>
                                 </div>
                             </div>
                         </div>

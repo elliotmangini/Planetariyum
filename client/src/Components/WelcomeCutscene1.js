@@ -91,7 +91,7 @@ export default function WelcomeCutscene1 ({ setSceneNumber }) {
                 <div className='code-text center-vertical'>
                     <div className={style.ether_text_position}>
                         { messageNumber === 6 ? <TypewriterText speed={500} 
-                        body={"Oh--       By the way I'm Sophie! Nice to  meet you ^_^"}
+                        body={"Oh--       By the way, I'm Sophie! Nice to  meet you ^_^"}
                         /> : null }
                     </div>
                 </div>

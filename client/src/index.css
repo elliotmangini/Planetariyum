@@ -380,6 +380,17 @@ input:focus {
   top: 50%;
 }
 
+.vertical-16 {
+  position: absolute;
+  /* border: 1px solid greenyellow; */
+  width: 100%;
+  top: 16%;
+}
+
+not(.verical-16) {
+  opacity: 10%;
+}
+
 .dev-text {
   width: fit-content;
   margin: auto;

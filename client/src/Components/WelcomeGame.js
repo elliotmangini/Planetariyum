@@ -43,6 +43,8 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     const [ isMyTurn , setisMyTurn ] = useState(true);
     const fetchIntervalRef = useRef();
     const [ isTurnEnding , setIsTurnEnding ] = useState(false);
+    const [ redirect , setRedirect ] = useState(null);
+    const [ isWrappingUp, setIsWrappingUp ] = useState(false);
 
     // STATE LOGGING
     // console.log("!!!!!!!!!!! GAME COMPONENT !!!!!!!!!!!");
@@ -286,22 +288,30 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
             callTimeout();
     }, [isMyTurn])
 
-    let gameCollection;
+    let wrapUpCards;
+
+    const [ lastSelected , setLastSelected ] = useState({});
+    const [ selectedCard2 , setSelectedCard2 ] = useState();
+
+    function handleSelect (nft) {
+        setLastSelected(selectedCard2);
+        setSelectedCard(nft);
+    }
 
     if (remainingCards.length === 0) {
-        gameCollection = claimedCards.map((nft) => {
+        wrapUpCards = claimedCards.map((nft) => {
             return (
-                    <WrapupCard nft={nft}/>
+                    <WrapupCard selectedCard={selectedCard2} handleSelect={handleSelect} key={nft.id} nft={nft}/>
             )
-
         })
     }
 
 
 
     return (
-        <div className={style.give_game_fullscreen}>
-            <img className={style.arena_background} src={currentGame ? currentGame.collection.arena_art_url : null}></img>
+        <>
+        <div className={`${isWrappingUp ? style.end_blur : null } ${style.give_game_fullscreen}`}>
+            <img className={`${style.arena_background}`} src={currentGame ? currentGame.collection.arena_art_url : null}></img>
             { currentGame && user ?
             <>
                 { currentGame.nfts.length === 0 ?
@@ -414,20 +424,18 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                         
                         <div className={style.scroll_container_new}>
                             <div className={style.wrapup_grid}>
-                                {gameCollection}
+                                {wrapUpCards}
                             </div>
                         </div>
                         <div className={style.wrap_up_btn_container}>
                             <div className="relative100">
                                 <div className="margin-container">
-                                    <div className={style.wrap_up_btn}>Wrap Up</div>
+                                    <div onClick={() => setIsWrappingUp(true)} className={style.wrap_up_btn}>Wrap Up</div>
                                 </div>
                             </div>
                         </div>
                     </>
                     : null}
-
-                    
                 </div>
                 : null }
             </>
@@ -435,6 +443,39 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
 
             <div className={`${style.loading_screen} ${currentGame ? style.transition_fade : null}`}>Loading . . .</div>
         </div>
+        { isWrappingUp ?
+            <>
+                <div className="vertical-16">
+                    {/* <div className="center-horizontal"> */}
+                        {/* <div className="absolute100"> */}
+                            <div className={`${style.wrap_up_container}`}>
+                                <div className={style.expand_popup}>
+                                    <h3>Well Done!</h3>
+                                    <div className={style.body_smaller}>
+                                    <div>That's your first draft, and hopefully a fun new way to collect samples, time to launch off this creative springboard ^_^</div>
+
+                                    </div>
+                                    <div className={style.button_container}>
+                                        <div className={style.move_grid_down}>
+                                            <div className={style.for_the_love_of_god}>
+                                            <div className={style.download_button_grid}>
+                                                <div>button1</div>
+                                                <div>button2</div>
+                                                <div>button3</div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        {/* </div> */}
+                    {/* </div> */}
+                </div>
+            </>
+            : null }
+        </>
     )
 }
 

@@ -17,9 +17,9 @@ export default function DeckStackItem ({ nft, selectedCard, isTurnEnding, lastSe
 
         // SLIGHTLY CONFUSED WHY WE NEED TO WAIT 1MS TO GET IT TO PLAY BUT I KNEW WHY AT ONE POINT
         const timer = setTimeout(() => {
-            if (!(selectedCard.id === nft.id)) {
-                handleSelect(nft)
-            }
+            // if (!(selectedCard.id === nft.id)) {
+            //     handleSelect(nft)
+            // }
             // THIS ALLOWS MULTIPLE PLAYS WETHER WE NEED TO SET A HIGHER LEVEL STATE OR NOT
             setAudioAction("");
         }, 1

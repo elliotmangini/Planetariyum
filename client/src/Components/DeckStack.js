@@ -13,8 +13,8 @@ export default function DeckStack ({ force, claimedCards , user, selectedCard, i
     // console.log(leftInPack())
 
     function handleSelect (nft) {
-        setLastSelected(selectedCard);
-        setSelectedCard(nft);
+        // setLastSelected(selectedCard);
+        // setSelectedCard(nft);
     }
 
 
