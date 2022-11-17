@@ -799,7 +799,7 @@
     /* height: 70%; */
     /* border: 2px solid red; */
     width: 100%;
-    bottom: 0%;
+    bottom: -10%;
 
 }
 
@@ -855,4 +855,10 @@
 
 #d_unique {
     background: rgb(176, 154, 12);
+}
+
+.sophie_positioning {
+    position: fixed;
+    left: -1%;
+    top: 5%;
 }

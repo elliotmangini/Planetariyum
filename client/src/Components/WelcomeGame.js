@@ -6,6 +6,7 @@ import CardPack from './CardPack';
 import CardBinder from './CardBinder';
 import DeckStack from './DeckStack';
 import WrapupCard from './WrapupCard';
+import EtherHost from './EtherHost';
 
 
 import style from '../StyleSheets/Game.module.css'
@@ -445,7 +446,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
         </div>
         { isWrappingUp ?
             <>
-                <div className="vertical-16">
+                <div className="vertical-13">
                     {/* <div className="center-horizontal"> */}
                         {/* <div className="absolute100"> */}
                             <div className={`${style.wrap_up_container}`}>
@@ -454,6 +455,9 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                                     <div className={style.body_smaller}>
                                     <div>That's your first draft, and hopefully a fun new way to collect samples, time to launch off this creative springboard ^_^</div>
 
+                                    </div>
+                                    <div className={style.sophie_positioning}>
+                                        <EtherHost />
                                     </div>
                                     <div className={style.button_container}>
                                         <div className={style.move_grid_down}>

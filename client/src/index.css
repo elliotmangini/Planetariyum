@@ -380,11 +380,11 @@ input:focus {
   top: 50%;
 }
 
-.vertical-16 {
+.vertical-13 {
   position: absolute;
   /* border: 1px solid greenyellow; */
   width: 100%;
-  top: 16%;
+  top: 13%;
 }
 
 not(.verical-16) {
