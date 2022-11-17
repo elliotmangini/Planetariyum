@@ -23,9 +23,11 @@ export default function Home () {
         .then(data => setPublications(data));
     },[]);
 
+
+
     const gridItems = publications.map((p) =>{
         return (
-            <GridItem scrollToArticle={scrollToArticle} item={p} key={uuid()} />
+            <GridItem item={p} key={uuid()} />
         )
     })
 
@@ -38,10 +40,6 @@ export default function Home () {
     function scrollToTop () {
         ref.current?.scrollIntoView({behavior: 'smooth'});
         console.log("scrolling");
-    }
-
-    function scrollToArticle (name) {
-        name.scrollIntoView({behavior: 'smooth'});
     }
 
 

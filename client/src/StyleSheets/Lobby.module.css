@@ -5,6 +5,15 @@
     /* background-color: grey; */
 }
 
+.lobby_panel {
+    position: relative;
+    width: 55%;
+    height: 30vh;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid red;
+}
+
 .start_game_button {
     position: absolute;
     width: 8vw;
@@ -12,7 +21,7 @@
     bottom: 3%;
     height: 3vw;
     text-align: center;
-    background: green;
+    background: rgb(77, 142, 64);
     border-radius: 30%;
     border: 2px solid red;
     display: flex;

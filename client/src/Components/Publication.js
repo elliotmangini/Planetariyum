@@ -5,7 +5,7 @@ import Robot1 from "../Assets/robots/robot6.png";
 export default function Publication({ item, scrollToTop }) {
   return (
     <>
-      <div className={`dev-box ${style.article_wrapper} halfsecond-lazyload`}>
+      <div id={`article${item.id}`} className={`dev-box ${style.article_wrapper} halfsecond-lazyload`}>
       <div className={style.blurry_background_container}>
         <img className={style.blurry_background_img} src={item.cover_url}></img>
       </div>

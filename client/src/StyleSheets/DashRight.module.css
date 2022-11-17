@@ -41,7 +41,7 @@ a, a:visited {
     /* border: 1px solid red; */
     text-align: right;
     /* float: left; */
-    bottom: 16%;
+    bottom: 20%;
 }
 
 #dash_avatar:hover {
@@ -53,10 +53,10 @@ a, a:visited {
     width: 2.5vw;
     object-fit: flex;
     border-radius:50%;
-    margin: .5rem;
+    /* margin: .5rem; */
     margin-left: .5rem;
-    margin-right: 1vw;
-    margin-top: 1rem;
+    margin-right: .5vw;
+    margin-top: .7rem;
 }
 
 .dash_contents_container {
