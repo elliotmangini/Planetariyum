@@ -853,8 +853,16 @@
     background: rgb(21, 121, 59);
 }
 
+#d_all:hover {
+    background: rgb(28, 160, 116);
+}
+
 #d_unique {
     background: rgb(176, 154, 12);
+}
+
+#d_unique:hover {
+    background: rgb(220, 193, 16);
 }
 
 .sophie_positioning {

@@ -23,6 +23,7 @@ export default function Lobby ({ user , startGame, currentGame }) {
                                 {currentGame.game_type} Game -&nbsp;
                                 <span>{currentGame.deck_size}</span> pull.
                             </div>
+                            <div><span>{user.display_name}</span> vs <span>Sophie</span></div>
                         </div>
 
                         <div className={style.players_container}>

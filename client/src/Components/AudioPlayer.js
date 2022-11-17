@@ -10,7 +10,7 @@ export default function AudioPlayer ({ setDuration , sound , action , clearActio
     // })
 
     const audio = new Audio(sound)
-    // audio.volume = .5;
+    audio.volume = .4;
 
     function play() {
         audio.play();

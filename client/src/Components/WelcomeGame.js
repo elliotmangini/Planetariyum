@@ -142,6 +142,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     
     // CREATES NFTS AND SETS GAME IN MOTION
     function startGame () {
+        
         if (!started.current) {
             started.current = true;
             fetch(`/nfts/welcomegame/${gameURL}/${user.id},2`, {
@@ -252,6 +253,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
             .then(data => {
                 const timer = setTimeout(() => {
                     setSelectedCard({}); // CLEAR SELECTED CARD AFFFFFTER ANIMATION OFF SCREEN
+                    setSelectedCard({});
                     // setIsTurnEnding(false);
                     setCurrentGame(data);
                 }, 3700
@@ -320,7 +322,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                 : null }
 
                 { currentGame.nfts.length > 0 ?
-                <div className={style.game_container}>
+                <div className={`${style.game_container} ${myTurnIndex === 0 ? "halfsecond-lazyload" : null}`}>
 
                     {/* SETTINGS */}
                     <div className={style.settings_box}>
@@ -442,7 +444,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
             </>
             : null }
 
-            <div className={`${style.loading_screen} ${currentGame ? style.transition_fade : null}`}>Loading . . .</div>
+            <div className={`${style.loading_screen} ${currentGame ? style.transition_fade : null}`}></div>
         </div>
         { isWrappingUp ?
             <>
