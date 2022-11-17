@@ -5,6 +5,8 @@ import style from '../StyleSheets/WelcomeCutscene.module.css';
 import EtherHost from './EtherHost';
 import TypewriterText from './TypewriterText';
 
+import AudioPlayer from './AudioPlayer';
+import SophieTheme from '../Assets/audio/welcome_cutscene/Sophie_Theme.wav';
 
 
 
@@ -83,7 +85,7 @@ export default function WelcomeCutscene1 ({ setSceneNumber }) {
                 <div className='code-text center-vertical'>
                     <div className={style.ether_text_position}>
                         { messageNumber === 5 ? <TypewriterText speed={500} 
-                        body={"Welcome to the Planetariyum!"}
+                        body={"Oh--       By the way, I'm Sophie! Nice to  meet you ^_^"}
                         /> : null }
                     </div>
                 </div>
@@ -91,7 +93,7 @@ export default function WelcomeCutscene1 ({ setSceneNumber }) {
                 <div className='code-text center-vertical'>
                     <div className={style.ether_text_position}>
                         { messageNumber === 6 ? <TypewriterText speed={500} 
-                        body={"Oh--       By the way, I'm Sophie! Nice to  meet you ^_^"}
+                        body={"Welcome to the Planetariyum!"}
                         /> : null }
                     </div>
                 </div>
@@ -100,6 +102,10 @@ export default function WelcomeCutscene1 ({ setSceneNumber }) {
                     <EtherHost delay={1000}/>
                 </div>
             </div>
+
+            {messageNumber === totalMessages - 2 ?
+                <AudioPlayer action={"play"} sound={SophieTheme} />
+            : null}
         </>
     )
 }

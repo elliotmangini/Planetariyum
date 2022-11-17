@@ -40,6 +40,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     const fetchIntervalRef = useRef();
     const [ isTurnEnding , setIsTurnEnding ] = useState(false);
 
+
     // STATE LOGGING
     // console.log("!!!!!!!!!!! GAME COMPONENT !!!!!!!!!!!");
     // function reportStates () {

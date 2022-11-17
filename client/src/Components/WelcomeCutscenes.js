@@ -7,6 +7,7 @@ import AudioPlayer from './AudioPlayer';
 
 import WelcomeTheme from '../Assets/audio/welcome_cutscene/welcome_theme.wav'
 
+
 import WelcomeCutscene1 from './WelcomeCutscene1';
 import WelcomeCutscene2 from './WelcomeCutscene2';
 import WelcomeCutscene3 from './WelcomeCutscene3';
@@ -83,7 +84,6 @@ export default function WelcomeCutscene ({ user }) {
 
     return (
         <>
-            { isRedirect ? <Navigate to={`/play/welcome/welcome_${user.username}`} /> : null}
 
             <div id={style.give_absolute_fullscreen}>
                 {scene}
@@ -91,8 +91,9 @@ export default function WelcomeCutscene ({ user }) {
 
             {sceneNumber === 1 ?
                 <AudioPlayer action={"play"} sound={WelcomeTheme} />
-            : null}
+                : null}
             
+            { isRedirect ? <Navigate to={`/play/welcome/welcome_${user.username}`} /> : null}
         </>
     )
 }

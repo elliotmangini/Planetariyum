@@ -1,12 +1,16 @@
 import { useParams } from 'react-router-dom';
 import Lobby from './Lobby';
 import { useState, useEffect, useRef } from 'react'
+import { Navigate } from 'react-router-dom';
+
 
 import CardPack from './CardPack';
 import CardBinder from './CardBinder';
 import DeckStack from './DeckStack';
 import WrapupCard from './WrapupCard';
 import EtherHost from './EtherHost';
+
+import SophiePfp from '../Assets/placeholders/Sophie_pfp.png';
 
 
 import style from '../StyleSheets/Game.module.css'
@@ -44,8 +48,10 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     const [ isMyTurn , setisMyTurn ] = useState(true);
     const fetchIntervalRef = useRef();
     const [ isTurnEnding , setIsTurnEnding ] = useState(false);
-    const [ redirect , setRedirect ] = useState(null);
+    // const [ redirect , setRedirect ] = useState(null);
     const [ isWrappingUp, setIsWrappingUp ] = useState(false);
+    const [ redirect , setRedirect ] = useState(false);
+
 
     // STATE LOGGING
     // console.log("!!!!!!!!!!! GAME COMPONENT !!!!!!!!!!!");
@@ -274,7 +280,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                 console.log("inside setInterval");
                 console.log({isMyTurn})
                 fetchGame()
-            }, 3800); // HOW LONG TO WAIT IN BETWEEN CHECKING FOR NEXT ROUND
+            }, 6600); // HOW LONG TO WAIT IN BETWEEN CHECKING FOR NEXT ROUND
         } else {
             console.log("continuous fetches not needed because it is my turn")
             // setisMyTurn(true);
@@ -313,6 +319,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
 
     return (
         <>
+        { redirect ? <Navigate to={`/`} /> : null}
         <div className={`${isWrappingUp ? style.end_blur : null } ${style.give_game_fullscreen}`}>
             <img className={`${style.arena_background}`} src={currentGame ? currentGame.collection.arena_art_url : null}></img>
             { currentGame && user ?
@@ -323,6 +330,9 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
 
                 { currentGame.nfts.length > 0 ?
                 <div className={`${style.game_container} ${myTurnIndex === 0 ? "halfsecond-lazyload" : null}`}>
+                    <div>
+                        <img className={style.sophie_avatar} src={SophiePfp}></img>
+                    </div>
 
                     {/* SETTINGS */}
                     <div className={style.settings_box}>
@@ -465,9 +475,9 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                                         <div className={style.move_grid_down}>
                                             <div className={style.for_the_love_of_god}>
                                             <div className={style.download_button_grid}>
-                                                <div id={style.d_all} className={style.download_button}>Download All</div>
-                                                <div id={style.d_unique} className={style.download_button}>Download Unique</div>
-                                                <div id={style.d_next} className={style.download_button}>Head To Submissions</div>
+                                                <div onClick={() => setRedirect(true)} id={style.d_all} className={style.download_button}>Download All</div>
+                                                <div onClick={() => setRedirect(true)} id={style.d_unique} className={style.download_button}>Download Unique</div>
+                                                <div onClick={() => setRedirect(true)} id={style.d_next} className={style.download_button}>Head To Submissions</div>
                                             </div>
                                             </div>
                                         </div>

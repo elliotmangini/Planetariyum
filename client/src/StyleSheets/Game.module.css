@@ -870,3 +870,8 @@
     left: -1%;
     top: 5%;
 }
+
+.sophie_avatar {
+    position: fixed;
+    width: 10%;
+}

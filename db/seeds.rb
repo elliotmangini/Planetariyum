@@ -70,6 +70,26 @@ Hiring Mangini is a great idea for any company that wants to improve its online 
 kind: "", route: nil, runtime: 10000)
 story6_cover_blob = story6.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/robot1.png')), filename: 'robot1.png')
 
+story7 = Publication.create(title: "More On The Mission",
+body: "Sharing is caring, and with Planetariyum, it's easy and fun! This website is chock-full of samples for music producers of all genres to download and use in their tracks. From classic drum breaks to rare synth patches, you're sure to find what you're looking for on Planetariyum. 
+
+Unlike other sample sharing websites, Planetariyum is highly curated. The emphasis on aesthetic and care for the sounds is clear throughout and, you can quickly catch a vibe. Plus, the sound design is always top-notch.
+
+If you're looking for a one-stop shop for all your sample needs, look no further than Planetariyum. It's the best of the best!",
+kind: "", route: nil, runtime: 10000)
+story7_cover_blob = story7.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/robot7.png')), filename: 'robot7.png')
+
+story8 = Publication.create(title: "Collaborative Engine!",
+body: "If you're looking for a way to make music with others, you've come to the right place. Collaborative Engine is a music creation website that enables you to collaborate with others on music projects.
+
+You can create new projects or join existing ones. When you join a project, you'll be able to chat with other members and share files. You can also leave comments on files to give feedback.
+
+Collaborative Engine is perfect for musicians of all skill levels. Whether you're a beginner who wants to learn from others, or a seasoned pro looking for collaborators, you'll find what you're looking for here.
+
+So what are you waiting for? Sign up now and start making music with others!",
+kind: "", route: nil, runtime: 10000)
+story8_cover_blob = story8.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/robot8.png')), filename: 'robot8.png')
+
 
 
 puts 'Creating Users 👤'
@@ -178,11 +198,11 @@ card_hash = [
     {"NASAInfo_Card_Art.png" => "Big_Sister_FX_NASAinfo_01.wav"},
     {"Diver_Card_Art.png" => "Big_Sister_FX_Diver_01.wav"},
 
-    {"DreamRhodes_Card_Art.png" => "Big_Sister_89bpm_Mel_DreamRhodes_01.wav"},
+    {"DreamRhodes_Card_Art.png" => "Big_Sister_Bass_172bpm_D_Rollerz.wav"},
     {"FAHKOFF_Card_Art.png" => "Big_Sister_Foghorn_FAHKOFF_01.wav"},
     {"RibbonGirl_Card_Art.png" => "Big_Sister_Kick_Physical_RibbonGirl_01.wav"},
     {"Rival_Card_Art.png" => "Big_Sister_808_Eb0_Rival_03.wav"},
-    {"Melo82_Card_Art.png" => "Big_Sister_82bpm_Mel_Abm_ClunkyPiano_01.wav"},
+    {"Melo82_Card_Art.png" => "Big_Sister_Watermark_Signal_01.wav"},
 
     ]
 

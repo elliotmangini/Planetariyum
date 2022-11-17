@@ -106,7 +106,10 @@ export default function Arena ({ setCurrentGame, user }) {
                 
                     <div className={style.game_details_panel}>
                         <div className={style.header_box}>
+                            <div className="center-text">
+
                             Configure Draft
+                            </div>
                         </div>
                         <div className={style.game_settings_box}>
 
@@ -128,7 +131,7 @@ export default function Arena ({ setCurrentGame, user }) {
                             </div>
                         </div>
                         <div className={style.custom_settings_box}>
-                            <label>Custom URL</label>
+                            <label className={style.custom_url} >Create Custom URL</label>
                             <form onSubmit={(e) => e.preventDefault()}>
                                 <input
                                 type="text"
