@@ -44,8 +44,8 @@ a, a:visited {
     bottom: 16%;
 }
 
-#username:hover {
-    /* background-color: var(--button-selected); */
+#dash_avatar:hover {
+    outline: 2px solid white;
 }
 
 #dash_avatar {

@@ -115,15 +115,19 @@ input:focus::placeholder , input:-webkit-autofill {
   z-index: 1;
   width: auto;
   height: 100%;
-  width: 18%;
+  max-width: 12vw;
+  min-width: 12vw;
+
   /* border: 3px solid rgb(0, 174, 255); */
   background: var(--background-secondary)
 }
 
 
 .site-right {
-  width: 18%;
+  width: 12vw;
   background: var(--background-secondary);
+  max-width: 12vw;
+  min-width: 12vw;
 }
 
 
@@ -451,7 +455,7 @@ input:focus {
 .halfsecond-lazyload {
   opacity: 0%;
   animation: lazyload .5s;
-  animation-delay: .5s;
+  /* animation-delay: .5s; */
   animation-fill-mode: forwards;
 
 }
@@ -484,5 +488,15 @@ input:focus {
 }
 
 .absolute {
+  height: 100%;
+  width: 100%;
   position: absolute;
+  border: 2px solid red;
+}
+
+.relative100 {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  border: 2px solid red;
 }

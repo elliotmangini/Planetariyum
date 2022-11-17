@@ -10,7 +10,7 @@ export default function Publication({ item, scrollToTop }) {
         <img className={style.blurry_background_img} src={item.cover_url}></img>
       </div>
         <div className={`${style.article_image_container}`}>
-          <img className={`${style.article_image}`} src={Robot1} />
+          <img className={`${style.article_image}`} src={item.cover_url} />
         </div>
         <div
           // ref={"Welcome to Planetariyum"}
@@ -49,8 +49,8 @@ export default function Publication({ item, scrollToTop }) {
           <div></div>
           <div className={style.like_btn}></div>
           <div className={style.visit_btn}></div>
-          <div className={style.scroll_to_top_btn}>Back To Top</div>
           <div></div>
+          <div className={style.scroll_to_top_btn}>Back To Top</div>
         </div>
       </div>
     </>

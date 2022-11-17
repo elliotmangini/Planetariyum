@@ -12,13 +12,3 @@ h1 {
     left: 0%;
     top: 0%;
 }
-
-.header_image {
-    pointer-events: none;
-    position: fixed;
-    left: 0vw;
-    top: 8%;
-    opacity: 60%;
-    width: 100vw;
-    /* z-index: -1; */
-}

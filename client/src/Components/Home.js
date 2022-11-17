@@ -49,9 +49,11 @@ export default function Home () {
     return (
 
         <>
-        <div className="center-horizontal">
-            <img className={style.header_image} src={HeaderLogo}></img>
-        </div>
+        {/* <div className="center-horizontal"> */}
+            <div className={style.hide_overflow}>
+                <img className={style.header_image} src={HeaderLogo}></img>
+            </div>
+        {/* </div> */}
         
         
         <div className='display-block'>

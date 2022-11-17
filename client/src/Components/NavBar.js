@@ -22,7 +22,7 @@ export default function NavBar ({ path, setPath }) {
     return (
         <>
             <div id={style.sidebar_container}>
-                <Link id={path === "" ? style.selected_path : null} onClick={() => clickedMainTab("")} to="/" className={style.nav_items}>Home</Link>
+                <Link id={path === "" ? style.selected_path : null} onClick={() => clickedMainTab("")} to="/" className={style.nav_items}>&nbsp;&nbsp;Home</Link>
                 {/* { path === "" ? */}
                     <>
                         <Link id={openTab === "Browse" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["", "Browse"])} to="/Browse" className={style.sub_items}>Browse</Link>
@@ -32,7 +32,7 @@ export default function NavBar ({ path, setPath }) {
                     </>
                 {/* : null } */}
 
-                <Link id={path === "Sphere" ? style.selected_path : null}  onClick={() => clickedMainTab("Sphere")}  to="/Sphere" className={style.nav_items}>Social</Link>
+                <Link id={path === "Sphere" ? style.selected_path : null}  onClick={() => clickedMainTab("Sphere")}  to="/Sphere" className={style.nav_items}>&nbsp;&nbsp;Social</Link>
                 {/* { path === "Sphere" ? */}
                     <>
                         <Link id={openTab === "Events" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["Sphere", "Events"])} to="/Events" className={style.sub_items}>Events</Link>
@@ -40,7 +40,7 @@ export default function NavBar ({ path, setPath }) {
                     </>
                 {/* : null } */}
 
-                <Link id={path === "Arena" ? style.selected_path : null}  onClick={() => clickedMainTab("Arena")} to="/Arena" className={style.nav_items}>Play</Link>
+                <Link id={path === "Arena" ? style.selected_path : null}  onClick={() => clickedMainTab("Arena")} to="/Arena" className={style.nav_items}>&nbsp;&nbsp;Play</Link>
                 {/* { path === "Sphere" ? */}
                     <>
                         <Link id={openTab === "Solo" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["Arena", "Solo"])} to="/Solo" className={style.sub_items}>Solo</Link>
@@ -49,7 +49,7 @@ export default function NavBar ({ path, setPath }) {
                     </>
                 {/* : null } */}
                 
-                <Link id={path === "Mint" ? style.selected_path : null}  onClick={() => clickedMainTab("Mint")} to="/Mint" className={style.nav_items}>Create</Link>
+                <Link id={path === "Mint" ? style.selected_path : null}  onClick={() => clickedMainTab("Mint")} to="/Mint" className={style.nav_items}>&nbsp;&nbsp;Create</Link>
                 {/* { path === "Sphere" ? */}
                     <>
                         <Link id={openTab === "OffRamp" ? style.selected_sub_item : null}  onClick={() => clickedSubTab(["Mint", "OffRamp"])} to="/OffRamp" className={style.sub_items}>Off Ramp</Link>

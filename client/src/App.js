@@ -58,9 +58,11 @@ export default function App({ cable }) {
         <div id="nav_main_and_dash_container">
 
           { !currentGame ?
-          <div className={dimUI} id="nav_and_left_dash_container">
-            <NavBar path={path} setPath={setPath} user={user} />
-            { user ? <DashLeft user={user} /> : <DashLeftUserless /> }
+          <div className={`halfsecond-lazyload`}>
+            <div className={dimUI} id="nav_and_left_dash_container">
+              <NavBar path={path} setPath={setPath} user={user} />
+              { user ? <DashLeft user={user} /> : <DashLeftUserless /> }
+            </div>
           </div>
           : null }
 
