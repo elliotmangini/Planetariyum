@@ -109,8 +109,10 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                 let packOpensAsIndex = (Math.floor(myTurnIndex / 5));
                 indexOfPackHeld = rotationOutput + (packOpensAsIndex * playerCount * 5); //  | 0-4: 0, 5-9: everyone opens a new pack, etc
                 
-                openedPacks = packOpensAsIndex + 1 * playerCount;
+                openedPacks = ((Math.floor((myTurnIndex) / 5)) * playerCount + playerCount);
                 unopenedPacks = totalPacks - openedPacks;
+
+                console.log(myTurnIndex);
     
                 cardsInPack = currentGame.nfts.slice(indexOfPackHeld, indexOfPackHeld + 5);
         
@@ -191,7 +193,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                 indexOfPackHeld = rotationOutput + (packOpensAsIndex * playerCount * 5); //  | 0-4: 0, 5-9: everyone opens a new pack, etc
                 indexOfSophiePackHeld = sophieRotation + (packOpensAsIndex * playerCount * 5); //  | 0-4: 0, 5-9: everyone opens a new pack, etc
 
-                openedPacks = packOpensAsIndex + 1 * playerCount;
+                openedPacks = ((Math.floor((myTurnIndex) / 5)) * playerCount + playerCount);
                 unopenedPacks = totalPacks - openedPacks;
     
                 cardsInPack = data.nfts.slice(indexOfPackHeld, indexOfPackHeld + 5);
@@ -309,7 +311,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     return (
         <>
         <div className={`${isWrappingUp ? style.end_blur : null } ${style.give_game_fullscreen}`}>
-            <img className={`${style.arena_background}`} src={currentGame ? null : null}></img>
+            <img className={`${style.arena_background}`} src={currentGame ? currentGame.collection.arena_art_url : null}></img>
             { currentGame && user ?
             <>
                 { currentGame.nfts.length === 0 ?
@@ -457,9 +459,9 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                                         <div className={style.move_grid_down}>
                                             <div className={style.for_the_love_of_god}>
                                             <div className={style.download_button_grid}>
-                                                <div>button1</div>
-                                                <div>button2</div>
-                                                <div>button3</div>
+                                                <div id={style.d_all} className={style.download_button}>Download All</div>
+                                                <div id={style.d_unique} className={style.download_button}>Download Unique</div>
+                                                <div id={style.d_next} className={style.download_button}>Head To Submissions</div>
                                             </div>
                                             </div>
                                         </div>
