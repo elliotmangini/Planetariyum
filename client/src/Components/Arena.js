@@ -99,6 +99,11 @@ export default function Arena ({ setCurrentGame, user }) {
 
             <div className={`halfsecond-lazyload ${style.main_and_pop_up}`}>
                 <div className={`${style.main_content} ${isPopUp ? style.blur : null}`}>
+
+                <div className={style.blurry_background_container}>
+                    <img className={style.blurry_background_img} src={selectedCollection.cover_url}></img>
+                </div>
+                
                     <div className={style.game_details_panel}>
                         <div className={style.header_box}>
                             Configure Draft

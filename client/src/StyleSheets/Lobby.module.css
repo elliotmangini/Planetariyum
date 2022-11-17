@@ -8,23 +8,80 @@
 .lobby_panel {
     position: relative;
     width: 55%;
-    height: 30vh;
+    margin-top: -7vw;
+    /* height: 40vh; */
+    /* top: 25%; */
     border-radius: 1rem;
     background-color: rgba(255, 255, 255, 0.5);
-    border: 2px solid red;
+    border: 2px solid white;
 }
 
 .start_game_button {
-    position: absolute;
+    /* position: absolute; */
+    margin: auto;
+    /* margin-right: 7vw; */
+    margin-bottom: 2vw;
     width: 8vw;
-    left: 46vw;
-    bottom: 3%;
-    height: 3vw;
+    /* left: 46vw; */
+    bottom: 12%;
+    height: 2.5vw;
+    font-size: 1.15vw;
     text-align: center;
-    background: rgb(77, 142, 64);
-    border-radius: 30%;
-    border: 2px solid red;
+    background: rgb(201, 121, 214);
+    border-radius: 1.3vw;
+    border: 1px solid rgb(182, 182, 182);
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 4px 5px 12px 3px rgba(0,0,0,0.30), 10px 25px 19px 33px rgba(0,0,0,0.16);
+
+}
+
+.start_game_button:hover {
+    background: rgb(205, 143, 215);
+    cursor: pointer;
+}
+
+.players_container {
+    margin: 2vw;
+    height: 10vw;
+    /* overflow: scroll; */
+}
+
+.player_slot {
+    width: 93%;
+    margin: .7vw auto .5vw auto;
+    font-size: 2vw;
+    text-align: left;
+    background: rgba(51,51,51,.9);
+    color: purple;
+
+    border: 2px solid rgb(201, 121, 214);
+    display: grid;
+    grid-template-columns: 30% 63% 5%;
+    border-radius: 3vw;
+    box-shadow: 4px 5px 12px 3px rgba(0,0,0,0.30), 10px 25px 19px 10px rgba(0,0,0,0.16);
+}
+
+.title_wrapper {
+    margin: 1.3vw 0vw 1vw 0vw;
+    font-size: 2vw;
+    color: rgba(51,51,51,.7);
+    /* -webkit-text-stroke: 1px white; */
+}
+
+
+.lobby_avatar {
+    height: 2.5vw;
+    width: 2.5vw;
+    object-fit: flex;
+    border-radius:50%;
+    /* margin: .5rem; */
+    margin-left: .5rem;
+    margin-right: .5vw;
+    margin-top: .7rem;
+}
+
+.status_icon {
+    font-size: 1vw;
 }

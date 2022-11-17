@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react'
 import CardPack from './CardPack';
 import CardBinder from './CardBinder';
 import DeckStack from './DeckStack';
+import WrapupCard from './WrapupCard';
 
 
 import style from '../StyleSheets/Game.module.css'
@@ -38,6 +39,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     // })
     const { gameType , gameURL } = useParams();
     const [ selectedCard , setSelectedCard ] = useState({});
+    const [ sophieSelection , setSophieSelection ] = useState({});
     const [ isMyTurn , setisMyTurn ] = useState(true);
     const fetchIntervalRef = useRef();
     const [ isTurnEnding , setIsTurnEnding ] = useState(false);
@@ -64,9 +66,12 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     let totalTurns;
 
     let tablePosition;
+    let sophiePosition;
 
 
     let remainingCards = [];
+    let sophiePossiblePicks = [];
+    let sophiePick;
     let claimedCards = [];
     let opponentsCards = [];
 
@@ -74,9 +79,11 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     let unopenedPacks;
     let openedPacks;
     let cardsInPack;
+    let cardsInSophiePack;
 
     let myTurnsRemaining;
     let indexOfPackHeld;
+    let indexOfSophiePackHeld;
 
     // LINEAR TIME PACK ORGANIZATION
     if (currentGame) {
@@ -132,7 +139,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     function startGame () {
         if (!started.current) {
             started.current = true;
-            fetch(`/nfts/${gameURL}/${"1,2"}`, {
+            fetch(`/nfts/welcomegame/${gameURL}/${user.id},2`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 })
@@ -148,12 +155,14 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     useEffect(() => {fetchGame()}, [user])
 
     function fetchGame () {
+        console.log("fetching game...")
         if (user) {
             fetch(`/games/${gameURL}`)
             .then(resp => resp.json())
             .then(data => {
                 setCurrentGame(data);
                 remainingCards = [];
+                sophiePossiblePicks = [];
                 claimedCards = [];
                 opponentsCards = [];
                 data.nfts.map((nft) => {
@@ -170,16 +179,39 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                 totalTurns = data.deck_size // ALWAYS CORRECT
                 playerCount = data.players.length // ALWAYS CORRECT
                 tablePosition = data.players.findIndex(p => (p.id === user.id)) //ALWAYS CORRECT
+                sophiePosition = data.players.findIndex(p => (p.id === 2)) //ALWAYS CORRECT
                 myTurnsRemaining = totalTurns - claimedCards.length;
                 myTurnIndex = totalTurns - myTurnsRemaining; //starts at 0, changes the moment we pull, determines what pack is rendered
                 let activeCards = 5 * playerCount;
                 let rotationOutput = (((myTurnIndex + tablePosition) * 5) % (activeCards));
+                let sophieRotation = (((myTurnIndex + sophiePosition) * 5) % (activeCards));
                 let packOpensAsIndex = (Math.floor(myTurnIndex / 5));
                 indexOfPackHeld = rotationOutput + (packOpensAsIndex * playerCount * 5); //  | 0-4: 0, 5-9: everyone opens a new pack, etc
+                indexOfSophiePackHeld = sophieRotation + (packOpensAsIndex * playerCount * 5); //  | 0-4: 0, 5-9: everyone opens a new pack, etc
+
                 openedPacks = packOpensAsIndex + 1 * playerCount;
                 unopenedPacks = totalPacks - openedPacks;
     
                 cardsInPack = data.nfts.slice(indexOfPackHeld, indexOfPackHeld + 5);
+
+                cardsInSophiePack = data.nfts.slice(indexOfSophiePackHeld, indexOfSophiePackHeld + 5);
+
+                console.log(cardsInPack, cardsInSophiePack);
+
+                cardsInSophiePack.map((c) => {
+                    console.log(c);
+                    if (c.owner === null) {
+                        sophiePossiblePicks = [...sophiePossiblePicks, c]; // NOT 100% VERIFIABLE
+                    }
+                })
+
+                console.log(sophiePossiblePicks);
+
+
+
+                setSophieSelection(sophiePossiblePicks[0]);
+
+
         
                 // console.log("Pseudo-States:")
                 // console.log({indexOfPackHeld});
@@ -204,9 +236,10 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     function handleSubmitTurn () {
         
         if ((Object.keys(selectedCard).length !== 0 && user)) {
+            console.log(sophieSelection)
             setIsTurnEnding(true); // THIS TRIGGERS ANIMATIONS
             setisMyTurn(false); // START CONTINUOUS FETCHING
-            fetch(`/nfts/claim/${selectedCard.id}/${user.id}`, {
+            fetch(`/nfts/welcomeclaim/${selectedCard.id}/${user.id}/${sophieSelection.id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
             })
@@ -229,11 +262,12 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
     
     function callTimeout () {
         if (!isMyTurn) {
+            // fetchGame()
             repeat = setTimeout(() => {
                 console.log("inside setInterval");
                 console.log({isMyTurn})
                 fetchGame()
-            }, 10000); // HOW LONG TO WAIT IN BETWEEN CHECKING FOR NEXT ROUND
+            }, 3800); // HOW LONG TO WAIT IN BETWEEN CHECKING FOR NEXT ROUND
         } else {
             console.log("continuous fetches not needed because it is my turn")
             // setisMyTurn(true);
@@ -252,6 +286,17 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
             callTimeout();
     }, [isMyTurn])
 
+    let gameCollection;
+
+    if (remainingCards.length === 0) {
+        gameCollection = claimedCards.map((nft) => {
+            return (
+                    <WrapupCard nft={nft}/>
+            )
+
+        })
+    }
+
 
 
     return (
@@ -260,7 +305,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
             { currentGame && user ?
             <>
                 { currentGame.nfts.length === 0 ?
-                    <Lobby startGame={startGame}/>
+                    <Lobby user={user} currentGame={currentGame} startGame={startGame}/>
                 : null }
 
                 { currentGame.nfts.length > 0 ?
@@ -291,7 +336,7 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                     </div>
                     
                     {/* DECKSTACK */}
-                    <DeckStack claimedCards={claimedCards} user={user} isMyTurn={isMyTurn} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
+                    <DeckStack force={remainingCards.length === 0 ? true : false} claimedCards={claimedCards} user={user} isMyTurn={isMyTurn} selectedCard={selectedCard} setSelectedCard={setSelectedCard} currentGame={currentGame}/>
 
                     {/* LOWER UI */}
                     <div className={style.playercamp_positioning_container}>
@@ -360,11 +405,26 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
 
                     {/* GAME POPUPS */}
                     {(currentGame.deck_size - claimedCards.length) === 5 ?
-                    <div className="dev-text">LAST PACK BEING OPENED</div>
+                    <div className={`center-text ${style.last_pack_warning}`}>LAST UNSEEN ASSETS BEING OPENED NOW!</div>
                     : null}
 
                     {remainingCards.length === 0 ?
-                    <div className="dev-text">ALL CARDS HAVE BEEN CLAIMED</div>
+                    <>
+                        {/* <div className="dev-text">ALL CARDS HAVE BEEN CLAIMED</div> */}
+                        
+                        <div className={style.scroll_container_new}>
+                            <div className={style.wrapup_grid}>
+                                {gameCollection}
+                            </div>
+                        </div>
+                        <div className={style.wrap_up_btn_container}>
+                            <div className="relative100">
+                                <div className="margin-container">
+                                    <div className={style.wrap_up_btn}>Wrap Up</div>
+                                </div>
+                            </div>
+                        </div>
+                    </>
                     : null}
 
                     

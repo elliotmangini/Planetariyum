@@ -42,11 +42,11 @@ export default function SignUp3 ({ setCurrentGame, dimUI, setDimUI, setSequence,
                 <div className={style.avatar_title_container}>
                     <img className={style.avatar_title_bubble} src={user.avatar_url ? user.avatar_url : avatarPlaceholder}></img>
                 </div>
-                <div className="pop-up-title">Have a Draft on us,<br /><span>{user.display_name}</span><br />?</div>
-                <div className={style.text_body_container}>
-                    <div>There'll be time to explore soon, but we'd like to show you the game and start your collection first.</div>
+                <div className="pop-up-title"><span>{user.display_name} . . . Okay,<br />Wouldn't have been my first choice! but--</span></div>
+                {/* <div>Have a Draft on us?</div> */}
+                    {/* <div className={style.smol}>There'll be time to explore soon, but we'd like to show you the game and start your collection first.</div> */}
                     <div>We'd like to recommend a curated set...</div>
-                    <div>How are you feeling?</div>
+                <div className={style.text_body_container}>
                 </div>
                 <div className={style.moods_container}>
                     <div></div>
@@ -78,6 +78,8 @@ export default function SignUp3 ({ setCurrentGame, dimUI, setDimUI, setSequence,
                         <img onClick={handleCollectionRecommendation} className={style.mood_thumb} src={Notsure}></img>
                     </div>
                 </div>
+
+            <div className="pop-up-title"><span>What's your vibe?</span></div>
             </div>
 
 

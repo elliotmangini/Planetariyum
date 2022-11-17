@@ -454,7 +454,7 @@ input:focus {
 
 .halfsecond-lazyload {
   opacity: 0%;
-  animation: lazyload .5s;
+  animation: lazyload 1s;
   /* animation-delay: .5s; */
   animation-fill-mode: forwards;
 
@@ -497,8 +497,8 @@ input:focus {
 .relative100 {
   height: 100%;
   width: 100%;
-  position: absolute;
-  border: 2px solid red;
+  position: relative;
+  /* border: 2px solid red; */
 }
 
 .emptyspacer {
@@ -511,4 +511,28 @@ input:focus {
   align-items: center;
   justify-content: center;
 
+}
+
+.easy-left-text {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+  margin-left: 10%;
+  justify-content: center;
+}
+
+.easy-right-text {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  justify-content: center;
+}
+
+.margin-container {
+  position: absolute;
+  top: 1.5%;
+  width: 100%;
+  height: 10%;
+  margin: auto;
+  /* border: 3px solid blue; */
 }

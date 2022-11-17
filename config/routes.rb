@@ -27,10 +27,12 @@ Rails.application.routes.draw do
 
   #GAMES
   get "/games/:local_url", to: "games#get_live_game"
-
+  
   #NFTS
   post "/nfts/:local_url/:staged_players", to: "nfts#start_game"
+  post "/nfts/welcomegame/:local_url/:staged_players", to: "nfts#create_welcome_game"
   patch "/nfts/claim/:id/:owner_id", to: "nfts#claim_nft"
+  patch "/nfts/welcomeclaim/:id/:owner_id/:sophie_pick_id", to: "nfts#welcome_claim_nft"
 
   #MESSAGES
   post "/messages/:user_id/:room_id/", to: "messages#create"

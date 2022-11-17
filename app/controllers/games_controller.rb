@@ -29,6 +29,15 @@ class GamesController < ApplicationController
     render json: @game, include: ['players', 'collection', 'nfts', 'nfts.owner', 'nfts.holder', 'nfts.card'], status: :created
   end
 
+  # POST /games
+  def welcome_game
+    puts "welcome game"
+    puts params
+    game = Game.create!(game_params)
+    game.create_room()
+    render json: @game, include: ['players', 'collection', 'nfts', 'nfts.owner', 'nfts.holder', 'nfts.card'], status: :created
+  end
+
   # PATCH/PUT /games/1
   def update
     if @game.update(game_params)

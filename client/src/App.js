@@ -100,7 +100,7 @@ export default function App({ cable }) {
           </div>
 
         { !currentGame ?
-        <div className={`halfsecond-lazyload site-right ${dimUI}`}>
+        <div className={`site-right ${dimUI}`}>
             { user ?
             <DashRight isLogout={isLogout} setIsLogout={setIsLogout} setUser={setUser} user={user} setPath={setPath} />
             :

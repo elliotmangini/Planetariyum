@@ -6,9 +6,9 @@ import DeckStackItem from './DeckStackItem';
 
 
 
-export default function DeckStack ({ claimedCards , user, selectedCard, isTurnEnding, setSelectedCard, currentGame }) {
+export default function DeckStack ({ force, claimedCards , user, selectedCard, isTurnEnding, setSelectedCard, currentGame }) {
     const [ lastSelected , setLastSelected ] = useState({});
-    const [ isDeckStack , setIsDeckStack ] = useState(false);
+    const [ isDeckStack , setIsDeckStack ] = useState(force);
 
     // console.log(leftInPack())
 

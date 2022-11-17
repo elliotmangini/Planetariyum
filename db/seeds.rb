@@ -83,6 +83,15 @@ planetariyumwallet = User.create(
 )
 wallet_avatar = planetariyumwallet.avatar.attach(io: File.open(File.join(Rails.root,'/app/assets/avatars/Octopus_God_pfp.png')), filename: 'Octopus_God_pfp.png')
 
+sophie = User.create(
+    username: 'sophiemonster',
+    display_name: 'Sophie ^_^',
+    password: '123456',
+    bio: 'your host!',
+    email: 'sophiemangini@gmail.com'
+)
+wallet_avatar = planetariyumwallet.avatar.attach(io: File.open(File.join(Rails.root,'/app/assets/avatars/Sophie_pfp.png')), filename: 'Sophie_pfp.png')
+
 elliot = User.create(
     username: 'bigsister',
     display_name: 'Big Sister',
@@ -125,28 +134,28 @@ yumBase_art_blob = yumBase.collection_art.attach(io: File.open(File.join(Rails.r
 yumBase_card_back_blob = yumBase.card_back.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/card_back_design.png')), filename: 'card_back_design.png')
 yumBase_arena_art_blob = yumBase.arena_art.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/base_arena_bkg.png')), filename: 'base_arena_bkg.png')
 
-coll1 = elliot.collections.create(name: 'Test Collection 1')
+coll1 = elliot.collections.create(name: 'Solaris')
 coll1_art_blob = coll1.collection_art.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/collection_arts/Test_Collection_Art_1.png')), filename: 'Test_Collection_Art_1.png')
 
-coll2 = elliot.collections.create(name: 'Test Collection 2')
+coll2 = elliot.collections.create(name: 'Rubber Station')
 coll2_art_blob = coll2.collection_art.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/collection_arts/Test_Collection_Art_2.png')), filename: 'Test_Collection_Art_2.png')
 
-coll3 = elliot.collections.create(name: 'Test Collection 3')
+coll3 = elliot.collections.create(name: 'Quasar')
 coll3_art_blob = coll3.collection_art.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/collection_arts/Test_Collection_Art_3.png')), filename: 'Test_Collection_Art_3.png')
 
-coll4 = elliot.collections.create(name: 'Test Collection 4')
+coll4 = elliot.collections.create(name: 'Stellar')
 coll4_art_blob = coll4.collection_art.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/collection_arts/Test_Collection_Art_4.png')), filename: 'Test_Collection_Art_4.png')
 
-coll5 = elliot.collections.create(name: 'Test Collection 5')
+coll5 = elliot.collections.create(name: 'Light Theatre')
 coll5_art_blob = coll5.collection_art.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/collection_arts/Test_Collection_Art_5.png')), filename: 'Test_Collection_Art_5.png')
 
-coll6 = elliot.collections.create(name: 'Test Collection 6')
+coll6 = elliot.collections.create(name: 'Fabric')
 coll6_art_blob = coll6.collection_art.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/collection_arts/Test_Collection_Art_6.png')), filename: 'Test_Collection_Art_6.png')
 
-coll7 = elliot.collections.create(name: 'Test Collection 7')
+coll7 = elliot.collections.create(name: 'Heaven Set')
 coll7_art_blob = coll7.collection_art.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/collection_arts/Test_Collection_Art_7.png')), filename: 'Test_Collection_Art_7.png')
 
-coll8 = elliot.collections.create(name: 'Test Collection 8')
+coll8 = elliot.collections.create(name: 'Chocolate Comet')
 coll8_art_blob = coll8.collection_art.attach(io: File.open(File.join(Rails.root,'/app/assets/collections/collection_arts/Test_Collection_Art_8.png')), filename: 'Test_Collection_Art_8.png')
 
 

@@ -67,7 +67,7 @@ export default function WelcomeCutscene1 ({ setSceneNumber }) {
                 <div className='code-text center-vertical'>
                     <div className={style.ether_text_position}>
                         { messageNumber === 3 ? <TypewriterText speed={500} 
-                        body={"Oh shit, someone is here."}
+                        body={"Just a moment...               OK!"}
                         /> : null }
                     </div>
                 </div>
@@ -75,7 +75,7 @@ export default function WelcomeCutscene1 ({ setSceneNumber }) {
                 <div className='code-text center-vertical'>
                     <div className={style.ether_text_position}>
                         { messageNumber === 4 ? <TypewriterText speed={500} 
-                        body={"Anyway, let's show you around!!"}
+                        body={"Let's show you around!!"}
                         /> : null }
                     </div>
                 </div>
@@ -83,7 +83,7 @@ export default function WelcomeCutscene1 ({ setSceneNumber }) {
                 <div className='code-text center-vertical'>
                     <div className={style.ether_text_position}>
                         { messageNumber === 5 ? <TypewriterText speed={500} 
-                        body={"Welcome to Planetariyum let's get you booted up!"}
+                        body={"Welcome to the Planetariyum!"}
                         /> : null }
                     </div>
                 </div>
@@ -91,7 +91,7 @@ export default function WelcomeCutscene1 ({ setSceneNumber }) {
                 <div className='code-text center-vertical'>
                     <div className={style.ether_text_position}>
                         { messageNumber === 6 ? <TypewriterText speed={500} 
-                        body={"Oh--       By the way I'm Sophie! Nice to  meet you :)"}
+                        body={"Oh--       By the way I'm Sophie! Nice to  meet you ^_^"}
                         /> : null }
                     </div>
                 </div>

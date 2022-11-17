@@ -42,14 +42,19 @@
     border-radius: 50%;
 }
 
+.smol {
+    margin: auto;
+    width: 22vw;
+}
+
 .text_body_container {
-    width: 90%;
+    width: 70%;
     margin: auto;
     margin-bottom: 2rem;
 }
 
 .moods_container {
-    width: 80%;
+    width: 90%;
     max-width: 40rem;
     margin: auto;
     margin-bottom: 2rem;

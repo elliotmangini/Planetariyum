@@ -35,7 +35,7 @@ export default function WelcomeCutscene ({ user }) {
             collection_id: 1,
             deadline: "03 Feb 2023 04:05:06 +0000",
             local_url: `welcome_${user.username}`,
-            game_type: "draft",
+            game_type: "Welcome",
             deck_size: 15,
         }
         fetch("/games", {
@@ -82,7 +82,7 @@ export default function WelcomeCutscene ({ user }) {
 
     return (
         <>
-            { isRedirect ? <Navigate to={`/play/draft/welcome_${user.username}`} /> : null}
+            { isRedirect ? <Navigate to={`/play/welcome/welcome_${user.username}`} /> : null}
 
             <div id={style.give_absolute_fullscreen}>
                 {scene}
