@@ -64,6 +64,8 @@ export default function Home () {
                 {articles} 
             </div>
         </div>
+
+        <div className="emptyspacer"></div>
         </>
     )
 }

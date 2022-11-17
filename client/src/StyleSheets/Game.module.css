@@ -545,9 +545,53 @@
 }
 
 .settings_box {
+    font-family: Myriad Pro;
+    font-size: 1.4vw;
     position: absolute;
     right: 0%;
-    height: 5%;
-    width: 22%;
-    background-color: rgb(49, 57, 65);
+    height: 2.9vw;
+    width: 22vw;
+    background-color: #515151;
+    display: grid;
+    grid-template-columns: 43% 10%5% 10%5% 10% 5% 8% 2%;
+}
+
+.number_indicators {
+    margin-top: .3vw;
+    margin-left: .4vw;
+}
+
+.settings_box span {
+    font-size: .8vw;
+    margin: .2vw
+}
+
+.settings_bar {
+    width: .7vw;
+    margin-top: .2vw;
+    margin-right: .2vw;
+    margin-left: .2vw;
+    /* border: 1px solid red; */
+
+}
+
+.dynamic_island {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings_icon {
+    margin-left: auto;
+    height: 2vw;
+    margin-top: .19vw;
+}
+
+#settings_cog {
+    margin-top: .25vw;
+
+}
+
+#radio_icon {
+
 }

@@ -16,17 +16,15 @@ export default function Publication({ item, scrollToTop }) {
           // ref={"Welcome to Planetariyum"}
           className={`dev-box ${style.article_text_wrapper}`}
         >
+          { item.title === "Welcome to Planetariyum" ?
+          <>
           <h2 className="glowing-text">
             Welcome To<br></br>
             <span>Planetariyum</span>
           </h2>
           <div className={`${style.article_body_wrapper}`}>
             <p style={{ width: "90%", margin: "auto" }}>
-              Welcome to our social network for artists! We are excited to have
-              you here and hope that you will find our community to be a
-              supportive and creative space. Our site is filled with features
-              that will help you connect with other artists, showcase your work,
-              and get inspired. Here are a few things you can do to get started:
+              {item.body}
             </p>
             <p style={{ textAlign: "center" }}>
               -Explore the work of other artists in our community.
@@ -44,6 +42,17 @@ export default function Publication({ item, scrollToTop }) {
               <span>"We can't wait to see what you create!"</span>
             </h3>
           </div>
+          </>
+          : 
+          <>
+            <h2 className="glowing-text">
+              {item.title}
+            </h2>
+            <div className={`${style.article_body_wrapper}`}>
+              <p>{item.body}</p>
+            </div>
+          </>
+          }
         </div>
         <div className={style.scroll_to_top_container} onClick={scrollToTop}>
           <div></div>

@@ -15,6 +15,10 @@ import campCounter1 from '../Assets/gamepieces/playercamp_counter_step1.png'
 import AvatarFrame from '../Assets/gamepieces/avatar_frame.png'
 import TurnCounter from '../Assets/gamepieces/turn_counter.png'
 import GlowIndicator from './GlowIndicator';
+import settingsCog from '../Assets/icons/settings_cog.png';
+import radioIcon from '../Assets/icons/radio_icon.png';
+import settingsBar from '../Assets/icons/settings_bar.png';
+import waveform from '../Assets/icons/waveform.png';
 
 
 
@@ -265,10 +269,24 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
                     {/* SETTINGS */}
                     <div className={style.settings_box}>
 
+
                     {/* unclaimed nfts/unpulled cards count */}
                     {/* currentGame.deck_size * currentGame.players.length */}
-                        <div>{currentGame.deck_size - claimedCards.length} pulls left</div>
-                        <div>{unopenedPacks} unopened pack(s) left</div>
+                        <div className={style.dynamic_island}>
+                            <img src={waveform}></img>
+                        </div>
+                        <div className="center-text">
+                            <div className={style.number_indicators}>{currentGame.deck_size - claimedCards.length}<span>c</span></div>
+                        </div>
+                        <img className={style.settings_bar} src={settingsBar}></img>
+                        <div className="center-text">
+                            <div className={style.number_indicators}>{unopenedPacks}<span>p</span></div>
+                        </div>
+                            <img className={style.settings_bar} src={settingsBar}></img>
+                        <img className={style.settings_icon} id={style.radio_icon} src={radioIcon}></img>
+                        <img className={style.settings_bar} src={settingsBar}></img>
+                        <img className={style.settings_icon} id={style.settings_cog} src={settingsCog}></img>
+                        <div></div>
                     </div>
                     
                     {/* DECKSTACK */}

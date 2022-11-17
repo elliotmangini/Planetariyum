@@ -15,6 +15,8 @@ import campCounter1 from '../Assets/gamepieces/playercamp_counter_step1.png'
 import AvatarFrame from '../Assets/gamepieces/avatar_frame.png'
 import TurnCounter from '../Assets/gamepieces/turn_counter.png'
 import GlowIndicator from './GlowIndicator';
+import settingsCog from '../Assets/icons/settings_cog.png';
+import radioIcon from '../Assets/icons/settings_cog.png';
 
 
 
@@ -264,6 +266,9 @@ export default function Game ({ setCurrentGame , currentGame, user }) {
 
                     {/* SETTINGS */}
                     <div className={style.settings_box}>
+                        <img src={radioIcon}></img>
+                        <img src={settingsCog}></img>
+
 
                     {/* unclaimed nfts/unpulled cards count */}
                     {/* currentGame.deck_size * currentGame.players.length */}

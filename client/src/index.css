@@ -500,3 +500,15 @@ input:focus {
   position: absolute;
   border: 2px solid red;
 }
+
+.emptyspacer {
+  height: 10%;
+
+}
+
+.center-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}

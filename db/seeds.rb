@@ -15,33 +15,58 @@ puts 'Seeding Database 🌱🍃🌱🍃🌱🍃'
 
 puts 'Creating Publications 🗞🗞🗞🗞🗞'
 story1 = Publication.create(title: "Welcome to Planetariyum",
-body: "",
+body: "
+
+If you're an artist looking for a new social platform to call home, you may want to check out Planetariyum. This new platform is being developed using ruby on rails and react, and it looks like it could be a great place for artists to collaborate and share their work.
+
+One of the key features of Planetariyum is that it will allow creators to get paid fairly for their work. That's something that is often lacking on other social platforms, so it's definitely a selling point for this new platform.
+
+In addition to being a place to share your work, Planetariyum will also offer exclusive content for its members. So if you're looking for a new social platform that supports artists and creators, Planetariyum may be worth checking out.
+
+So! welcome to our social network for artists! We are excited to have
+you here and hope that you will find our community to be a
+supportive and creative space. Our site is filled with features
+that will help you connect with other artists, showcase your work,
+and get inspired. Here are a few things you can do to get started:",
 kind: "large", route: nil, runtime: 10000)
 story1_cover_blob = story1.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/robot6.png')), filename: 'robot6.png')
 
-story2 = Publication.create(title: "New Release: Planetariyum Base",
-body: "",
+story2 = Publication.create(title: "Planetariyum Base",
+body: "Dear artists and musicians,
+If you're looking for something new and exciting to check out, I highly recommend the Planetariyum Base collection of sounds. It's full of otherworldly, dreamlike textures that are perfect for creating atmospheric and ambient music.
+I've been a big fan of ambient and experimental music for many years, and this collection really captures the essence of that style. There's something about the ethereal quality of the sounds that just transports me to another place. It's like nothing I've ever heard before.
+If you're looking for something new and inspiring to add to your musical arsenal, I urge you to check out the Planetariyum Base collection.",
 kind: "", route: nil, runtime: 10000)
 story2_cover_blob = story2.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/robot5.png')), filename: 'robot5.png')
 
-story3 = Publication.create(title: "About The Creators",
-body: "",
+story3 = Publication.create(title: "About The Creator",
+body: "Elliot Mangini is a developer who is taking the world of web development by storm. Known for his maiden work with Ruby on Rails and React. Mangini is also the creator of Planetariyum, a social platform for artists to collaborate and share their work. He is currently working on the development of the site, and he welcomes feedback from anyone who is interested in helping him out. Mangini is a developer who is pushing the boundaries of web development, and he is sure to make a name for himself in the industry!",
 kind: "", route: nil, runtime: 10000)
 story3_cover_blob = story3.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/robot4.png')), filename: 'robot4.png')
 
 
 story5 = Publication.create(title: "Web 3.0 Integration",
-body: "",
+body: "Planetariyum is a social network that rewards artists for their work. The network uses a combination of web3 and NFTs to ensure that artists are paid fairly.
+
+Web3 is a platform for building decentralized applications. It enables users to send and receive payments, store data, and more. NFTs are a type of digital asset that can be used to store information.
+
+To pay artists, Planetariyum uses web3 and NFTs. NFTs are automatically minted and held in the Planetariyum Wallet until they are transfered to users. This ensures that artists are paid fairly and that their work is stored securely.
+
+The bulk of this feature will be coming soon. Elliot is currently finishing a Solidity bootcamp and once he is done, the feature will be ready to be implemented.",
 kind: "", route: nil, runtime: 10000)
 story5_cover_blob = story5.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/robot3.png')), filename: 'robot3.png')
 
 story4 = Publication.create(title: "Limited Time Invite Offer",
-body: "",
+body: "Planetariyum is a social network that is currently in development. The site is being created by Big Sister, and will initially be invite-only. Once the site is up and running, existing users will be able to invite their friends. Inviters and invitees will be rewarded with Planetariyum Credits. The goal of the site is to create a safe place for people to connect with each other.
+
+The site will have a number of features, including a newsfeed, a messaging system, and a way to connect with other users. The site will also have a points system, which will allow users to earn rewards for their activity on the site. The more active a user is, the more credits they will earn. ",
 kind: "large", route: nil, runtime: 10000)
 story4_cover_blob = story4.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/robot2.png')), filename: 'robot2.png')
 
 story6 = Publication.create(title: "Reach Out (and Hire Me)",
-body: "",
+body: "Founder and lead developer of Planetariyum, Elliot Mangini, is no stranger to the music industry and is excited to be rolling out his first full-featured web app.
+
+Hiring Mangini is a great idea for any company that wants to improve its online presence. His experience and knowledge in the field of social media and online marketing is second to none (okay, some), and he has a proven track record of success. Mangini is a true asset to any team, and his skills and abilities will undoubtedly help any project to reach new heights.",
 kind: "", route: nil, runtime: 10000)
 story6_cover_blob = story6.cover_image.attach(io: File.open(File.join(Rails.root,'/app/assets/publications/robot1.png')), filename: 'robot1.png')
 

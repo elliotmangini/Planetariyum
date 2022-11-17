@@ -102,7 +102,7 @@
 
 .article_wrapper {
     position: relative;
-    width: 90%;
+    width: 85%;
     margin: auto;
     margin-top: 35px;
     background: rgb(37, 37, 90);
@@ -154,7 +154,7 @@
     font-style: oblique;
 }
 
-span {
+.article_wrapper span {
     color: #ff71e7;
 }
 
